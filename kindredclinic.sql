@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 23-Out-2020 às 14:16
+-- Generation Time: 06-Nov-2020 às 16:54
 -- Versão do servidor: 5.7.24
 -- versão do PHP: 7.1.26
 
@@ -89,6 +89,128 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `consulta`
+--
+
+DROP TABLE IF EXISTS `consulta`;
+CREATE TABLE IF NOT EXISTS `consulta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `conteudo` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `id_marcacao` int(11) NOT NULL,
+  `id_medico` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_marcacao` (`id_marcacao`),
+  UNIQUE KEY `id_medico` (`id_medico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `especialidade`
+--
+
+DROP TABLE IF EXISTS `especialidade`;
+CREATE TABLE IF NOT EXISTS `especialidade` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `exame`
+--
+
+DROP TABLE IF EXISTS `exame`;
+CREATE TABLE IF NOT EXISTS `exame` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `conteudo` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `id_medico` int(11) NOT NULL,
+  `id_marcacao` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_medico` (`id_medico`),
+  UNIQUE KEY `id_marcacao` (`id_marcacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `macacao_exame`
+--
+
+DROP TABLE IF EXISTS `macacao_exame`;
+CREATE TABLE IF NOT EXISTS `macacao_exame` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `id_medico` int(11) NOT NULL,
+  `id_utente` int(11) NOT NULL,
+  `id_especialidade` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_medico` (`id_medico`),
+  UNIQUE KEY `id_utente` (`id_utente`),
+  UNIQUE KEY `id_especialidade` (`id_especialidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `marcacao_consulta`
+--
+
+DROP TABLE IF EXISTS `marcacao_consulta`;
+CREATE TABLE IF NOT EXISTS `marcacao_consulta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `id_medico` int(11) NOT NULL,
+  `id_especialidade` int(11) NOT NULL,
+  `id_utente` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_medico` (`id_medico`),
+  UNIQUE KEY `id_especialidade` (`id_especialidade`),
+  UNIQUE KEY `id_utente` (`id_utente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `medicamentos`
+--
+
+DROP TABLE IF EXISTS `medicamentos`;
+CREATE TABLE IF NOT EXISTS `medicamentos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(80) NOT NULL,
+  `gramas` decimal(7,2) NOT NULL,
+  `companhia` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `medicos`
+--
+
+DROP TABLE IF EXISTS `medicos`;
+CREATE TABLE IF NOT EXISTS `medicos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `sexo` enum('Masculino','Feminino') NOT NULL,
+  `nif` int(9) NOT NULL,
+  `telefone` int(9) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `num_ordem_medico` int(16) NOT NULL,
+  `id_especialidade` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_categoria` (`id_especialidade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `migration`
 --
 
@@ -115,6 +237,26 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `receita_medica`
+--
+
+DROP TABLE IF EXISTS `receita_medica`;
+CREATE TABLE IF NOT EXISTS `receita_medica` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `conteudo` varchar(255) NOT NULL,
+  `id_medico` int(11) NOT NULL,
+  `id_utente` int(11) NOT NULL,
+  `id_medicamentos` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_medico` (`id_medico`),
+  UNIQUE KEY `id_utente` (`id_utente`),
+  UNIQUE KEY `id_medicamentos` (`id_medicamentos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `user`
 --
 
@@ -135,6 +277,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `utente`
+--
+
+DROP TABLE IF EXISTS `utente`;
+CREATE TABLE IF NOT EXISTS `utente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `nif` int(9) NOT NULL,
+  `sexo` enum('Masculino','Feminino') NOT NULL,
+  `telemovel` int(9) NOT NULL,
+  `morada` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `num_sns` int(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -158,6 +319,50 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `consulta`
+--
+ALTER TABLE `consulta`
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_marcacao`) REFERENCES `marcacao_consulta` (`id`),
+  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`);
+
+--
+-- Limitadores para a tabela `exame`
+--
+ALTER TABLE `exame`
+  ADD CONSTRAINT `exame_ibfk_1` FOREIGN KEY (`id_marcacao`) REFERENCES `macacao_exame` (`id`),
+  ADD CONSTRAINT `exame_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`);
+
+--
+-- Limitadores para a tabela `macacao_exame`
+--
+ALTER TABLE `macacao_exame`
+  ADD CONSTRAINT `macacao_exame_ibfk_1` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`),
+  ADD CONSTRAINT `macacao_exame_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `macacao_exame_ibfk_3` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
+
+--
+-- Limitadores para a tabela `marcacao_consulta`
+--
+ALTER TABLE `marcacao_consulta`
+  ADD CONSTRAINT `marcacao_consulta_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `marcacao_consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`),
+  ADD CONSTRAINT `marcacao_consulta_ibfk_3` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
+
+--
+-- Limitadores para a tabela `medicos`
+--
+ALTER TABLE `medicos`
+  ADD CONSTRAINT `medicos_ibfk_1` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
+
+--
+-- Limitadores para a tabela `receita_medica`
+--
+ALTER TABLE `receita_medica`
+  ADD CONSTRAINT `receita_medica_ibfk_1` FOREIGN KEY (`id_medicamentos`) REFERENCES `medicamentos` (`id`),
+  ADD CONSTRAINT `receita_medica_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`),
+  ADD CONSTRAINT `receita_medica_ibfk_3` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
