@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=ficha5',
+            'dsn' => 'mysql:host=localhost;dbname=kindredclinic',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
@@ -14,8 +14,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'adatel.19.20@gmail.com',
-                'password' => 'Adatel1234',
+                'username' => 'kindredclinic.20.21@gmail.com',
+                'password' => 'KindredClinic2021',
                 'port' => '587',
                 'encryption' => 'tls',
             ],
