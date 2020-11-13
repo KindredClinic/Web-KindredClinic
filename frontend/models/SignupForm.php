@@ -29,6 +29,11 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+            [['nome', 'nif', 'sexo', 'telemovel', 'morada', 'email', 'numSnS'], 'required'],
+            [['nif', 'telemovel', 'numSnS'], 'integer'],
+            [['sexo'], 'string'],
+            [['nome', 'morada', 'email'], 'string', 'max' => 255],
+
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
@@ -57,16 +62,28 @@ class SignupForm extends Model
             $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
+            $user->status = 9;
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
-            return $user->save(false);
+            $user->save(false);
 
             $utente = new Utente();
             $utente->nome = $this->nome;
+            $utente->nif = $this->nif;
+            $utente->telemovel = $this->telemovel;
+            $utente->morada = $this->morada;
+            $utente->email = $this->email;
+            $utente->num_sns = $this->numSnS;
+            $utente->id_user = $user->getId();
+            $utente->save(false);
 
+            //rbac
+            $auth = \Yii::$app->authManager;
+            $temp = $auth->getRole('utente');
+            $auth->assign($temp, $user->getId());
 
-            $this->sendEmail($user);
+            return $this->sendEmail($user);
 
         }else{
             return null;
@@ -89,7 +106,7 @@ class SignupForm extends Model
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject('Conta Registada em ' . Yii::$app->name)
             ->send();
     }
 }
