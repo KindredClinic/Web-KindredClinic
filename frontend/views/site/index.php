@@ -32,7 +32,15 @@ $this->title = 'Kindred Clinic';
 
     <div>
 
-        <h3> A Kindred Clinic centra-se no seu conforto e bem estar, além das suas necessidades médicas.</h3>
-        <h3> Estamos sempre disponiveis para atender às suas necessidades, a qualquer dia e a qualquer hora.</h3>
+        <h2>Sobre</h2>
+        <h4> A Kindred Clinic centra-se no seu conforto e bem estar, além das suas necessidades médicas.</h4>
+        <h4> Estamos sempre disponiveis para atender às suas necessidades, a qualquer dia e a qualquer hora.</h4>
     </div>
+
+    <div>
+        <h2>O porqûe de escolher a nossa clinica</h2>
+        <h4> Na nossa clinica acreditamos que o bem estar dos nossos pacientes ajuda para a sua recuperação. Assim cada utente tem um enfermeiro/enfermeira sempre ao seu dispor.</h4>
+        <h4> Ainda acreditamos que uma boa hospitalidade ajuda ao bem estar psicológico do utente.</h4>
+    </div>
+
 </div>
