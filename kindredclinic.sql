@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 06-Nov-2020 às 16:54
+-- Generation Time: 25-Nov-2020 às 20:15
 -- Versão do servidor: 5.7.24
 -- versão do PHP: 7.1.26
 
@@ -37,6 +37,13 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
   KEY `idx-auth_assignment-user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Extraindo dados da tabela `auth_assignment`
+--
+
+INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('utente', '2', 1606318091);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +64,16 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
   KEY `idx-auth_item-type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Extraindo dados da tabela `auth_item`
+--
+
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('consulta', 2, 'Consulta', NULL, NULL, 1606318071, 1606318071),
+('marcacao_consulta', 2, 'Marcar uma consulta', NULL, NULL, 1606318071, 1606318071),
+('receitaMedica', 2, 'Receita Medica', NULL, NULL, 1606318071, 1606318071),
+('utente', 1, NULL, NULL, NULL, 1606318071, 1606318071);
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +87,15 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
   PRIMARY KEY (`parent`,`child`),
   KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `auth_item_child`
+--
+
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('utente', 'consulta'),
+('utente', 'marcacao_consulta'),
+('utente', 'receitaMedica');
 
 -- --------------------------------------------------------
 
@@ -100,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `consulta` (
   `id_marcacao` int(11) NOT NULL,
   `id_medico` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_marcacao` (`id_marcacao`),
-  UNIQUE KEY `id_medico` (`id_medico`)
+  KEY `id_marcacao` (`id_marcacao`) USING BTREE,
+  KEY `id_medico` (`id_medico`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -115,7 +141,25 @@ CREATE TABLE IF NOT EXISTS `especialidade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `especialidade`
+--
+
+INSERT INTO `especialidade` (`id`, `tipo`) VALUES
+(1, 'Cardiologia'),
+(2, 'Cirurgia Geral'),
+(3, 'Cirurgia Pediátrica'),
+(4, 'Doenças Infecciosas'),
+(5, 'Medicina do Trabalho'),
+(6, 'Medicina Física e de Reabilitação'),
+(7, 'Medicina Interna'),
+(8, 'Oftalmologia'),
+(9, 'Ortopedia'),
+(10, 'Psiquiatria'),
+(11, 'Psiquiatria da Infância e da Adolescência'),
+(12, 'Saúde Pública');
 
 -- --------------------------------------------------------
 
@@ -131,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `exame` (
   `id_medico` int(11) NOT NULL,
   `id_marcacao` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_medico` (`id_medico`),
-  UNIQUE KEY `id_marcacao` (`id_marcacao`)
+  KEY `id_medico` (`id_medico`) USING BTREE,
+  KEY `id_marcacao` (`id_marcacao`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -149,9 +193,9 @@ CREATE TABLE IF NOT EXISTS `macacao_exame` (
   `id_utente` int(11) NOT NULL,
   `id_especialidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_medico` (`id_medico`),
-  UNIQUE KEY `id_utente` (`id_utente`),
-  UNIQUE KEY `id_especialidade` (`id_especialidade`)
+  KEY `id_medico` (`id_medico`) USING BTREE,
+  KEY `id_especialidade` (`id_especialidade`) USING BTREE,
+  KEY `id_utente` (`id_utente`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -168,10 +212,21 @@ CREATE TABLE IF NOT EXISTS `marcacao_consulta` (
   `id_especialidade` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_medico` (`id_medico`),
-  UNIQUE KEY `id_especialidade` (`id_especialidade`),
-  UNIQUE KEY `id_utente` (`id_utente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `id_especialidade` (`id_especialidade`) USING BTREE,
+  KEY `id_utente` (`id_utente`) USING BTREE,
+  KEY `id_medico` (`id_medico`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `marcacao_consulta`
+--
+
+INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, `id_utente`) VALUES
+(6, '2020-11-27 15:50:05', 12, 6, 2),
+(7, '2020-11-26 22:50:38', 8, 4, 2),
+(8, '2020-12-02 19:50:34', 14, 7, 2),
+(9, '2020-11-30 11:45:36', 5, 3, 2),
+(10, '2020-11-23 19:45:34', 14, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -206,7 +261,37 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   `id_especialidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_categoria` (`id_especialidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `medicos`
+--
+
+INSERT INTO `medicos` (`id`, `nome`, `sexo`, `nif`, `telefone`, `email`, `num_ordem_medico`, `id_especialidade`) VALUES
+(1, 'Dr. João Albatross', 'Masculino', 203036263, 915073025, 'João.Albatross@hotmail.com', 2147483647, 10),
+(2, 'Dr. David M. Steed', 'Masculino', 249514630, 912666823, 'DavidMSteed@jourrapide.com', 1736264431, 1),
+(3, 'Dr. Michelle D. Mason', 'Feminino', 220422826, 948099803, 'MichelleDMason@rhyta.com ', 1516372811, 2),
+(4, 'Dr. Mark M. Tibbetts', 'Masculino', 281233420, 948099157, 'MarkMTibbetts@rhyta.com ', 1291263453, 2),
+(5, 'Dr. Francis K. Kent', 'Masculino', 221435352, 948027997, 'FrancisKKent@jourrapide.com ', 1728125362, 3),
+(6, 'Dr. Gabrielly Alves Dias', 'Feminino', 253992214, 910855412, 'GabriellyAlvesDias@rhyta.com ', 1901879791, 3),
+(7, 'Dr. Guilherme Pinto Barbosa', 'Masculino', 202892824, 911602763, 'GuilhermePintoBarbosa@jourrapide.com', 1876582298, 4),
+(8, 'Dr. Daniel Barros Correia', 'Masculino', 257630171, 948068512, 'DanielBarrosCorreia@teleworm.us ', 129994085, 4),
+(9, 'Dr. Leonor Azevedo Barbosa', 'Feminino', 217534694, 924755838, 'LeonorAzevedoBarbosa@rhyta.com', 274140289, 5),
+(10, 'Dr. José Silva Martins', 'Masculino', 297251066, 969393024, 'JoseSilvaMartins@rhyta.com', 371393612, 5),
+(11, 'Dr. Joao Castro Goncalves', 'Masculino', 218941455, 969354846, 'JoaoCastroGoncalves@dayrep.com', 723133682, 6),
+(12, 'Dr. Victor Ribeiro Cunha', 'Masculino', 245538798, 962204216, 'VictorRibeiroCunha@armyspy.com ', 519591293, 6),
+(13, 'Dr. Renan Santos Martins', 'Feminino', 288880005, 939389418, 'RenanSantosMartins@teleworm.us', 857827916, 7),
+(14, 'Dr. Sophia Martins Barbosa', 'Feminino', 254362125, 939348129, 'SophiaMartinsBarbosa@jourrapide.com', 879536243, 7),
+(15, 'Dr. João Carvalho Silva', 'Masculino', 219207690, 639230316, 'JoaoCarvalhoSilva@rhyta.com', 557899400, 8),
+(16, 'Dr. Julieta Pereira Araujo', 'Feminino', 288583841, 969230745, 'JulietaPereiraAraujo@jourrapide.com', 981120310, 8),
+(17, 'Dr. Diogo Barbosa Ribeiro', 'Masculino', 283614250, 909389751, 'DiogoBarbosaRibeiro@armyspy.com', 881928717, 9),
+(18, 'Dr. José Martins Caralho', 'Masculino', 254506682, 909317274, 'JoseMartinsCarvalho@rhyta.com ', 561910771, 9),
+(19, 'Dr. Danilo Pereira Rocha', 'Masculino', 255723067, 969347517, 'DaniloPereiraRocha@armyspy.com ', 216748876, 10),
+(20, 'Dr. Gabriela Ferreira Sousa', 'Feminino', 217491340, 969310170, 'GabrielaFerreiraSousa@armyspy.com ', 479505815, 1),
+(21, 'Dr. Kauan Cardoso Cunha', 'Masculino', 260122564, 959230418, 'KauanCardosoCunha@armyspy.com', 654332562, 11),
+(22, 'Dr. Paulo Araujo Ribeiro', 'Masculino', 260122564, 959230834, 'PauloAraujoRibeiro@dayrep.com', 654332562, 11),
+(23, 'Dr. Karen Martins Dias', 'Feminino', 234178787, 959230853, 'NicoleMartinsDias@dayrep.com ', 962433288, 12),
+(24, 'Dr. Renan Castro Cavalcanti', 'Feminino', 284784591, 959230643, 'RenanCastroCavalcanti@dayrep.com ', 398075423, 12);
 
 -- --------------------------------------------------------
 
@@ -232,7 +317,8 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m140506_102106_rbac_init', 1603461855),
 ('m170907_052038_rbac_add_index_on_auth_assignment_user_id', 1603461856),
 ('m180523_151638_rbac_updates_indexes_without_prefix', 1603461856),
-('m200409_110543_rbac_update_mssql_trigger', 1603461856);
+('m200409_110543_rbac_update_mssql_trigger', 1603461856),
+('m201106_171805_userVerification', 1606318071);
 
 -- --------------------------------------------------------
 
@@ -249,9 +335,9 @@ CREATE TABLE IF NOT EXISTS `receita_medica` (
   `id_utente` int(11) NOT NULL,
   `id_medicamentos` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_medico` (`id_medico`),
-  UNIQUE KEY `id_utente` (`id_utente`),
-  UNIQUE KEY `id_medicamentos` (`id_medicamentos`)
+  KEY `id_medico` (`id_medico`) USING BTREE,
+  KEY `id_medicamentos` (`id_medicamentos`) USING BTREE,
+  KEY `id_utente` (`id_utente`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -276,7 +362,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
+(2, 'Alex', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$9P/01WEJSEBTw0QVIQLxxegBWvWo17KAoE2YWaaDH85h513RC/azm', NULL, 'alexpereira90038@gmail.com', 10, 1606318089, 1606318130, 'xGg1vt9m0adP8_kPgqfVWQW4L20eyB_R_1606318089');
 
 -- --------------------------------------------------------
 
@@ -294,8 +387,17 @@ CREATE TABLE IF NOT EXISTS `utente` (
   `morada` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `num_sns` int(9) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `utente`
+--
+
+INSERT INTO `utente` (`id`, `nome`, `nif`, `sexo`, `telemovel`, `morada`, `email`, `num_sns`, `id_user`) VALUES
+(2, 'Alex', 123456789, 'Masculino', 916073037, 'rua rua', 'alexpereira90038@gmail.com', 123456789, 2);
 
 --
 -- Constraints for dumped tables
