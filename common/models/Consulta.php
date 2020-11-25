@@ -37,8 +37,6 @@ class Consulta extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['id_marcacao', 'id_medico'], 'integer'],
             [['conteudo'], 'string', 'max' => 255],
-            [['id_marcacao'], 'unique'],
-            [['id_medico'], 'unique'],
             [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MarcacaoConsulta::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
         ];

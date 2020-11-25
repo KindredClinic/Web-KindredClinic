@@ -20,7 +20,7 @@ class SignupForm extends Model
     public $sexo;
     public $telemovel;
     public $morada;
-    public $numSnS;
+    public $num_sns;
 
 
     /**
@@ -29,8 +29,8 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['nome', 'nif', 'sexo', 'telemovel', 'morada', 'email', 'numSnS'], 'required'],
-            [['nif', 'telemovel', 'numSnS'], 'integer'],
+            [['nome', 'nif', 'sexo', 'telemovel', 'morada', 'email', 'num_sns'], 'required'],
+            [['nif', 'telemovel', 'num_sns'], 'integer'],
             [['sexo'], 'string'],
             [['nome', 'morada', 'email'], 'string', 'max' => 255],
 
@@ -49,6 +49,13 @@ class SignupForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'num_sns' => 'Numero de Utente',
+        ];
+    }
+
 
     /**
      * Signs user up.
@@ -74,7 +81,7 @@ class SignupForm extends Model
             $utente->telemovel = $this->telemovel;
             $utente->morada = $this->morada;
             $utente->email = $this->email;
-            $utente->num_sns = $this->numSnS;
+            $utente->num_sns = $this->num_sns;
             $utente->id_user = $user->getId();
             $utente->save(false);
 

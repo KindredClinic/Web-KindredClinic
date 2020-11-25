@@ -50,6 +50,7 @@ class Medicos extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -72,9 +73,9 @@ class Medicos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getConsulta()
+    public function getConsultas()
     {
-        return $this->hasOne(Consulta::className(), ['id_medico' => 'id']);
+        return $this->hasMany(Consulta::className(), ['id_medico' => 'id']);
     }
 
     /**
@@ -82,9 +83,9 @@ class Medicos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getExame()
+    public function getExames()
     {
-        return $this->hasOne(Exame::className(), ['id_medico' => 'id']);
+        return $this->hasMany(Exame::className(), ['id_medico' => 'id']);
     }
 
     /**
@@ -92,9 +93,9 @@ class Medicos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMacacaoExame()
+    public function getMacacaoExames()
     {
-        return $this->hasOne(MacacaoExame::className(), ['id_medico' => 'id']);
+        return $this->hasMany(MacacaoExame::className(), ['id_medico' => 'id']);
     }
 
     /**
@@ -102,9 +103,9 @@ class Medicos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMarcacaoConsulta()
+    public function getMarcacaoConsultas()
     {
-        return $this->hasOne(MarcacaoConsulta::className(), ['id_medico' => 'id']);
+        return $this->hasMany(MarcacaoConsulta::className(), ['id_medico' => 'id']);
     }
 
     /**
@@ -122,8 +123,8 @@ class Medicos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getReceitaMedica()
+    public function getReceitaMedicas()
     {
-        return $this->hasOne(ReceitaMedica::className(), ['id_medico' => 'id']);
+        return $this->hasMany(ReceitaMedica::className(), ['id_medico' => 'id']);
     }
 }

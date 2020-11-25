@@ -39,14 +39,12 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
             [['date', 'id_medico', 'id_especialidade', 'id_utente'], 'required'],
             [['date'], 'safe'],
             [['id_medico', 'id_especialidade', 'id_utente'], 'integer'],
-            [['id_medico'], 'unique'],
-            [['id_especialidade'], 'unique'],
-            [['id_utente'], 'unique'],
             [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id']],
         ];
     }
+
 
     /**
      * {@inheritdoc}
@@ -56,8 +54,8 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'date' => 'Date',
-            'id_medico' => 'Id Medico',
-            'id_especialidade' => 'Id Especialidade',
+            'id_medico' => 'Medico',
+            'id_especialidade' => 'Especialidade',
             'id_utente' => 'Id Utente',
         ];
     }
@@ -67,9 +65,9 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getConsulta()
+    public function getConsultas()
     {
-        return $this->hasOne(Consulta::className(), ['id_marcacao' => 'id']);
+        return $this->hasMany(Consulta::className(), ['id_marcacao' => 'id']);
     }
 
     /**
@@ -100,5 +98,28 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
     public function getEspecialidade()
     {
         return $this->hasOne(Especialidade::className(), ['id' => 'id_especialidade']);
+    }
+
+    public function criarMarcacaoConsulta(){
+
+        $model = new MarcacaoConsulta();
+        $model->date = $this->date;
+        $model->id_especialidade = $this->id_especialidade;
+        $model->id_medico = $this->id_medico;
+        $model->id_utente = Yii::$app->user->id;
+
+        $model->save();
+    }
+
+    public static function getSubDropDownList($especialidade){
+
+        $procurar = Medicos::find()
+            ->select(['id as id', 'nome as name'])
+            ->where(['id_especialidade' => $especialidade])
+            ->asArray()
+            ->all();
+
+
+        return $procurar;
     }
 }

@@ -38,7 +38,8 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Registar', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/index']];
+        $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/create']];
+        $menuItems[] = ['label' => 'Marc_Consulta', 'url' => ['/marcacao-consulta/index']];
 
     } else {
         $menuItems[] = '<li>'
@@ -49,6 +50,8 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/create']];
+        $menuItems[] = ['label' => 'Marc_Consulta', 'url' => ['/marcacao-consulta/index']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -70,7 +73,10 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"> Telefone: 916073037 <br> Email: kindredclinic.20.21@gmail.com</p>
+        <p class="pull-right"><?= Yii::powered() ?></p>
+    </div>
+    <div class="container">
+        <p class="pull-left"> Telefone: 916073037 / Email: kindredclinic.20.21@gmail.com</p>
     </div>
 </footer>
 

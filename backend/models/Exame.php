@@ -36,8 +36,6 @@ class Exame extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['id_medico', 'id_marcacao'], 'integer'],
             [['conteudo'], 'string', 'max' => 255],
-            [['id_medico'], 'unique'],
-            [['id_marcacao'], 'unique'],
             [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MacacaoExame::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
         ];

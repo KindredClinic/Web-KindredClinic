@@ -55,8 +55,8 @@ class Medicamentos extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getReceitaMedica()
+    public function getReceitaMedicas()
     {
-        return $this->hasOne(ReceitaMedica::className(), ['id_medicamentos' => 'id']);
+        return $this->hasMany(ReceitaMedica::className(), ['id_medicamentos' => 'id']);
     }
 }

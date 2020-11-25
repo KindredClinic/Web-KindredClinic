@@ -62,9 +62,9 @@ class Especialidade extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMarcacaoConsulta()
+    public function getMarcacaoConsultas()
     {
-        return $this->hasOne(MarcacaoConsulta::className(), ['id_especialidade' => 'id']);
+        return $this->hasMany(MarcacaoConsulta::className(), ['id_especialidade' => 'id']);
     }
 
     /**
@@ -75,5 +75,19 @@ class Especialidade extends \yii\db\ActiveRecord
     public function getMedicos()
     {
         return $this->hasMany(Medicos::className(), ['id_especialidade' => 'id']);
+    }
+
+    public static function dropdown(){
+
+        static $dropdown;
+
+        if($dropdown == null){
+            $models = static::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->tipo;
+            }
+        }
+
+        return $dropdown;
     }
 }

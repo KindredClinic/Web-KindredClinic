@@ -8,8 +8,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+/* @var $form yii\widgets\ActiveForm */
+
 $this->title = 'Registar';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'morada')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'numSnS')->textInput() ?>
+                <?= $form->field($model, 'num_sns')->textInput() ?>
 
                 <?= $form->field($model, 'username')->textInput() ?>
 

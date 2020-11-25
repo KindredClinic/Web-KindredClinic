@@ -42,11 +42,14 @@ class Utente extends \yii\db\ActiveRecord
             [['nome', 'nif', 'sexo', 'telemovel', 'morada', 'email', 'num_sns', 'id_user'], 'required'],
             [['nif', 'telemovel', 'num_sns', 'id_user'], 'integer'],
             [['sexo'], 'string'],
-            [['nome', 'morada', 'email'], 'string', 'max' => 255],
-            [['id_user'], 'unique'],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
-        ];
+            [['nome', 'morada', 'email'], 'string', 'max' => 255]        ];
     }
+
+    public function fields()
+    {
+        return ['Numero de Utente'=>'Num Sns'];
+    }
+
 
     /**
      * {@inheritdoc}
@@ -81,9 +84,9 @@ class Utente extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMarcacaoConsulta()
+    public function getMarcacaoConsultas()
     {
-        return $this->hasOne(MarcacaoConsulta::className(), ['id_utente' => 'id']);
+        return $this->hasMany(MarcacaoConsulta::className(), ['id_utente' => 'id']);
     }
 
     /**
