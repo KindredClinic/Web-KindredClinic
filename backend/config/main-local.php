@@ -4,9 +4,20 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'b5dBym13jh_YsXhzV8R--1qupdePJId1',
+            'cookieValidationKey' => 'JaGA_a3EDhUlNc6BUVeBmJE0AvkwRb42',
         ],
     ],
+    'modules' => [
+        'datecontrol' => [
+            'class' => 'kartik\datecontrol\Module',
+            // format settings for displaying each date attribute (ICU format example)
+            'displaySettings' => [
+                \kartik\datecontrol\Module::FORMAT_DATE => 'dd-MM-yyyy',
+                \kartik\datecontrol\Module::FORMAT_TIME => 'HH:mm:ss a',
+                \kartik\datecontrol\Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm:ss a',
+                ],
+            ],
+        ],
 ];
 
 if (!YII_ENV_TEST) {
