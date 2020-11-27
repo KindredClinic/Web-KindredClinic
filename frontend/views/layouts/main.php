@@ -73,10 +73,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-    <div class="container">
-        <p class="pull-left"> Telefone: 916073037 / Email: kindredclinic.20.21@gmail.com</p>
+        <p class="pull-right"> Telefone: 916073037 <br> Email: kindredclinic.20.21@gmail.com</p>
     </div>
 </footer>
 
@@ -84,3 +81,4 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+

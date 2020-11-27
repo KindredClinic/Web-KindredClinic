@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\MarcacaoConsulta */
 
-$this->title = $model->id;
+$this->title = $model->date;
 $this->params['breadcrumbs'][] = ['label' => 'Marcacao Consultas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -17,24 +17,37 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'date',
-            'id_medico',
-            'id_especialidade',
-            'id_utente',
+            [
+
+                'attribute'=>'id_medico',
+
+                'value'=>$model->medico->nome
+
+            ],
+            [
+
+                'attribute'=>'id_especialidade',
+
+                'value'=>$model->especialidade->tipo
+
+            ],
+            [
+
+                'attribute'=>'id_utente',
+
+                'value'=>$model->utente->nome
+
+            ],
+
         ],
+
     ]) ?>
 
 </div>

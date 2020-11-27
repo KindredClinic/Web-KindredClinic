@@ -56,7 +56,7 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
             'date' => 'Date',
             'id_medico' => 'Medico',
             'id_especialidade' => 'Especialidade',
-            'id_utente' => 'Id Utente',
+            'id_utente' => 'Utente',
         ];
     }
 
