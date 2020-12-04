@@ -118,8 +118,9 @@ class MarcacaoConsultaController extends Controller
     {
         $model = new MarcacaoConsulta();
 
-        if ($model->load(Yii::$app->request->post()) && $model->criarMarcacaoConsulta()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->criarMarcacaoConsulta();
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('create', [

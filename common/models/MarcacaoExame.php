@@ -99,4 +99,37 @@ class MarcacaoExame extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Especialidade::className(), ['id' => 'id_especialidade']);
     }
+
+    public function criarMarcacaoExame(){
+
+        $model = new MarcacaoExame();
+        $model->date = $this->date;
+        $model->id_especialidade = $this->id_especialidade;
+        $model->id_medico = $this->id_medico;
+        $model->id_utente = Yii::$app->user->id;
+
+        $model->save();
+    }
+
+    public static function getSubDropDownList($especialidade){
+
+        $procurar = Medicos::find()
+            ->select(['id as id', 'nome as name'])
+            ->where(['id_especialidade' => $especialidade])
+            ->asArray()
+            ->all();
+
+
+        return $procurar;
+    }
+
+    public static function dataByUser($idUtente){
+
+        $procurar = self::find()
+            ->where(['id_utente' =>  $idUtente ])
+            ->all();
+
+        return $procurar;
+    }
+
 }

@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
+use backend\models\Especialidade;
+use common\models\MarcacaoConsulta;
 use Yii;
 use common\models\MarcacaoExame;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * MarcacaoExameController implements the CRUD actions for MarcacaoExame model.
@@ -35,13 +38,41 @@ class MarcacaoExameController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoExame::find(),
-        ]);
+        $times = MarcacaoExame::dataByUser(Yii::$app->user->id);
+
+        $events = [];
+        foreach ($times AS $time){
+
+            $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
+
+
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = $time['id'];
+            $Event->backgroundColor = $this->chooseColor($time['status']);
+            $Event->title = $temp['tipo'];
+            $Event->start = date(($time['date']));
+            $Event->url = 'index.php?r=marcacao-exame/view&id='.$time['id'];
+            $events[] = $Event;
+
+        }
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'events' => $events,
         ]);
+    }
+
+    public function chooseColor($tipo){
+        if($tipo == 'Aprovado'){
+            return 'green';
+        }
+        elseif ($tipo == 'Em Espera'){
+            return 'orange';
+        }
+        elseif ($tipo == 'Rejeitado'){
+            return 'red';
+        }
+
+        return 'white';
     }
 
     /**
@@ -66,8 +97,9 @@ class MarcacaoExameController extends Controller
     {
         $model = new MarcacaoExame();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->criarMarcacaoExame();
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -125,6 +157,26 @@ class MarcacaoExameController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    
+    public function actionSubcat() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $especialidade = $parents[0];
+                $out = MarcacaoConsulta::getSubDropDownList($especialidade);
+
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+
+                return ['output' => $out, 'selected' => ''];
+            }
+        }
+        return ['output'=>'', 'selected'=>''];
+    }
 
 }
