@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 25-Nov-2020 às 21:17
+-- Generation Time: 04-Dez-2020 às 14:52
 -- Versão do servidor: 5.7.24
 -- versão do PHP: 7.1.26
 
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('utente', '2', 1606318091);
+('utente', '2', 1606318091),
+('utente', '3', 1606487175);
 
 -- --------------------------------------------------------
 
@@ -191,6 +192,7 @@ CREATE TABLE IF NOT EXISTS `macacao_exame` (
   `date` datetime NOT NULL,
   `id_medico` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
+  `status` enum('Aprovado','Em Espera','Rejeitado','') NOT NULL,
   `id_especialidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_medico` (`id_medico`) USING BTREE,
@@ -211,23 +213,27 @@ CREATE TABLE IF NOT EXISTS `marcacao_consulta` (
   `id_medico` int(11) NOT NULL,
   `id_especialidade` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
+  `status` enum('Aprovado','Em Espera','Rejeitado','') NOT NULL DEFAULT 'Em Espera',
   PRIMARY KEY (`id`),
   KEY `id_especialidade` (`id_especialidade`) USING BTREE,
   KEY `id_utente` (`id_utente`) USING BTREE,
   KEY `id_medico` (`id_medico`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `marcacao_consulta`
 --
 
-INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, `id_utente`) VALUES
-(6, '2020-11-27 15:50:05', 12, 6, 2),
-(7, '2020-11-26 22:50:38', 8, 4, 2),
-(8, '2020-12-02 19:50:34', 14, 7, 2),
-(9, '2020-11-30 11:45:36', 5, 3, 2),
-(10, '2020-11-23 19:45:34', 14, 7, 2),
-(11, '2021-01-01 18:45:04', 10, 5, 2);
+INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, `id_utente`, `status`) VALUES
+(6, '2020-11-27 15:50:05', 12, 6, 2, 'Aprovado'),
+(7, '2020-11-26 22:50:38', 8, 4, 2, 'Aprovado'),
+(8, '2020-12-02 19:50:34', 14, 7, 2, 'Aprovado'),
+(9, '2020-11-30 11:45:36', 5, 3, 2, 'Aprovado'),
+(10, '2020-11-23 19:45:34', 14, 7, 2, 'Aprovado'),
+(11, '2021-01-01 18:45:04', 10, 5, 2, 'Aprovado'),
+(12, '2020-11-25 21:55:51', 16, 8, 3, 'Aprovado'),
+(13, '2020-12-03 14:45:53', 14, 7, 2, 'Aprovado'),
+(14, '2020-12-10 11:50:16', 9, 5, 2, 'Em Espera');
 
 -- --------------------------------------------------------
 
@@ -363,14 +369,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(2, 'Alex', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$9P/01WEJSEBTw0QVIQLxxegBWvWo17KAoE2YWaaDH85h513RC/azm', NULL, 'alexpereira90038@gmail.com', 10, 1606318089, 1606318130, 'xGg1vt9m0adP8_kPgqfVWQW4L20eyB_R_1606318089');
+(2, 'Alex', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$9P/01WEJSEBTw0QVIQLxxegBWvWo17KAoE2YWaaDH85h513RC/azm', NULL, 'alexpereira90038@gmail.com', 10, 1606318089, 1606318130, 'xGg1vt9m0adP8_kPgqfVWQW4L20eyB_R_1606318089'),
+(3, 'teste', 'Zqw2829aOQEJii73dbjkA3dYamvZ7Y1X', '$2y$13$CYuGcfRMkjaBuCYz363IB.317jYUa0NK4XKCGEtnDyovunD7AezYm', NULL, 'teste@teste.com', 10, 1606487174, 1606487174, 'YyBG3TpF011g4WDhs3GLssQ6RinYsKSH_1606487174');
 
 -- --------------------------------------------------------
 
@@ -391,14 +398,15 @@ CREATE TABLE IF NOT EXISTS `utente` (
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `utente`
 --
 
 INSERT INTO `utente` (`id`, `nome`, `nif`, `sexo`, `telemovel`, `morada`, `email`, `num_sns`, `id_user`) VALUES
-(2, 'Alex', 123456789, 'Masculino', 916073037, 'rua rua', 'alexpereira90038@gmail.com', 123456789, 2);
+(2, 'Alex', 123456789, 'Masculino', 916073037, 'rua rua', 'alexpereira90038@gmail.com', 123456789, 2),
+(3, 'teste', 987654321, 'Masculino', 923065035, 'rua rua', 'teste@teste.com', 987654321, 3);
 
 --
 -- Constraints for dumped tables

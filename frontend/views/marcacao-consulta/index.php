@@ -1,7 +1,11 @@
 <?php
 
+use common\models\MarcacaoConsulta;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,20 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?= yii2fullcalendar\yii2fullcalendar::widget(array(
+            'events' => $events,
+            'options' => [
+                'lang' => 'pt-br',
+                //... more options to be defined here!
+            ],
 
-            'id',
-            'date',
-            'id_medico',
-            'id_especialidade',
-            'id_utente',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+        )
+    );
+    ?>
 
 
 </div>

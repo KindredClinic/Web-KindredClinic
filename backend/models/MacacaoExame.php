@@ -12,6 +12,7 @@ use Yii;
  * @property string $date
  * @property int $id_medico
  * @property int $id_utente
+ * @property string $status
  * @property int $id_especialidade
  *
  * @property Exame $exame
@@ -38,6 +39,7 @@ class MacacaoExame extends \yii\db\ActiveRecord
             [['date', 'id_medico', 'id_utente', 'id_especialidade'], 'required'],
             [['date'], 'safe'],
             [['id_medico', 'id_utente', 'id_especialidade'], 'integer'],
+            [['status'], 'string'],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
             [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id']],
@@ -53,6 +55,7 @@ class MacacaoExame extends \yii\db\ActiveRecord
             'date' => 'Date',
             'id_medico' => 'Id Medico',
             'id_utente' => 'Id Utente',
+            'status' => 'Status',
             'id_especialidade' => 'Id Especialidade',
         ];
     }

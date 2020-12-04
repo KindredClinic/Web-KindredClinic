@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use backend\models\Especialidade;
 use Yii;
 use common\models\MarcacaoConsulta;
 use yii\data\ActiveDataProvider;
@@ -10,6 +11,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
+use yii2fullcalendar\models\Event;
+use yii2fullcalendar\tests\unit\FullcalendarTest;
 
 
 /**
@@ -17,12 +20,10 @@ use yii\web\Response;
  */
 class MarcacaoConsultaController extends Controller
 {
+    public $id;
     public $data;
     public $id_especialidade;
     public $id_medico;
-
-
-
 
     /**
      * {@inheritdoc}
@@ -45,14 +46,44 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoConsulta::find(),
-        ]);
+        $times = MarcacaoConsulta::dataByUser(Yii::$app->user->id);
+
+        $events = [];
+        foreach ($times AS $time){
+
+            $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
+
+
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = $time['id'];
+            $Event->backgroundColor = $this->chooseColor($time['status']);
+            $Event->title = $temp['tipo'];
+            $Event->start = date(($time['date']));
+            $Event->url = 'index.php?r=marcacao-consulta/view&id='.$time['id'];
+            $events[] = $Event;
+
+        }
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'events' => $events,
         ]);
+
     }
+
+    public function chooseColor($tipo){
+        if($tipo == 'Aprovado'){
+            return 'green';
+        }
+        elseif ($tipo == 'Em Espera'){
+            return 'orange';
+        }
+        elseif ($tipo == 'Rejeitado'){
+            return 'red';
+        }
+
+        return 'white';
+    }
+
 
     /**
      * Displays a single MarcacaoConsulta model.

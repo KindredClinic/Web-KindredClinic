@@ -77,6 +77,15 @@ class Especialidade extends \yii\db\ActiveRecord
         return $this->hasMany(Medicos::className(), ['id_especialidade' => 'id']);
     }
 
+    public static function dataByEspecialidade($idEspecialidade){
+
+        $procurar = self::find()
+            ->where(['id' =>  $idEspecialidade ])
+            ->one();
+
+        return $procurar;
+    }
+
     public static function dropdown(){
 
         static $dropdown;

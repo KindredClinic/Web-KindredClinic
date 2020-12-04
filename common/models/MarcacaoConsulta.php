@@ -14,6 +14,7 @@ use Yii;
  * @property int $id_medico
  * @property int $id_especialidade
  * @property int $id_utente
+ * @property string $status
  *
  * @property Consulta $consulta
  * @property Utente $utente
@@ -39,6 +40,7 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
             [['date', 'id_medico', 'id_especialidade', 'id_utente'], 'required'],
             [['date'], 'safe'],
             [['id_medico', 'id_especialidade', 'id_utente'], 'integer'],
+            [['status'], 'string'],
             [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id']],
@@ -53,10 +55,11 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date' => 'Date',
+            'date' => 'Data',
             'id_medico' => 'Medico',
             'id_especialidade' => 'Especialidade',
             'id_utente' => 'Utente',
+            'status' => 'Status',
         ];
     }
 
@@ -119,6 +122,15 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
             ->asArray()
             ->all();
 
+
+        return $procurar;
+    }
+
+    public static function dataByUser($idUtente){
+
+        $procurar = self::find()
+            ->where(['id_utente' =>  $idUtente ])
+            ->all();
 
         return $procurar;
     }
