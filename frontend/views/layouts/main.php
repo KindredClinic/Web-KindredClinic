@@ -38,9 +38,6 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
         $menuItems[] = ['label' => 'Registar', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/create']];
-        $menuItems[] = ['label' => 'Marc_Consulta', 'url' => ['/marcacao-consulta/index']];
-
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -51,7 +48,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
         $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/create']];
-        $menuItems[] = ['label' => 'Marc_Consulta', 'url' => ['/marcacao-consulta/index']];
+        $menuItems[] = ['label' => 'Marcação Consulta', 'url' => ['/marcacao-consulta/index']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
