@@ -18,20 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?= yii2fullcalendar\yii2fullcalendar::widget(array(
+            'events' => $events,
+            'options' => [
+                'lang' => 'pt-br',
+                //... more options to be defined here!
+            ],
 
-            'id',
-            'date',
-            'id_medico',
-            'id_utente',
-            'id_especialidade',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+        )
+    );
+    ?>
 
 
 </div>
