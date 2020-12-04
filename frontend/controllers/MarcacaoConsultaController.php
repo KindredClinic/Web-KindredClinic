@@ -84,6 +84,17 @@ class MarcacaoConsultaController extends Controller
         return 'white';
     }
 
+    public function actionGrid(){
+        $dataProvider = new ActiveDataProvider([
+            'query' => MarcacaoConsulta::find()
+            ->where(['id_utente' => Yii::$app->user->id]),
+        ]);
+
+        return $this->render('grid', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single MarcacaoConsulta model.

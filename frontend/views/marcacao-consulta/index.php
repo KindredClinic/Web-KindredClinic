@@ -18,9 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Marcacao Consulta', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Consulta', ['create'], ['class' => 'btn btn-success']) ?>
+        &nbsp;&nbsp;
+        <?= Html::a('Ver Consultas', ['grid'], ['class' => 'btn btn-success']) ?>
     </p>
-
 
     <?= yii2fullcalendar\yii2fullcalendar::widget(array(
             'events' => $events,
