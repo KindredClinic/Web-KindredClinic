@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 04-Dez-2020 às 14:52
--- Versão do servidor: 5.7.24
--- versão do PHP: 7.1.26
+-- Generation Time: Dec 05, 2020 at 07:27 PM
+-- Server version: 5.7.31
+-- PHP Version: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_assignment`
+-- Table structure for table `auth_assignment`
 --
 
 DROP TABLE IF EXISTS `auth_assignment`;
@@ -38,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_assignment`
+-- Dumping data for table `auth_assignment`
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
@@ -48,7 +47,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_item`
+-- Table structure for table `auth_item`
 --
 
 DROP TABLE IF EXISTS `auth_item`;
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_item`
+-- Dumping data for table `auth_item`
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
@@ -78,7 +77,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_item_child`
+-- Table structure for table `auth_item_child`
 --
 
 DROP TABLE IF EXISTS `auth_item_child`;
@@ -90,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `auth_item_child`
+-- Dumping data for table `auth_item_child`
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
@@ -101,7 +100,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `auth_rule`
+-- Table structure for table `auth_rule`
 --
 
 DROP TABLE IF EXISTS `auth_rule`;
@@ -116,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `consulta`
+-- Table structure for table `consulta`
 --
 
 DROP TABLE IF EXISTS `consulta`;
@@ -134,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `consulta` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `especialidade`
+-- Table structure for table `especialidade`
 --
 
 DROP TABLE IF EXISTS `especialidade`;
@@ -145,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `especialidade` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `especialidade`
+-- Dumping data for table `especialidade`
 --
 
 INSERT INTO `especialidade` (`id`, `tipo`) VALUES
@@ -165,7 +164,7 @@ INSERT INTO `especialidade` (`id`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exame`
+-- Table structure for table `exame`
 --
 
 DROP TABLE IF EXISTS `exame`;
@@ -183,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `exame` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `macacao_exame`
+-- Table structure for table `macacao_exame`
 --
 
 DROP TABLE IF EXISTS `macacao_exame`;
@@ -192,18 +191,26 @@ CREATE TABLE IF NOT EXISTS `macacao_exame` (
   `date` datetime NOT NULL,
   `id_medico` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
-  `status` enum('Aprovado','Em Espera','Rejeitado','') NOT NULL,
+  `status` enum('Aprovado','Em Espera','Rejeitado','') NOT NULL DEFAULT 'Em Espera',
   `id_especialidade` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_medico` (`id_medico`) USING BTREE,
   KEY `id_especialidade` (`id_especialidade`) USING BTREE,
   KEY `id_utente` (`id_utente`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `macacao_exame`
+--
+
+INSERT INTO `macacao_exame` (`id`, `date`, `id_medico`, `id_utente`, `status`, `id_especialidade`) VALUES
+(1, '2020-12-22 22:55:34', 16, 2, 'Aprovado', 8),
+(2, '2020-12-21 14:50:53', 12, 2, 'Em Espera', 6);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `marcacao_consulta`
+-- Table structure for table `marcacao_consulta`
 --
 
 DROP TABLE IF EXISTS `marcacao_consulta`;
@@ -221,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `marcacao_consulta` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `marcacao_consulta`
+-- Dumping data for table `marcacao_consulta`
 --
 
 INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, `id_utente`, `status`) VALUES
@@ -238,7 +245,7 @@ INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `medicamentos`
+-- Table structure for table `medicamentos`
 --
 
 DROP TABLE IF EXISTS `medicamentos`;
@@ -246,14 +253,23 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) NOT NULL,
   `gramas` decimal(7,2) NOT NULL,
-  `companhia` varchar(100) NOT NULL,
+  `laboratorio` varchar(75) NOT NULL,
+  `modoTomar` varchar(50) NOT NULL,
+  `descricao` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `medicamentos`
+--
+
+INSERT INTO `medicamentos` (`id`, `nome`, `gramas`, `laboratorio`, `modoTomar`, `descricao`) VALUES
+(2, 'Ácido acetilsalicílico (A-A-S)\r\n', '500.00', 'Omega Pharma Portuguesa, Unipessoal, Lda.\r\n', 'Via oral', 'Medicamento não sujeito a receita médica|\r\nBlister - 1000 unidade(s)\r\nBlister - 20 unidade(s)\r\nBlister - 40 unidade(s)\r\n');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `medicos`
+-- Table structure for table `medicos`
 --
 
 DROP TABLE IF EXISTS `medicos`;
@@ -271,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `medicos`
+-- Dumping data for table `medicos`
 --
 
 INSERT INTO `medicos` (`id`, `nome`, `sexo`, `nif`, `telefone`, `email`, `num_ordem_medico`, `id_especialidade`) VALUES
@@ -303,7 +319,7 @@ INSERT INTO `medicos` (`id`, `nome`, `sexo`, `nif`, `telefone`, `email`, `num_or
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `migration`
+-- Table structure for table `migration`
 --
 
 DROP TABLE IF EXISTS `migration`;
@@ -314,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `migration` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `migration`
+-- Dumping data for table `migration`
 --
 
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
@@ -330,7 +346,7 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `receita_medica`
+-- Table structure for table `receita_medica`
 --
 
 DROP TABLE IF EXISTS `receita_medica`;
@@ -350,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `receita_medica` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -372,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
@@ -382,7 +398,7 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `utente`
+-- Table structure for table `utente`
 --
 
 DROP TABLE IF EXISTS `utente`;
@@ -401,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `utente` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `utente`
+-- Dumping data for table `utente`
 --
 
 INSERT INTO `utente` (`id`, `nome`, `nif`, `sexo`, `telemovel`, `morada`, `email`, `num_sns`, `id_user`) VALUES
@@ -413,40 +429,40 @@ INSERT INTO `utente` (`id`, `nome`, `nif`, `sexo`, `telemovel`, `morada`, `email
 --
 
 --
--- Limitadores para a tabela `auth_assignment`
+-- Constraints for table `auth_assignment`
 --
 ALTER TABLE `auth_assignment`
   ADD CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `auth_item`
+-- Constraints for table `auth_item`
 --
 ALTER TABLE `auth_item`
   ADD CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `auth_item_child`
+-- Constraints for table `auth_item_child`
 --
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `consulta`
+-- Constraints for table `consulta`
 --
 ALTER TABLE `consulta`
   ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`id_marcacao`) REFERENCES `marcacao_consulta` (`id`),
   ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`);
 
 --
--- Limitadores para a tabela `exame`
+-- Constraints for table `exame`
 --
 ALTER TABLE `exame`
   ADD CONSTRAINT `exame_ibfk_1` FOREIGN KEY (`id_marcacao`) REFERENCES `macacao_exame` (`id`),
   ADD CONSTRAINT `exame_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`);
 
 --
--- Limitadores para a tabela `macacao_exame`
+-- Constraints for table `macacao_exame`
 --
 ALTER TABLE `macacao_exame`
   ADD CONSTRAINT `macacao_exame_ibfk_1` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id`),
@@ -454,7 +470,7 @@ ALTER TABLE `macacao_exame`
   ADD CONSTRAINT `macacao_exame_ibfk_3` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
 
 --
--- Limitadores para a tabela `marcacao_consulta`
+-- Constraints for table `marcacao_consulta`
 --
 ALTER TABLE `marcacao_consulta`
   ADD CONSTRAINT `marcacao_consulta_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`),
@@ -462,13 +478,13 @@ ALTER TABLE `marcacao_consulta`
   ADD CONSTRAINT `marcacao_consulta_ibfk_3` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
 
 --
--- Limitadores para a tabela `medicos`
+-- Constraints for table `medicos`
 --
 ALTER TABLE `medicos`
   ADD CONSTRAINT `medicos_ibfk_1` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidade` (`id`);
 
 --
--- Limitadores para a tabela `receita_medica`
+-- Constraints for table `receita_medica`
 --
 ALTER TABLE `receita_medica`
   ADD CONSTRAINT `receita_medica_ibfk_1` FOREIGN KEY (`id_medicamentos`) REFERENCES `medicamentos` (`id`),
