@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\MarcacaoExame;
 use Yii;
 
 /**
@@ -13,7 +14,7 @@ use Yii;
  * @property int $id_medico
  * @property int $id_marcacao
  *
- * @property MacacaoExame $marcacao
+ * @property MarcacaoExame $marcacao
  * @property Medicos $medico
  */
 class Exame extends \yii\db\ActiveRecord
@@ -36,7 +37,7 @@ class Exame extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['id_medico', 'id_marcacao'], 'integer'],
             [['conteudo'], 'string', 'max' => 255],
-            [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MacacaoExame::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
+            [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MarcacaoExame::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
         ];
     }
@@ -62,7 +63,7 @@ class Exame extends \yii\db\ActiveRecord
      */
     public function getMarcacao()
     {
-        return $this->hasOne(MacacaoExame::className(), ['id' => 'id_marcacao']);
+        return $this->hasOne(MarcacaoExame::className(), ['id' => 'id_marcacao']);
     }
 
     /**

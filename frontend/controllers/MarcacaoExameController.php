@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use backend\models\Especialidade;
 use common\models\MarcacaoConsulta;

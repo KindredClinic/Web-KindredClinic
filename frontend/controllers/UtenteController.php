@@ -52,8 +52,9 @@ class UtenteController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
+        $id = Yii::$app->user->id;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

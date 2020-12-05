@@ -6,16 +6,14 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Marcacao Consultas';
+$this->title = 'Marcação de Exames';
 ?>
 <div class="marcacao-consulta-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Criar Consulta', ['create'], ['class' => 'btn btn-success']) ?>
-        &nbsp;&nbsp;
-        <?= Html::a('Ver Calendatio', ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Calendario', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -39,6 +37,7 @@ $this->title = 'Marcacao Consultas';
                     return ['style' => 'background-color:'.$temp];
                 },
             ],
+            'status',
             'date',
             [
                 'attribute' => 'id_medico',

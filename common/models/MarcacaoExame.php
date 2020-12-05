@@ -53,10 +53,10 @@ class MarcacaoExame extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date' => 'Date',
-            'id_medico' => 'Id Medico',
-            'id_utente' => 'Id Utente',
-            'id_especialidade' => 'Id Especialidade',
+            'date' => 'Data',
+            'id_medico' => 'Médico',
+            'id_utente' => 'Utente',
+            'id_especialidade' => 'Especialidade',
         ];
     }
 
@@ -130,6 +130,18 @@ class MarcacaoExame extends \yii\db\ActiveRecord
             ->all();
 
         return $procurar;
+    }
+
+    public function changeColor($status){
+        if($status == 'Aprovado'){
+            return "<h1 style=\"color: lightgreen\">$status</h1>";
+        }
+        elseif($status == 'Em Espera'){
+            return "<h1 style=\"color: orange\">$status</h1>";
+        }
+        elseif($status == 'Rejeitado'){
+            return "<h1 style=\"color: red\">$status</h1>";
+        }
     }
 
 }

@@ -47,8 +47,8 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-        $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/create']];
-        $menuItems[] = ['label' => 'Marcação Consulta', 'url' => ['/marcacao-consulta/index']];
+        $menuItems[] = ['label' => 'Menu', 'url' => ['/utente/index']];
+
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

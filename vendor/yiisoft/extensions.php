@@ -78,7 +78,7 @@ return array (
   'kartik-v/yii2-datecontrol' => 
   array (
     'name' => 'kartik-v/yii2-datecontrol',
-    'version' => '9999999-dev',
+    'version' => 'dev-master',
     'alias' => 
     array (
       '@kartik/datecontrol' => $vendorDir . '/kartik-v/yii2-datecontrol/src',
@@ -87,7 +87,7 @@ return array (
   'kartik-v/yii2-widget-datepicker' => 
   array (
     'name' => 'kartik-v/yii2-widget-datepicker',
-    'version' => '9999999-dev',
+    'version' => 'dev-master',
     'alias' => 
     array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker/src',
@@ -96,7 +96,7 @@ return array (
   'kartik-v/yii2-widget-datetimepicker' => 
   array (
     'name' => 'kartik-v/yii2-widget-datetimepicker',
-    'version' => '9999999-dev',
+    'version' => 'dev-master',
     'alias' => 
     array (
       '@kartik/datetime' => $vendorDir . '/kartik-v/yii2-widget-datetimepicker/src',
@@ -105,7 +105,7 @@ return array (
   'kartik-v/yii2-widget-depdrop' => 
   array (
     'name' => 'kartik-v/yii2-widget-depdrop',
-    'version' => '9999999-dev',
+    'version' => 'dev-master',
     'alias' => 
     array (
       '@kartik/depdrop' => $vendorDir . '/kartik-v/yii2-widget-depdrop/src',

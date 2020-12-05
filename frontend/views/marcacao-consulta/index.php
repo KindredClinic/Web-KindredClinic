@@ -11,8 +11,20 @@ use yii\web\JqueryAsset;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Marcação de Consulta';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="utente-index">
+
+    <div id="SideBar" class="sidenav">
+
+        <?= Html::a('Menu', ['/utente/index'])  ?>
+        <?= Html::a('Perfil', ['/utente/view'])  ?>
+        <?= Html::a('Exames', ['/marcacao-exame/index'])  ?>
+
+    </div>
+
+</div>
+
+
 <div class="marcacao-consulta-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\MarcacaoExame */
 
-$this->title = 'Estado do Exame: '.$model->status;
+$this->title = 'Estado do Exame: ';
 $this->params['breadcrumbs'][] = ['label' => 'Marcacao Exames', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?=$model->changeColor($model->status)?>
 
     <br>
 

@@ -1,19 +1,18 @@
 <?php
 
 use backend\models\Especialidade;
-use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
+use kartik\depdrop\DepDrop;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use kartik\depdrop\DepDrop;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\MarcacaoConsulta */
+/* @var $model common\models\MarcacaoExame */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="marcacao-consulta-form">
+<div class="marcacao-exame-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -38,7 +37,7 @@ use kartik\depdrop\DepDrop;
         'pluginOptions'=>[
             'depends'=>['id_especialidade'],
             'placeholder'=>'Selecionar Medico',
-            'url'=>Url::to(['marcacao-consulta/subcat'])
+            'url'=>Url::to(['marcacao-exame/subcat'])
         ]
     ]);
     ?>

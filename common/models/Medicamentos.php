@@ -10,9 +10,11 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property float $gramas
- * @property string $companhia
+ * @property string $laboratorio
+ * @property string $modoTomar
+ * @property string $descricao
  *
- * @property ReceitaMedica $receitaMedica
+ * @property ReceitaMedica[] $receitaMedicas
  */
 class Medicamentos extends \yii\db\ActiveRecord
 {
@@ -30,10 +32,12 @@ class Medicamentos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'gramas', 'companhia'], 'required'],
+            [['nome', 'gramas', 'laboratorio', 'modoTomar', 'descricao'], 'required'],
             [['gramas'], 'number'],
             [['nome'], 'string', 'max' => 80],
-            [['companhia'], 'string', 'max' => 100],
+            [['laboratorio'], 'string', 'max' => 25],
+            [['modoTomar'], 'string', 'max' => 50],
+            [['descricao'], 'string', 'max' => 250],
         ];
     }
 
@@ -46,12 +50,14 @@ class Medicamentos extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'gramas' => 'Gramas',
-            'companhia' => 'Companhia',
+            'laboratorio' => 'Laboratorio',
+            'modoTomar' => 'Modo de Tomar',
+            'descricao' => 'Descricao',
         ];
     }
 
     /**
-     * Gets query for [[ReceitaMedica]].
+     * Gets query for [[ReceitaMedicas]].
      *
      * @return \yii\db\ActiveQuery
      */

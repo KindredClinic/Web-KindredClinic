@@ -4,15 +4,18 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\MarcacaoConsulta */
+/* @var $model common\models\MarcacaoExame */
 
-$this->title = 'Estado da Consulta: ';
+$this->title = 'Estado do Exame: ';
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="marcacao-consulta-view">
+<div class="marcacao-exame-view">
+
     <br>
-    <h1><?= Html::encode($this->title) ?> </h1>
+
+    <h1><?= Html::encode($this->title) ?></h1>
     <?=$model->changeColor($model->status)?>
+
     <br>
 
     <?= DetailView::widget([
@@ -33,6 +36,5 @@ $this->title = 'Estado da Consulta: ';
             ],
         ],
     ]) ?>
-
     <?= Html::a('Voltar para trás', ['index'], ['class' => 'btn btn-success']) ?>
 </div>
