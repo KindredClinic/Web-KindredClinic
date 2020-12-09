@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 05, 2020 at 07:27 PM
--- Server version: 5.7.31
--- PHP Version: 7.3.21
+-- Generation Time: Dec 09, 2020 at 04:51 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -54,9 +55,9 @@ DROP TABLE IF EXISTS `auth_item`;
 CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` blob,
+  `data` blob DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`),
@@ -106,7 +107,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 DROP TABLE IF EXISTS `auth_rule`;
 CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `data` blob,
+  `data` blob DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -253,18 +254,25 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) NOT NULL,
   `gramas` decimal(7,2) NOT NULL,
-  `laboratorio` varchar(75) NOT NULL,
-  `modoTomar` varchar(50) NOT NULL,
   `descricao` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `medicamentos`
 --
 
-INSERT INTO `medicamentos` (`id`, `nome`, `gramas`, `laboratorio`, `modoTomar`, `descricao`) VALUES
-(2, 'Ácido acetilsalicílico (A-A-S)\r\n', '500.00', 'Omega Pharma Portuguesa, Unipessoal, Lda.\r\n', 'Via oral', 'Medicamento não sujeito a receita médica|\r\nBlister - 1000 unidade(s)\r\nBlister - 20 unidade(s)\r\nBlister - 40 unidade(s)\r\n');
+INSERT INTO `medicamentos` (`id`, `nome`, `gramas`, `descricao`) VALUES
+(2, 'Ácido acetilsalicílico (A-A-S)\r\n', '500.00', 'Medicamento não sujeito a receita médica|\r\nBlister - 1000 unidade(s)\r\nBlister - 20 unidade(s)\r\nBlister - 40 unidade(s)\r\n'),
+(3, 'Valdispert', '45.00', 'Medicamento para dormir, 15 comprimidos'),
+(4, 'IB-U-RON', '20.00', 'Tomar de 6/6h durante ou após refeições.'),
+(5, 'Aspirina-C', '400.00', 'Dissolver em àgua, 1-2 comprimidos de 6/6h, 10 Comprimidos'),
+(6, 'BISOLVON', '8.00', '20 comprimidos, 3 vezes ao dia'),
+(7, 'BISOLTUSSIN', '2.00', 'Adultos e adolescentes com mais de 12 anos: -5 a 10 ml de Bisoltussin Tosse Seca com intervalos de 4 horas ou -15 ml de Bisoltussin Tosse Seca com intervalos de 6-8 horas.'),
+(13, 'Gurosan', '500.00', '20 Comprimidos, Um comprimido de manhã e outro ao meio dia num copo de água'),
+(14, 'Cegripe', '500.00', '20 Comprimidos, 1 a 2 comprimidos a cada 6 ou 8 horas (3 ou 4 vezes por dia).'),
+(16, 'Halibut', '150.00', 'No Rabinho do Bebé, em cada muda da fralda, aplicar uma camada espessa de Halibut, de modo a criar uma barreira protectora, entre a pele do bebé, a urina e as fezes.'),
+(17, 'Bepanthene', '50.00', 'Limpe a ferida ou a zona da pele infectada o melhor possível e aplique uma fina camada de Bepanthene Plus.');
 
 -- --------------------------------------------------------
 
@@ -377,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '10',
+  `status` smallint(6) NOT NULL DEFAULT 10,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
