@@ -41,7 +41,7 @@ class Exame extends \yii\db\ActiveRecord
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
         ];
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -50,7 +50,7 @@ class Exame extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'conteudo' => 'Conteudo',
-            'date' => 'Date',
+            'date' => 'Data',
             'id_medico' => 'Id Medico',
             'id_marcacao' => 'Id Marcacao',
         ];

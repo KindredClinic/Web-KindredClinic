@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '55ff04d0f31b276760a62358b1c6538fc9b70fd9',
+    'reference' => 'c30bd71c393ab336286c9dca5eed762326240665',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -435,12 +435,12 @@
     ),
     'phpunit/php-token-stream' => 
     array (
-      'pretty_version' => '4.0.4',
-      'version' => '4.0.4.0',
+      'pretty_version' => '3.1.2',
+      'version' => '3.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a853a0e183b9db7eed023d7933a858fa1c8d25a3',
+      'reference' => '472b687829041c24b25f475e14c2f38a09edf1c2',
     ),
     'phpunit/phpunit' => 
     array (
@@ -618,12 +618,12 @@
     ),
     'swiftmailer/swiftmailer' => 
     array (
-      'pretty_version' => 'v6.2.3',
-      'version' => '6.2.3.0',
+      'pretty_version' => 'v6.2.4',
+      'version' => '6.2.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '149cfdf118b169f7840bbe3ef0d4bc795d1780c9',
+      'reference' => '56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e',
     ),
     'symfony/browser-kit' => 
     array (
@@ -846,7 +846,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '55ff04d0f31b276760a62358b1c6538fc9b70fd9',
+      'reference' => 'c30bd71c393ab336286c9dca5eed762326240665',
     ),
     'yiisoft/yii2-bootstrap' => 
     array (
