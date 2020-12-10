@@ -1,5 +1,15 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -19,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'c30bd71c393ab336286c9dca5eed762326240665',
+    'reference' => 'bb6f3775e19a6d3910c4cf202ad2188e31078156',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -448,12 +458,12 @@ private static $installed = array (
     ),
     'phpunit/php-token-stream' => 
     array (
-      'pretty_version' => '3.1.2',
-      'version' => '3.1.2.0',
+      'pretty_version' => '4.0.4',
+      'version' => '4.0.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '472b687829041c24b25f475e14c2f38a09edf1c2',
+      'reference' => 'a853a0e183b9db7eed023d7933a858fa1c8d25a3',
     ),
     'phpunit/phpunit' => 
     array (
@@ -834,6 +844,15 @@ private static $installed = array (
       ),
       'reference' => '75a63c33a8577608444246075ea0af0d052e452a',
     ),
+    'vova07/yii2-imperavi-widget' => 
+    array (
+      'pretty_version' => '2.0.11',
+      'version' => '2.0.11.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c4fe4a9f64a4c53d9686c80b8744e2c1366184e5',
+    ),
     'webmozart/assert' => 
     array (
       'pretty_version' => '1.9.1',
@@ -859,7 +878,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'c30bd71c393ab336286c9dca5eed762326240665',
+      'reference' => 'bb6f3775e19a6d3910c4cf202ad2188e31078156',
     ),
     'yiisoft/yii2-bootstrap' => 
     array (

@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Medicamentos;
+use vova07\imperavi\Widget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datetime\DateTimePicker;
@@ -7,13 +9,22 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Exame */
 /* @var $form yii\widgets\ActiveForm */
+
+$medicamentos = Medicamentos::formAddon();
+
 ?>
+
+<script>
+    $('#conteudo').redactor({
+        buttons:['formatting','bold','italic','unorderedlist','orderedlist','outdent','indent']
+    });
+</script>
+
 
 <div class="exame-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'conteudo')->textInput(['maxlength' => true]) ?>
 
     <?=  $form->field($model, 'date')->widget(DateTimePicker::className(),[
         'name' => 'date',
@@ -24,6 +35,17 @@ use kartik\datetime\DateTimePicker;
         ]
     ]);
     ?>
+
+    <br>
+
+    <?= $form->field($model, 'conteudo')->widget(Widget::className(), [
+        'name' => 'conteudo',
+        'settings' => [
+            'lang' => 'en',
+            'minHeight' => 250,
+            'buttons' => ['formatting','bold','italic','unorderedlist','orderedlist','outdent','indent','alignment'],
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'id_medico')->textInput() ?>
 

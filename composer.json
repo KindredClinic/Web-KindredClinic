@@ -24,6 +24,7 @@
         "kartik-v/yii2-widget-depdrop": "dev-master",
         "philippfrenzel/yii2fullcalendar": "*",
         "bower-asset/fullcalendar": "3.10.2",
+        "vova07/yii2-imperavi-widget": "*",
         "ext-json": "*"
     },
     "require-dev": {

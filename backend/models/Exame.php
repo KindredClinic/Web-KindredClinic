@@ -75,4 +75,5 @@ class Exame extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Medicos::className(), ['id' => 'id_medico']);
     }
+
 }

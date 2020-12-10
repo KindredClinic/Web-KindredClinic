@@ -32,11 +32,9 @@ class Medicamentos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'gramas', 'laboratorio', 'modoTomar', 'descricao'], 'required'],
+            [['nome', 'gramas', 'descricao'], 'required'],
             [['gramas'], 'number'],
             [['nome'], 'string', 'max' => 80],
-            [['laboratorio'], 'string', 'max' => 25],
-            [['modoTomar'], 'string', 'max' => 50],
             [['descricao'], 'string', 'max' => 250],
         ];
     }
@@ -50,8 +48,6 @@ class Medicamentos extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'gramas' => 'Gramas',
-            'laboratorio' => 'Laboratorio',
-            'modoTomar' => 'Modo de Tomar',
             'descricao' => 'Descricao',
         ];
     }
@@ -64,5 +60,12 @@ class Medicamentos extends \yii\db\ActiveRecord
     public function getReceitaMedicas()
     {
         return $this->hasMany(ReceitaMedica::className(), ['id_medicamentos' => 'id']);
+    }
+
+    public static function formAddon(){
+        $procurar = Medicamentos::find()
+            ->all();
+
+        return [$procurar, $procurar];
     }
 }
