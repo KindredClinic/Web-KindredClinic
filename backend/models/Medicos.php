@@ -4,7 +4,9 @@ namespace backend\models;
 
 use common\models\Consulta;
 use common\models\MarcacaoConsulta;
+use common\models\MarcacaoExame;
 use common\models\ReceitaMedica;
+use common\models\User;
 use Yii;
 
 /**
@@ -18,16 +20,20 @@ use Yii;
  * @property string $email
  * @property int $num_ordem_medico
  * @property int $id_especialidade
+ * @property int $id_user
  *
  * @property Consulta $consulta
  * @property Exame $exame
- * @property MacacaoExame $macacaoExame
+ * @property MarcacaoExame $macacaoExame
  * @property MarcacaoConsulta $marcacaoConsulta
  * @property Especialidade $especialidade
- * @property ReceitaMedica $receitaMedica
  */
 class Medicos extends \yii\db\ActiveRecord
 {
+    public $username;
+    public $email;
+    public $password;
+
     /**
      * {@inheritdoc}
      */
@@ -42,12 +48,26 @@ class Medicos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'sexo', 'nif', 'telefone', 'email', 'num_ordem_medico', 'id_especialidade'], 'required'],
+            [['nome', 'sexo', 'nif', 'telefone', 'num_ordem_medico', 'id_especialidade', 'id_user'], 'required'],
             [['sexo'], 'string'],
-            [['nif', 'telefone', 'num_ordem_medico', 'id_especialidade'], 'integer'],
+            [['nif', 'telefone', 'num_ordem_medico', 'id_especialidade', 'id_user'], 'integer'],
             [['nome', 'email'], 'string', 'max' => 255],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id']],
-        ];
+
+            ['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+            ['password', 'required'],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ];
     }
 
 
@@ -65,6 +85,7 @@ class Medicos extends \yii\db\ActiveRecord
             'email' => 'Email',
             'num_ordem_medico' => 'Num Ordem Medico',
             'id_especialidade' => 'Id Especialidade',
+            'id_user' => 'Id User',
         ];
     }
 
@@ -95,7 +116,7 @@ class Medicos extends \yii\db\ActiveRecord
      */
     public function getMacacaoExames()
     {
-        return $this->hasMany(MacacaoExame::className(), ['id_medico' => 'id']);
+        return $this->hasMany(MarcacaoExame::className(), ['id_medico' => 'id']);
     }
 
     /**
@@ -118,13 +139,44 @@ class Medicos extends \yii\db\ActiveRecord
         return $this->hasOne(Especialidade::className(), ['id' => 'id_especialidade']);
     }
 
-    /**
-     * Gets query for [[ReceitaMedica]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getReceitaMedicas()
-    {
-        return $this->hasMany(ReceitaMedica::className(), ['id_medico' => 'id']);
+    public function criarMedico(){
+
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->status = 9;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $user->save();
+
+        $model = new Medicos();
+        $model->nome = $this->nome;
+        $model->sexo = $this->sexo;
+        $model->nif = $this->nif;
+        $model->telefone = $this->telefone;
+        $model->num_ordem_medico = $this->num_ordem_medico;
+        $model->id_especialidade = $this->id_especialidade;
+        $model->email = $this->email;
+        $model->id_user = $user->getId();
+        $model->save(false);
+
+        return $this->sendEmail($user);
+
     }
+
+    protected function sendEmail($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Conta Registada em ' . Yii::$app->name)
+            ->send();
+    }
+
 }
