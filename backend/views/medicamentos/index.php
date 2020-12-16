@@ -6,15 +6,14 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Exames';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Medicamentos';
 ?>
-<div class="exame-index">
+<div class="medicamentos-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Criar Exame', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Inserir Medicamento', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -23,10 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'conteudo',
-            'date',
-            'id_medico',
-            'id_marcacao',
+            'nome',
+            'miligramas',
+            'descricao',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
