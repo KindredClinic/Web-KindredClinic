@@ -7,8 +7,6 @@ use yii\widgets\DetailView;
 /* @var $model common\models\MarcacaoExame */
 
 $this->title = 'Estado do Exame: ';
-$this->params['breadcrumbs'][] = ['label' => 'Marcacao Exames', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="marcacao-exame-view">
@@ -40,5 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+
+    <?php
+        if($model->status == 'Aprovado'){
+            echo Html::a('Exame', ['exame/create', 'id' => $model->id, 'data' => $model->date], ['class' => 'btn btn-primary']) ;
+        }
+    ?>
+    &nbsp;&nbsp;&nbsp;
+    <?= Html::a('Voltar para trás', ['grid'], ['class' => 'btn btn-success']) ?>
 
 </div>

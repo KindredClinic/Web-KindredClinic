@@ -7,7 +7,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Marcação de Exames';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="marcacao-consulta-index">
 
@@ -16,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Criar Exame', ['create'], ['class' => 'btn btn-success']) ?>
         &nbsp;&nbsp;
-        <?= Html::a('Ver Calendatio', ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Calendario', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -40,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ['style' => 'background-color:'.$temp];
                 },
             ],
-            'status',
             'date',
             [
                 'attribute' => 'id_medico',
@@ -49,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id_especialidade',
                 'value'     => 'especialidade.tipo'
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
             ],
 
         ],

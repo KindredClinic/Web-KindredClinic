@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'bb6f3775e19a6d3910c4cf202ad2188e31078156',
+    'reference' => 'f03e3abadfb3237d9ef00675b57149f526896158',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -220,12 +220,12 @@
     ),
     'fakerphp/faker' => 
     array (
-      'pretty_version' => 'v1.12.0',
-      'version' => '1.12.0.0',
+      'pretty_version' => 'v1.12.1',
+      'version' => '1.12.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9aa6c9e289860951e6b4d010c7a841802d015cd8',
+      'reference' => '841e8bdde345cc1ea9f98e776959e7531cadea0e',
     ),
     'guzzlehttp/psr7' => 
     array (
@@ -273,6 +273,16 @@
       ),
       'reference' => '9ddb662bdf49fdb671a90853912a40418a26a0dd',
     ),
+    'kartik-v/yii2-markdown' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '1.3.x-dev',
+      ),
+      'reference' => '9d2534435f0ad61c55d064c7ba1b2d284fafe7a4',
+    ),
     'kartik-v/yii2-widget-datepicker' => 
     array (
       'pretty_version' => 'dev-master',
@@ -302,6 +312,34 @@
         0 => '1.0.x-dev',
       ),
       'reference' => '4dffe1fd0c9d9d5b7e6231f6cd059dfa36d22b3b',
+    ),
+    'kartik-v/yii2-widget-select2' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '2.2.x-dev',
+      ),
+      'reference' => '05ed365ea5ed3555646db27dfb9beea79757a054',
+    ),
+    'michelf/php-markdown' => 
+    array (
+      'pretty_version' => '1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c83178d49e372ca967d1a8c77ae4e051b3a3c75c',
+    ),
+    'michelf/php-smartypants' => 
+    array (
+      'pretty_version' => '1.8.1',
+      'version' => '1.8.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '47d17c90a4dfd0ccf1f87e25c65e6c8012415aad',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -336,12 +374,12 @@
     ),
     'phar-io/version' => 
     array (
-      'pretty_version' => '3.0.3',
-      'version' => '3.0.3.0',
+      'pretty_version' => '3.0.4',
+      'version' => '3.0.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '726c026815142e4f8677b7cb7f2249c9ffb7ecae',
+      'reference' => 'e4782611070e50613683d2b9a57730e9a3ba5451',
     ),
     'philippfrenzel/yii2fullcalendar' => 
     array (
@@ -435,12 +473,12 @@
     ),
     'phpunit/php-token-stream' => 
     array (
-      'pretty_version' => '4.0.4',
-      'version' => '4.0.4.0',
+      'pretty_version' => '3.1.2',
+      'version' => '3.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a853a0e183b9db7eed023d7933a858fa1c8d25a3',
+      'reference' => '472b687829041c24b25f475e14c2f38a09edf1c2',
     ),
     'phpunit/phpunit' => 
     array (
@@ -615,6 +653,15 @@
       array (
       ),
       'reference' => '99732be0ddb3361e16ad77b68ba41efc8e979019',
+    ),
+    'select2/select2' => 
+    array (
+      'pretty_version' => '4.0.13',
+      'version' => '4.0.13.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '45f2b83ceed5231afa7b3d5b12b58ad335edd82e',
     ),
     'swiftmailer/swiftmailer' => 
     array (
@@ -855,7 +902,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'bb6f3775e19a6d3910c4cf202ad2188e31078156',
+      'reference' => 'f03e3abadfb3237d9ef00675b57149f526896158',
     ),
     'yiisoft/yii2-bootstrap' => 
     array (

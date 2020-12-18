@@ -22,8 +22,10 @@
         "kartik-v/yii2-widget-datepicker": "dev-master",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "kartik-v/yii2-widget-depdrop": "dev-master",
+        "kartik-v/yii2-widget-select2": "dev-master",
         "philippfrenzel/yii2fullcalendar": "*",
         "bower-asset/fullcalendar": "3.10.2",
+        "kartik-v/yii2-markdown": "dev-master",
         "vova07/yii2-imperavi-widget": "*",
         "ext-json": "*"
     },

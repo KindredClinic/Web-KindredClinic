@@ -64,8 +64,9 @@ class Medicamentos extends \yii\db\ActiveRecord
 
     public static function formAddon(){
         $procurar = Medicamentos::find()
+            ->asArray()
             ->all();
 
-        return [$procurar, $procurar];
+        return $procurar;
     }
 }

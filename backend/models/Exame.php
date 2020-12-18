@@ -3,7 +3,9 @@
 namespace backend\models;
 
 use common\models\MarcacaoExame;
+use common\models\Utente;
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "exame".
@@ -51,8 +53,8 @@ class Exame extends \yii\db\ActiveRecord
             'id' => 'ID',
             'conteudo' => 'Conteudo',
             'date' => 'Data',
-            'id_medico' => 'Id Medico',
-            'id_marcacao' => 'Id Marcacao',
+            'id_medico' => 'Medico',
+            'id_marcacao' => 'Marcacao',
         ];
     }
 
@@ -66,6 +68,11 @@ class Exame extends \yii\db\ActiveRecord
         return $this->hasOne(MarcacaoExame::className(), ['id' => 'id_marcacao']);
     }
 
+    public function getUtente()
+    {
+        return $this->hasOne(Utente::className(), ['id' => 'id_utente'])->via('marcacao');
+    }
+
     /**
      * Gets query for [[Medico]].
      *
@@ -74,6 +81,18 @@ class Exame extends \yii\db\ActiveRecord
     public function getMedico()
     {
         return $this->hasOne(Medicos::className(), ['id' => 'id_medico']);
+    }
+
+    public function criarExame($id,$data){
+
+        $model = new Exame();
+        $model->conteudo = $this->conteudo;
+        $model->date = $data;
+        $model->id_medico = Yii::$app->user->id;
+        $model->id_marcacao = $id;
+
+        $model->save();
+
     }
 
 }

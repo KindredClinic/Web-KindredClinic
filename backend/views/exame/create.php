@@ -5,9 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Exame */
 
-$this->title = 'Create Exame';
-$this->params['breadcrumbs'][] = ['label' => 'Exames', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Exame';
 ?>
 <div class="exame-create">
 

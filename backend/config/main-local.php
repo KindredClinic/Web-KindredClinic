@@ -17,6 +17,10 @@ $config = [
                 \kartik\datecontrol\Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm:ss a',
                 ],
             ],
+        'markdown' => [
+            'class' => 'kartik\markdown\Module',
+
+            ],
         ],
 ];
 
