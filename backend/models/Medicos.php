@@ -179,4 +179,17 @@ class Medicos extends \yii\db\ActiveRecord
             ->send();
     }
 
+    public static function dropdown(){
+
+        static $dropdown;
+
+        if($dropdown == null){
+            $models = Medicos::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->nome;
+            }
+        }
+
+        return $dropdown;
+    }
 }

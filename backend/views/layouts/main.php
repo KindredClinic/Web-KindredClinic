@@ -40,6 +40,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Marc_Exame', 'url' => ['/marcacao-exame/index']],
         $menuItems[] = ['label' => 'Medicos', 'url' => ['/medicos/index']],
         $menuItems[] = ['label' => 'Medicamentos', 'url' => ['/medicamentos/index']],
+        $menuItems[] = ['label' => 'Receita', 'url' => ['/receita-medica/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

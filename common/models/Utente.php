@@ -18,7 +18,7 @@ use Yii;
  * @property int $num_sns
  * @property int $id_user
  *
- * @property MacacaoExame $macacaoExame
+ * @property MarcacaoExame $macacaoExame
  * @property MarcacaoConsulta $marcacaoConsulta
  * @property ReceitaMedica $receitaMedica
  * @property User $user
@@ -76,7 +76,7 @@ class Utente extends \yii\db\ActiveRecord
      */
     public function getMacacaoExame()
     {
-        return $this->hasOne(MacacaoExame::className(), ['id_utente' => 'id']);
+        return $this->hasOne(MarcacaoExame::className(), ['id_utente' => 'id']);
     }
 
     /**
@@ -222,6 +222,18 @@ class Utente extends \yii\db\ActiveRecord
         $this->num_sns = $num_sns;
     }
 
+    public static function dropdown(){
 
+        static $dropdown;
+
+        if($dropdown == null){
+            $models = self::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->nome;
+            }
+        }
+
+        return $dropdown;
+    }
 
 }

@@ -9,12 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $nome
- * @property float $gramas
- * @property string $laboratorio
- * @property string $modoTomar
- * @property string $descricao
- *
- * @property ReceitaMedica[] $receitaMedicas
+ * @property float $miligramas
+ * @property string $designacao
  */
 class Medicamentos extends \yii\db\ActiveRecord
 {
@@ -32,10 +28,10 @@ class Medicamentos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'gramas', 'descricao'], 'required'],
-            [['gramas'], 'number'],
+            [['nome', 'miligramas', 'designacao'], 'required'],
+            [['miligramas'], 'number'],
             [['nome'], 'string', 'max' => 80],
-            [['descricao'], 'string', 'max' => 250],
+            [['designacao'], 'string', 'max' => 250],
         ];
     }
 
@@ -47,26 +43,22 @@ class Medicamentos extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'gramas' => 'Gramas',
-            'descricao' => 'Descricao',
+            'miligramas' => 'Miligramas',
+            'designacao' => 'Designacao',
         ];
     }
 
-    /**
-     * Gets query for [[ReceitaMedicas]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getReceitaMedicas()
-    {
-        return $this->hasMany(ReceitaMedica::className(), ['id_medicamentos' => 'id']);
-    }
+    public static function dropdown(){
 
-    public static function formAddon(){
-        $procurar = Medicamentos::find()
-            ->asArray()
-            ->all();
+        static $dropdown;
 
-        return $procurar;
+        if($dropdown == null){
+            $models = self::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->nome;
+            }
+        }
+
+        return $dropdown;
     }
 }
