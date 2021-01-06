@@ -28,10 +28,10 @@ class Medicamentos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'miligramas', 'designacao'], 'required'],
+            [['nome', 'miligramas', 'descricao'], 'required'],
             [['miligramas'], 'number'],
-            [['nome'], 'string', 'max' => 80],
-            [['designacao'], 'string', 'max' => 250],
+            [['nome'], 'string', 'max' => 25],
+            [['descricao'], 'string', 'max' => 250],
         ];
     }
 
@@ -60,5 +60,21 @@ class Medicamentos extends \yii\db\ActiveRecord
         }
 
         return $dropdown;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @param string $nome
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
     }
 }

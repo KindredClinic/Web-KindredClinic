@@ -4,4 +4,8 @@ modules:
     enabled:
         - Yii2:
             part: [orm, email, fixtures]
+        - Db:
+                dsn: 'mysql:host=localhost;dbname=kindredclinic_test'
+                user: 'root'
+                password: ''
         - Asserts

@@ -22,4 +22,7 @@ class UnitTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
+    public function seeInDatabase($string, array $array)
+    {
+    }
 }

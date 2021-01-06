@@ -32,7 +32,7 @@ class Especialidade extends \yii\db\ActiveRecord
     {
         return [
             [['tipo'], 'required'],
-            [['tipo'], 'string', 'max' => 255],
+            [['tipo'], 'string', 'max' => 25],
         ];
     }
 
@@ -98,5 +98,21 @@ class Especialidade extends \yii\db\ActiveRecord
         }
 
         return $dropdown;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * @param string $tipo
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
     }
 }
