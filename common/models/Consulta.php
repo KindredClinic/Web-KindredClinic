@@ -13,6 +13,7 @@ use Yii;
  * @property string $date
  * @property int $id_marcacao
  * @property int $id_medico
+ * @property int $id_utente
  *
  * @property MarcacaoConsulta $marcacao
  * @property Medicos $medico
@@ -39,6 +40,7 @@ class Consulta extends \yii\db\ActiveRecord
             [['conteudo'], 'string', 'max' => 255],
             [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MarcacaoConsulta::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
+            [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
         ];
     }
 
@@ -50,9 +52,10 @@ class Consulta extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'conteudo' => 'Conteudo',
-            'date' => 'Date',
-            'id_marcacao' => 'Id Marcacao',
-            'id_medico' => 'Id Medico',
+            'date' => 'Data',
+            'id_marcacao' => 'Marcacao',
+            'id_medico' => 'Médico',
+            'id_utente' => 'Utente',
         ];
     }
 
@@ -75,4 +78,31 @@ class Consulta extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Medicos::className(), ['id' => 'id_medico']);
     }
+
+    /**
+     * Gets query for [[Utente]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUtente()
+    {
+        return $this->hasOne(Utente::className(), ['id' => 'id_utente']);
+    }
+
+    public function criarConsulta($id,$data,$id_utente){
+
+        $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
+
+
+        $model = new Consulta();
+        $model->conteudo = $this->conteudo;
+        $model->date = $data;
+        $model->id_medico = $tempMedic['id'];
+        $model->id_marcacao = $id;
+        $model->id_utente = $id_utente;
+
+        $model->save();
+
+    }
+
 }

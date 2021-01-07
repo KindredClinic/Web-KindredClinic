@@ -20,11 +20,9 @@ return array(
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'kartik\\select2\\' => array($vendorDir . '/kartik-v/yii2-widget-select2/src'),
     'kartik\\plugins\\depdrop\\' => array($vendorDir . '/kartik-v/dependent-dropdown'),
-    'kartik\\plugins\\dateformatter\\' => array($vendorDir . '/kartik-v/php-date-formatter'),
     'kartik\\markdown\\' => array($vendorDir . '/kartik-v/yii2-markdown/src'),
     'kartik\\depdrop\\' => array($vendorDir . '/kartik-v/yii2-widget-depdrop/src'),
     'kartik\\datetime\\' => array($vendorDir . '/kartik-v/yii2-widget-datetimepicker/src'),
-    'kartik\\datecontrol\\' => array($vendorDir . '/kartik-v/yii2-datecontrol/src'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker/src'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base/src'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
@@ -62,5 +60,5 @@ return array(
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Codeception\\PHPUnit\\' => array($vendorDir . '/codeception/phpunit-wrapper/src'),
     'Codeception\\Extension\\' => array($vendorDir . '/codeception/codeception/ext'),
-    'Codeception\\' => array($vendorDir . '/codeception/codeception/src/Codeception', $vendorDir . '/codeception/stub/src', $vendorDir . '/codeception/verify/src/Codeception'),
+    'Codeception\\' => array($vendorDir . '/codeception/stub/src', $vendorDir . '/codeception/verify/src/Codeception', $vendorDir . '/codeception/codeception/src/Codeception'),
 );

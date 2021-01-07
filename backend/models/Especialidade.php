@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\models\MarcacaoConsulta;
+use common\models\MarcacaoExame;
 use Yii;
 
 /**
@@ -11,7 +12,7 @@ use Yii;
  * @property int $id
  * @property string $tipo
  *
- * @property MacacaoExame $macacaoExame
+ * @property MarcacaoExame $macacaoExame
  * @property MarcacaoConsulta $marcacaoConsulta
  * @property Medicos[] $medicos
  */
@@ -54,7 +55,7 @@ class Especialidade extends \yii\db\ActiveRecord
      */
     public function getMacacaoExame()
     {
-        return $this->hasOne(MacacaoExame::className(), ['id_especialidade' => 'id']);
+        return $this->hasOne(MarcacaoExame::className(), ['id_especialidade' => 'id']);
     }
 
     /**

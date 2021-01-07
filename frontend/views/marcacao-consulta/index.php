@@ -33,6 +33,8 @@ $this->title = 'Marcação de Consulta';
         <?= Html::a('Criar Consulta', ['create'], ['class' => 'btn btn-success']) ?>
         &nbsp;&nbsp;
         <?= Html::a('Ver Consultas', ['grid'], ['class' => 'btn btn-success']) ?>
+        &nbsp;&nbsp;
+        <?= Html::a('Consultas Passadas', ['consulta/index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= yii2fullcalendar\yii2fullcalendar::widget(array(

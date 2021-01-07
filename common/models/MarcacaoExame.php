@@ -14,6 +14,7 @@ use Yii;
  * @property string $date
  * @property int $id_medico
  * @property int $id_utente
+ * @property string $status
  * @property int $id_especialidade
  *
  * @property Exame[] $exames
@@ -39,6 +40,7 @@ class MarcacaoExame extends \yii\db\ActiveRecord
         return [
             [['date', 'id_medico', 'id_utente', 'id_especialidade'], 'required'],
             [['date'], 'safe'],
+            [['status'], 'string'],
             [['id_medico', 'id_utente', 'id_especialidade'], 'integer'],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
             [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
@@ -55,6 +57,7 @@ class MarcacaoExame extends \yii\db\ActiveRecord
             'id' => 'ID',
             'date' => 'Data',
             'id_medico' => 'Médico',
+            'status' => 'Status',
             'id_utente' => 'Utente',
             'id_especialidade' => 'Especialidade',
         ];
@@ -102,11 +105,14 @@ class MarcacaoExame extends \yii\db\ActiveRecord
 
     public function criarMarcacaoExame(){
 
+        $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
+        $tempEspec = Especialidade::dataByEspecialidade($tempMedic);
+
         $model = new MarcacaoExame();
         $model->date = $this->date;
-        $model->id_especialidade = $this->id_especialidade;
-        $model->id_medico = $this->id_medico;
-        $model->id_utente = Yii::$app->user->id;
+        $model->id_especialidade = $tempEspec['id'];
+        $model->id_medico = $tempMedic['id'];
+        $model->id_utente = $this->id_utente;
 
         $model->save();
     }
@@ -126,7 +132,7 @@ class MarcacaoExame extends \yii\db\ActiveRecord
     public static function dataByUser($idUtente){
 
         $procurar = self::find()
-            ->where(['id_utente' =>  $idUtente ])
+            ->where(['id_medico' =>  $idUtente ])
             ->all();
 
         return $procurar;

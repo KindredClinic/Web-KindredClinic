@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Especialidade;
+use backend\models\Medicos;
 use common\models\MarcacaoConsulta;
 use Yii;
 use common\models\MarcacaoExame;
@@ -38,7 +39,8 @@ class MarcacaoExameController extends Controller
      */
     public function actionIndex()
     {
-        $times = MarcacaoExame::dataByUser(Yii::$app->user->id);
+        $tempVariable = Medicos::dataByUser(Yii::$app->user->id);
+        $times = MarcacaoExame::dataByUser($tempVariable);
 
         $events = [];
         foreach ($times AS $time){
@@ -78,7 +80,7 @@ class MarcacaoExameController extends Controller
     public function actionGrid(){
         $dataProvider = new ActiveDataProvider([
             'query' => MarcacaoExame::find()
-                ->where(['id_utente' => Yii::$app->user->id]),
+                ->where(['id_medico' => Medicos::dataByUser(Yii::$app->user->id)]),
         ]);
 
         return $this->render('grid', [
@@ -176,7 +178,7 @@ class MarcacaoExameController extends Controller
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {
                 $especialidade = $parents[0];
-                $out = MarcacaoConsulta::getSubDropDownList($especialidade);
+                $out = MarcacaoExame::getSubDropDownList($especialidade);
 
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:

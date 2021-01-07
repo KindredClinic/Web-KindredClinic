@@ -41,7 +41,10 @@ $this->title = 'Estado do Exame: ';
 
     <?php
         if($model->status == 'Aprovado'){
-            echo Html::a('Exame', ['exame/create', 'id' => $model->id, 'data' => $model->date], ['class' => 'btn btn-primary']) ;
+            echo Html::a('Exame', ['exame/create', 'id' => $model->id, 'data' => $model->date, 'id_utente' => $model->id_utente], ['class' => 'btn btn-primary']) ;
+        }
+        if($model->status == 'Em Espera'){
+            echo Html::a('Alterar', ['marcacao-exame/update', 'id' => $model->id, 'data' => $model->date], ['class' => 'btn btn-primary']) ;
         }
     ?>
     &nbsp;&nbsp;&nbsp;

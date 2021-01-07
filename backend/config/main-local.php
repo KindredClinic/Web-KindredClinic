@@ -8,15 +8,6 @@ $config = [
         ],
     ],
     'modules' => [
-        'datecontrol' => [
-            'class' => 'kartik\datecontrol\Module',
-            // format settings for displaying each date attribute (ICU format example)
-            'displaySettings' => [
-                \kartik\datecontrol\Module::FORMAT_DATE => 'dd-MM-yyyy',
-                \kartik\datecontrol\Module::FORMAT_TIME => 'HH:mm:ss a',
-                \kartik\datecontrol\Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm:ss a',
-                ],
-            ],
         'markdown' => [
             'class' => 'kartik\markdown\Module',
 

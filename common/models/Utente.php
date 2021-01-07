@@ -18,7 +18,7 @@ use Yii;
  * @property int $num_sns
  * @property int $id_user
  *
- * @property MacacaoExame $macacaoExame
+ * @property MarcacaoExame $macacaoExame
  * @property MarcacaoConsulta $marcacaoConsulta
  * @property ReceitaMedica $receitaMedica
  * @property User $user
@@ -76,7 +76,7 @@ class Utente extends \yii\db\ActiveRecord
      */
     public function getMacacaoExame()
     {
-        return $this->hasOne(MacacaoExame::className(), ['id_utente' => 'id']);
+        return $this->hasOne(MarcacaoExame::className(), ['id_utente' => 'id']);
     }
 
     /**
@@ -107,6 +107,14 @@ class Utente extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
+
+    public static function formAddon(){
+        $procurar = Utente::find()
+            ->asArray()
+            ->all();
+
+        return $procurar;
     }
 
 

@@ -1,8 +1,11 @@
 <?php
 
 use backend\models\Especialidade;
+use common\models\Utente;
 use kartik\datetime\DateTimePicker;
 use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -27,20 +30,25 @@ use yii\widgets\ActiveForm;
     ?>
 
     <br>
-
-    <?= $form->field($model , 'id_especialidade')->dropDownList(Especialidade::dropdown(),
-        ['prompt' => 'Selecionar Especialidade', 'id' => 'id_especialidade'])
-    ?>
-
-    <?= $form->field($model, 'id_medico')->widget(DepDrop::classname(), [
-        'options'=>['prompt' => 'Selecionar Medico', 'id'=>'id_medico'],
-        'pluginOptions'=>[
-            'depends'=>['id_especialidade'],
-            'placeholder'=>'Selecionar Medico',
-            'url'=>Url::to(['marcacao-exame/subcat'])
-        ]
+    <?= $form->field($model, 'id_utente')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Utente::formAddon(), 'id', 'nome'),
+        'options' => ['placeholder' => 'Selecione o utente ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
     ]);
     ?>
+
+
+    <?php
+        if($model->status == 'Em Espera'){
+            echo $form->field($model, 'status')->dropDownList(['Aprovado' => 'Aprovado', 'Em Espera' => 'Em Espera', 'Rejeitado' => 'Rejeitado', '' => '',], ['prompt' => '']);
+        }
+        else{
+
+        }
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

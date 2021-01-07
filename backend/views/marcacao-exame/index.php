@@ -15,7 +15,9 @@ $this->title = 'Marcação de Exames';
     <p>
         <?= Html::a('Criar Exame', ['create'], ['class' => 'btn btn-success']) ?>
 
-        <?= Html::a('Ver Consultas', ['grid'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Exames', ['grid'], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('Exames Passados', ['exame/index'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

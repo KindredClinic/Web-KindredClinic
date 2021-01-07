@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use common\models\Medicamentos;
 use Yii;
 use backend\models\Exame;
 use yii\data\ActiveDataProvider;
@@ -63,12 +62,12 @@ class ExameController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id,$data)
+    public function actionCreate($id,$data,$id_utente)
     {
         $model = new Exame();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->criarExame($id,$data);
+            $model->criarExame($id,$data,$id_utente);
             return $this->redirect(['index']);
         }
 

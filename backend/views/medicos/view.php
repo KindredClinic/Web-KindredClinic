@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Medicos */
 
-$this->title = $model->id;
+$this->title = 'Nome: '.$model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Medicos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -34,9 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'sexo',
             'nif',
             'telefone',
-            'email:email',
             'num_ordem_medico',
-            'id_especialidade',
+            [
+                'attribute'=>'id_especialidade',
+                'value'=>$model->especialidade->tipo.' ('.$model->especialidade->id.') '
+            ],
         ],
     ]) ?>
 

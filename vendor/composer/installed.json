@@ -308,17 +308,17 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "4.1.12",
-            "version_normalized": "4.1.12.0",
+            "version": "4.1.13",
+            "version_normalized": "4.1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "fc550bf6e90d69fbfc8ab7e9e0a330ac98ffafdd"
+                "reference": "e817f83fe019ed3f9c280254b88f90cc70c3d7cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/fc550bf6e90d69fbfc8ab7e9e0a330ac98ffafdd",
-                "reference": "fc550bf6e90d69fbfc8ab7e9e0a330ac98ffafdd",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/e817f83fe019ed3f9c280254b88f90cc70c3d7cf",
+                "reference": "e817f83fe019ed3f9c280254b88f90cc70c3d7cf",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
                 "stecman/symfony-console-completion": "For BASH autocompletion",
                 "symfony/phpunit-bridge": "For phpunit-bridge support"
             },
-            "time": "2020-11-16T06:36:57+00:00",
+            "time": "2020-12-20T13:35:09+00:00",
             "bin": [
                 "codecept"
             ],
@@ -391,6 +391,16 @@
                 "acceptance testing",
                 "functional testing",
                 "unit testing"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/Codeception/issues",
+                "source": "https://github.com/Codeception/Codeception/tree/4.1.13"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/codeception",
+                    "type": "open_collective"
+                }
             ],
             "install-path": "../codeception/codeception"
         },
@@ -1026,17 +1036,17 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.12.1",
-            "version_normalized": "1.12.1.0",
+            "version": "v1.13.0",
+            "version_normalized": "1.13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "841e8bdde345cc1ea9f98e776959e7531cadea0e"
+                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/841e8bdde345cc1ea9f98e776959e7531cadea0e",
-                "reference": "841e8bdde345cc1ea9f98e776959e7531cadea0e",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/ab3f5364d01f2c2c16113442fb987d26e4004913",
+                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913",
                 "shasum": ""
             },
             "require": {
@@ -1050,7 +1060,7 @@
                 "ext-intl": "*",
                 "phpunit/phpunit": "^7.5.20 || ^8.5.8 || ^9.4.2"
             },
-            "time": "2020-12-11T10:39:41+00:00",
+            "time": "2020-12-18T16:50:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1075,7 +1085,7 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.12.1"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.13.0"
             },
             "install-path": "../fakerphp/faker"
         },
@@ -1202,118 +1212,6 @@
                 "select"
             ],
             "install-path": "../kartik-v/dependent-dropdown"
-        },
-        {
-            "name": "kartik-v/php-date-formatter",
-            "version": "v1.3.6",
-            "version_normalized": "1.3.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/php-date-formatter.git",
-                "reference": "514a53660b0d69439236fd3cbc3f41512adb00a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/php-date-formatter/zipball/514a53660b0d69439236fd3cbc3f41512adb00a0",
-                "reference": "514a53660b0d69439236fd3cbc3f41512adb00a0",
-                "shasum": ""
-            },
-            "time": "2020-04-14T10:16:32+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\plugins\\dateformatter\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "A Javascript datetime formatting and manipulation library using PHP date-time formats.",
-            "homepage": "https://github.com/kartik-v/php-date-formatter",
-            "keywords": [
-                "date",
-                "datetime",
-                "formatter",
-                "javascript",
-                "php",
-                "php-date-formatter.js",
-                "time"
-            ],
-            "install-path": "../kartik-v/php-date-formatter"
-        },
-        {
-            "name": "kartik-v/yii2-datecontrol",
-            "version": "dev-master",
-            "version_normalized": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-datecontrol.git",
-                "reference": "0e7057f644fb178c9a949836c2b0dc7325d07e02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/0e7057f644fb178c9a949836c2b0dc7325d07e02",
-                "reference": "0e7057f644fb178c9a949836c2b0dc7325d07e02",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/php-date-formatter": ">1.3",
-                "kartik-v/yii2-krajee-base": ">=1.9"
-            },
-            "time": "2020-02-03T06:37:57+00:00",
-            "default-branch": true,
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9.x-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\datecontrol\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "Date control module allowing separation of formats for View and Model for Yii Framework 2.0",
-            "homepage": "https://github.com/kartik-v/yii2-datecontrol",
-            "keywords": [
-                "control",
-                "date",
-                "extension",
-                "format",
-                "yii",
-                "yii2"
-            ],
-            "support": {
-                "issues": "https://github.com/kartik-v/yii2-datecontrol/issues",
-                "source": "https://github.com/kartik-v/yii2-datecontrol/tree/master"
-            },
-            "install-path": "../kartik-v/yii2-datecontrol"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -2284,17 +2182,17 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.12.1",
-            "version_normalized": "1.12.1.0",
+            "version": "1.12.2",
+            "version_normalized": "1.12.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d"
+                "reference": "245710e971a030f42e08f4912863805570f23d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8ce87516be71aae9b956f81906aaf0338e0d8a2d",
-                "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/245710e971a030f42e08f4912863805570f23d39",
+                "reference": "245710e971a030f42e08f4912863805570f23d39",
                 "shasum": ""
             },
             "require": {
@@ -2306,9 +2204,9 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^6.0",
-                "phpunit/phpunit": "^8.0 || ^9.0 <9.3"
+                "phpunit/phpunit": "^8.0 || ^9.0"
             },
-            "time": "2020-09-29T09:10:42+00:00",
+            "time": "2020-12-19T10:15:11+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2346,6 +2244,10 @@
                 "spy",
                 "stub"
             ],
+            "support": {
+                "issues": "https://github.com/phpspec/prophecy/issues",
+                "source": "https://github.com/phpspec/prophecy/tree/1.12.2"
+            },
             "install-path": "../phpspec/prophecy"
         },
         {
@@ -2583,31 +2485,31 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "3.1.2",
-            "version_normalized": "3.1.2.0",
+            "version": "4.0.4",
+            "version_normalized": "4.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "472b687829041c24b25f475e14c2f38a09edf1c2"
+                "reference": "a853a0e183b9db7eed023d7933a858fa1c8d25a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/472b687829041c24b25f475e14c2f38a09edf1c2",
-                "reference": "472b687829041c24b25f475e14c2f38a09edf1c2",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/a853a0e183b9db7eed023d7933a858fa1c8d25a3",
+                "reference": "a853a0e183b9db7eed023d7933a858fa1c8d25a3",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": ">=7.1"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.0"
+                "phpunit/phpunit": "^9.0"
             },
-            "time": "2020-11-30T08:38:46+00:00",
+            "time": "2020-08-04T08:28:15+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "installation-source": "dist",
@@ -2633,7 +2535,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-token-stream/issues",
-                "source": "https://github.com/sebastianbergmann/php-token-stream/tree/3.1.2"
+                "source": "https://github.com/sebastianbergmann/php-token-stream/tree/master"
             },
             "funding": [
                 {
@@ -3839,17 +3741,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "3e0564fb08d44a98bd5f1960204c958e57bd586b"
+                "reference": "47c02526c532fb381374dab26df05e7313978976"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/3e0564fb08d44a98bd5f1960204c958e57bd586b",
-                "reference": "3e0564fb08d44a98bd5f1960204c958e57bd586b",
+                "url": "https://api.github.com/repos/symfony/console/zipball/47c02526c532fb381374dab26df05e7313978976",
+                "reference": "47c02526c532fb381374dab26df05e7313978976",
                 "shasum": ""
             },
             "require": {
@@ -3885,7 +3787,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2020-11-28T11:24:18+00:00",
+            "time": "2020-12-18T08:03:05+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3918,6 +3820,9 @@
                 "console",
                 "terminal"
             ],
+            "support": {
+                "source": "https://github.com/symfony/console/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3936,23 +3841,23 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256"
+                "reference": "f789e7ead4c79e04ca9a6d6162fc629c89bd8054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256",
-                "reference": "b8d8eb06b0942e84a69e7acebc3e9c1e6e6e7256",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/f789e7ead4c79e04ca9a6d6162fc629c89bd8054",
+                "reference": "f789e7ead4c79e04ca9a6d6162fc629c89bd8054",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5"
             },
-            "time": "2020-10-28T21:31:18+00:00",
+            "time": "2020-12-08T17:02:38+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3983,6 +3888,9 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/css-selector/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4054,17 +3962,17 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.4.17",
-            "version_normalized": "4.4.17.0",
+            "version": "v4.4.18",
+            "version_normalized": "4.4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "30ad9ac96a01913195bf0328d48e29d54fa53e6e"
+                "reference": "d44fbb02b458fe18d00fea18f24c97cefb87577e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/30ad9ac96a01913195bf0328d48e29d54fa53e6e",
-                "reference": "30ad9ac96a01913195bf0328d48e29d54fa53e6e",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/d44fbb02b458fe18d00fea18f24c97cefb87577e",
+                "reference": "d44fbb02b458fe18d00fea18f24c97cefb87577e",
                 "shasum": ""
             },
             "require": {
@@ -4082,7 +3990,7 @@
             "suggest": {
                 "symfony/css-selector": ""
             },
-            "time": "2020-10-24T11:50:19+00:00",
+            "time": "2020-12-18T07:41:31+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4109,6 +4017,9 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/dom-crawler/tree/v4.4.18"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4127,17 +4038,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "aa13a09811e6d2ad43f8fb336bebdb7691d85d3c"
+                "reference": "1c93f7a1dff592c252574c79a8635a8a80856042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/aa13a09811e6d2ad43f8fb336bebdb7691d85d3c",
-                "reference": "aa13a09811e6d2ad43f8fb336bebdb7691d85d3c",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/1c93f7a1dff592c252574c79a8635a8a80856042",
+                "reference": "1c93f7a1dff592c252574c79a8635a8a80856042",
                 "shasum": ""
             },
             "require": {
@@ -4167,7 +4078,7 @@
                 "symfony/dependency-injection": "",
                 "symfony/http-kernel": ""
             },
-            "time": "2020-11-01T16:14:45+00:00",
+            "time": "2020-12-18T08:03:05+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4194,6 +4105,9 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4277,23 +4191,23 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "fd8305521692f27eae3263895d1ef1571c71a78d"
+                "reference": "0b9231a5922fd7287ba5b411893c0ecd2733e5ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/fd8305521692f27eae3263895d1ef1571c71a78d",
-                "reference": "fd8305521692f27eae3263895d1ef1571c71a78d",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/0b9231a5922fd7287ba5b411893c0ecd2733e5ba",
+                "reference": "0b9231a5922fd7287ba5b411893c0ecd2733e5ba",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5"
             },
-            "time": "2020-11-18T09:42:36+00:00",
+            "time": "2020-12-08T17:02:38+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4320,6 +4234,9 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/finder/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5006,17 +4923,17 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242"
+                "reference": "5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/40e975edadd4e32cd16f3753b3bad65d9ac48242",
-                "reference": "40e975edadd4e32cd16f3753b3bad65d9ac48242",
+                "url": "https://api.github.com/repos/symfony/string/zipball/5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed",
+                "reference": "5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed",
                 "shasum": ""
             },
             "require": {
@@ -5033,7 +4950,7 @@
                 "symfony/translation-contracts": "^1.1|^2",
                 "symfony/var-exporter": "^4.4|^5.0"
             },
-            "time": "2020-10-24T12:08:07+00:00",
+            "time": "2020-12-05T07:33:16+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -5071,6 +4988,9 @@
                 "utf-8",
                 "utf8"
             ],
+            "support": {
+                "source": "https://github.com/symfony/string/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5089,17 +5009,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.2.0",
-            "version_normalized": "5.2.0.0",
+            "version": "v5.2.1",
+            "version_normalized": "5.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "bb73619b2ae5121bbbcd9f191dfd53ded17ae598"
+                "reference": "290ea5e03b8cf9b42c783163123f54441fb06939"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/bb73619b2ae5121bbbcd9f191dfd53ded17ae598",
-                "reference": "bb73619b2ae5121bbbcd9f191dfd53ded17ae598",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/290ea5e03b8cf9b42c783163123f54441fb06939",
+                "reference": "290ea5e03b8cf9b42c783163123f54441fb06939",
                 "shasum": ""
             },
             "require": {
@@ -5116,7 +5036,7 @@
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
             },
-            "time": "2020-11-28T10:57:20+00:00",
+            "time": "2020-12-08T17:02:38+00:00",
             "bin": [
                 "Resources/bin/yaml-lint"
             ],
@@ -5146,6 +5066,9 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v5.2.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5321,17 +5244,17 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.39.3",
-            "version_normalized": "2.0.39.3",
+            "version": "2.0.40",
+            "version_normalized": "2.0.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "7c3b93b57e568509a7cb5cef826d8c424a779f3f"
+                "reference": "debb520c1d72a2c97c09d70a2a2a4f600ef3958e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/7c3b93b57e568509a7cb5cef826d8c424a779f3f",
-                "reference": "7c3b93b57e568509a7cb5cef826d8c424a779f3f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/debb520c1d72a2c97c09d70a2a2a4f600ef3958e",
+                "reference": "debb520c1d72a2c97c09d70a2a2a4f600ef3958e",
                 "shasum": ""
             },
             "require": {
@@ -5347,7 +5270,7 @@
                 "php": ">=5.4.0",
                 "yiisoft/yii2-composer": "~2.0.4"
             },
-            "time": "2020-11-23T19:17:58+00:00",
+            "time": "2020-12-23T15:44:43+00:00",
             "bin": [
                 "yii"
             ],
@@ -5419,6 +5342,27 @@
             "keywords": [
                 "framework",
                 "yii2"
+            ],
+            "support": {
+                "forum": "http://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+                "source": "https://github.com/yiisoft/yii2",
+                "wiki": "http://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "../yiisoft/yii2"
         },
@@ -5548,17 +5492,17 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.1.15",
-            "version_normalized": "2.1.15.0",
+            "version": "2.1.16",
+            "version_normalized": "2.1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "317f85c1ac7a8c0b73eea345a49066b5570aa2c6"
+                "reference": "0d8ce76b2dd036a5fc38b26434e1c672ad8975a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/317f85c1ac7a8c0b73eea345a49066b5570aa2c6",
-                "reference": "317f85c1ac7a8c0b73eea345a49066b5570aa2c6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/0d8ce76b2dd036a5fc38b26434e1c672ad8975a9",
+                "reference": "0d8ce76b2dd036a5fc38b26434e1c672ad8975a9",
                 "shasum": ""
             },
             "require": {
@@ -5573,7 +5517,7 @@
                 "yiisoft/yii2-coding-standards": "~2.0",
                 "yiisoft/yii2-swiftmailer": "*"
             },
-            "time": "2020-11-13T10:09:11+00:00",
+            "time": "2020-12-23T16:36:12+00:00",
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -5615,6 +5559,27 @@
                 "debug",
                 "debugger",
                 "yii2"
+            ],
+            "support": {
+                "forum": "http://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/yii2-debug/issues",
+                "source": "https://github.com/yiisoft/yii2-debug",
+                "wiki": "http://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-debug",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "../yiisoft/yii2-debug"
         },

@@ -6,13 +6,10 @@ use backend\models\Especialidade;
 use Yii;
 use common\models\MarcacaoConsulta;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
-use yii2fullcalendar\models\Event;
-use yii2fullcalendar\tests\unit\FullcalendarTest;
 
 
 /**

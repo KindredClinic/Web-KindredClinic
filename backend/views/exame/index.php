@@ -14,7 +14,7 @@ $this->title = 'Exames';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Criar Exame', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Calendario', ['marcacao-exame/index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -22,7 +22,6 @@ $this->title = 'Exames';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'conteudo',
             'date',
             [
                 'attribute' => 'id_medico',

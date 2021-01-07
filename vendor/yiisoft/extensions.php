@@ -30,15 +30,6 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
     ),
   ),
-  'yiisoft/yii2-debug' => 
-  array (
-    'name' => 'yiisoft/yii2-debug',
-    'version' => '2.1.15.0',
-    'alias' => 
-    array (
-      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
-    ),
-  ),
   'yiisoft/yii2-faker' => 
   array (
     'name' => 'yiisoft/yii2-faker',
@@ -73,15 +64,6 @@ return array (
     'alias' => 
     array (
       '@yii2fullcalendar' => $vendorDir . '/philippfrenzel/yii2fullcalendar',
-    ),
-  ),
-  'kartik-v/yii2-datecontrol' => 
-  array (
-    'name' => 'kartik-v/yii2-datecontrol',
-    'version' => 'dev-master',
-    'alias' => 
-    array (
-      '@kartik/datecontrol' => $vendorDir . '/kartik-v/yii2-datecontrol/src',
     ),
   ),
   'kartik-v/yii2-widget-datepicker' => 
@@ -137,6 +119,15 @@ return array (
     'alias' => 
     array (
       '@kartik/markdown' => $vendorDir . '/kartik-v/yii2-markdown/src',
+    ),
+  ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '2.1.16.0',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
     ),
   ),
 );

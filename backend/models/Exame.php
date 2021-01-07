@@ -15,6 +15,7 @@ use yii\db\Query;
  * @property string $date
  * @property int $id_medico
  * @property int $id_marcacao
+ * @property int $id_utente
  *
  * @property MarcacaoExame $marcacao
  * @property Medicos $medico
@@ -41,6 +42,7 @@ class Exame extends \yii\db\ActiveRecord
             [['conteudo'], 'string', 'max' => 255],
             [['id_marcacao'], 'exist', 'skipOnError' => true, 'targetClass' => MarcacaoExame::className(), 'targetAttribute' => ['id_marcacao' => 'id']],
             [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
+            [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
         ];
     }
     
@@ -55,6 +57,7 @@ class Exame extends \yii\db\ActiveRecord
             'date' => 'Data',
             'id_medico' => 'Medico',
             'id_marcacao' => 'Marcacao',
+            'id_utente' => 'Utente',
         ];
     }
 
@@ -83,13 +86,16 @@ class Exame extends \yii\db\ActiveRecord
         return $this->hasOne(Medicos::className(), ['id' => 'id_medico']);
     }
 
-    public function criarExame($id,$data){
+    public function criarExame($id,$data,$id_utente){
+
+        $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
 
         $model = new Exame();
         $model->conteudo = $this->conteudo;
         $model->date = $data;
-        $model->id_medico = Yii::$app->user->id;
+        $model->id_medico = $tempMedic['id'];
         $model->id_marcacao = $id;
+        $model->id_utente = $id_utente;
 
         $model->save();
 

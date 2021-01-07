@@ -139,6 +139,15 @@ class Medicos extends \yii\db\ActiveRecord
         return $this->hasOne(Especialidade::className(), ['id' => 'id_especialidade']);
     }
 
+    public static function dataByUser($idUser){
+
+        $procurar = self::find()
+            ->where(['id_user' =>  $idUser ])
+            ->one();
+
+        return $procurar;
+    }
+
     public function criarMedico(){
 
         $user = new User();

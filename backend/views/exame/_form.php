@@ -48,12 +48,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Ver Consultas', ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Exames', ['index'], ['class' => 'btn btn-success']) ?>
     </div>
-
-
-
-
 
     <?php ActiveForm::end(); ?>
 

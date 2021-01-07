@@ -105,11 +105,17 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
 
     public function criarMarcacaoConsulta(){
 
+        $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
+        $tempEspec = Especialidade::dataByEspecialidade($tempMedic);
+
         $model = new MarcacaoConsulta();
         $model->date = $this->date;
-        $model->id_especialidade = $this->id_especialidade;
-        $model->id_medico = $this->id_medico;
-        $model->id_utente = Yii::$app->user->id;
+        $model->id_especialidade = $tempEspec['id'];
+        $model->id_medico = $tempMedic['id'];
+        $model->id_utente = $this->id_utente;
+
+        var_dump($model);
+
 
         $model->save();
     }
@@ -129,7 +135,7 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
     public static function dataByUser($idUtente){
 
         $procurar = self::find()
-            ->where(['id_utente' =>  $idUtente ])
+            ->where(['id_medico' =>  $idUtente ])
             ->all();
 
         return $procurar;
