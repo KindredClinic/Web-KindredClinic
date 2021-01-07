@@ -4,4 +4,5 @@
 /.phpunit.result.cache
 /.psalm/cache
 /composer.lock
+/composer.phar
 /vendor

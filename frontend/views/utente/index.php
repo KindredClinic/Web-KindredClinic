@@ -21,6 +21,7 @@ AppAsset::register($this);
         <?= Html::a('Perfil', ['/utente/view'])  ?>
         <?= Html::a('Consultas', ['/marcacao-consulta/index'])  ?>
         <?= Html::a('Exames', ['/marcacao-exame/index'])  ?>
+        <?= Html::a('receita', ['/receita-medica/index'])  ?>
 
     </div>
 

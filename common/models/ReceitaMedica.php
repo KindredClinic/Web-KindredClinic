@@ -13,11 +13,11 @@ use Yii;
  * @property string $conteudo
  * @property int $id_medico
  * @property int $id_utente
- * @property int $id_medicamentos
+ * @property int $id_medicamento
  *
- * @property Medicamentos $medicamentos
- * @property Utente $utente
+ * @property  Medicamentos $medicamento
  * @property Medicos $medico
+ * @property Utente $utente
  */
 class ReceitaMedica extends \yii\db\ActiveRecord
 {
@@ -35,13 +35,10 @@ class ReceitaMedica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'conteudo', 'id_medico', 'id_utente', 'id_medicamentos'], 'required'],
+            [['date', 'conteudo', 'id_medico', 'id_utente', 'id_medicamento'], 'required'],
             [['date'], 'safe'],
-            [['id_medico', 'id_utente', 'id_medicamentos'], 'integer'],
+            [['id_medico', 'id_utente', 'id_medicamento'], 'integer'],
             [['conteudo'], 'string', 'max' => 255],
-            [['id_medicamentos'], 'exist', 'skipOnError' => true, 'targetClass' => Medicamentos::className(), 'targetAttribute' => ['id_medicamentos' => 'id']],
-            [['id_utente'], 'exist', 'skipOnError' => true, 'targetClass' => Utente::className(), 'targetAttribute' => ['id_utente' => 'id']],
-            [['id_medico'], 'exist', 'skipOnError' => true, 'targetClass' => Medicos::className(), 'targetAttribute' => ['id_medico' => 'id']],
         ];
     }
 
@@ -54,27 +51,12 @@ class ReceitaMedica extends \yii\db\ActiveRecord
             'id' => 'ID',
             'date' => 'Date',
             'conteudo' => 'Conteudo',
-            'id_medico' => 'Id Medico',
-            'id_utente' => 'Id Utente',
-            'id_medicamentos' => 'Id Medicamentos',
+            'id_medico' => 'Medico',
+            'id_utente' => 'Utente',
+            'id_medicamento' => 'Id Medicamento',
         ];
     }
 
-    /**
-     * Gets query for [[Medicamentos]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMedicamentos()
-    {
-        return $this->hasOne(Medicamentos::className(), ['id' => 'id_medicamentos']);
-    }
-
-    /**
-     * Gets query for [[Utente]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getUtente()
     {
         return $this->hasOne(Utente::className(), ['id' => 'id_utente']);
@@ -88,5 +70,22 @@ class ReceitaMedica extends \yii\db\ActiveRecord
     public function getMedico()
     {
         return $this->hasOne(Medicos::className(), ['id' => 'id_medico']);
+    }
+
+    public function getMedicamento()
+    {
+        return $this->hasOne(Medicamentos::className(), ['id' => 'id_medicamento']);
+    }
+
+    public function criarReceitaMedica(){
+        $receita = new ReceitaMedica();
+
+        $receita->date = date('Y-m-d H:i:s');
+        $receita->conteudo = $this->conteudo;
+        $receita->id_medico = Yii::$app->user->id;
+        $receita->id_utente = $this->id_utente;
+        $receita->id_medicamento = $this->id_medicamento;
+
+        $receita->save();
     }
 }

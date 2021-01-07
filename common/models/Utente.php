@@ -230,6 +230,18 @@ class Utente extends \yii\db\ActiveRecord
         $this->num_sns = $num_sns;
     }
 
+    public static function dropdown(){
 
+        static $dropdown;
+
+        if($dropdown == null){
+            $models = self::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->nome;
+            }
+        }
+
+        return $dropdown;
+    }
 
 }
