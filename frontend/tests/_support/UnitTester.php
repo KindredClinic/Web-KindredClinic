@@ -13,6 +13,9 @@ namespace frontend\tests;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method seeInDatabase(string $string, string[] $array)
+ * @method updateInDatabase(string $string, string[] $array, array $array1)
+ * @method dontSeeInDatabase(string $string, array $array)
  *
  * @SuppressWarnings(PHPMD)
  */
@@ -22,8 +25,6 @@ class UnitTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
-    public function seeInDatabase($string, array $array)
-    {
 
-    }
+
 }
