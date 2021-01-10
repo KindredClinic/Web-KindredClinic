@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     ]);?>
 
     <?=
-    $form->field($model, 'id_medicamento')->widget(Select2::classname(), [
+    $form->field($model, 'id_medicamentos')->widget(Select2::classname(), [
         'data' => Medicamentos::dropdown(),
         'options' => ['placeholder' => 'Selecione o Medicamento ...'],
         'pluginOptions' => [
@@ -46,7 +46,7 @@ use yii\widgets\ActiveForm;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success','name' => 'save-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

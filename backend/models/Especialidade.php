@@ -92,7 +92,7 @@ class Especialidade extends \yii\db\ActiveRecord
         static $dropdown;
 
         if($dropdown == null){
-            $models = static::find()->all();
+            $models = self::find()->all();
             foreach ($models as $model){
                 $dropdown[$model->id] = $model->tipo;
             }

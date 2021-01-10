@@ -13,6 +13,8 @@ namespace common\tests;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method updateInDatabase(string $string, string[] $array, array $array1)
+ * @method dontSeeInDatabase(string $string, array $array)
  *
  * @SuppressWarnings(PHPMD)
  */

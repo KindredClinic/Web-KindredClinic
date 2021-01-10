@@ -1,5 +1,7 @@
 <?php
 
+use backend\models\Especialidade;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -22,7 +24,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'num_ordem_medico')->textInput() ?>
 
-    <?= $form->field($model, 'id_especialidade')->textInput() ?>
+    <?=
+    $form->field($model, 'id_especialidade')->widget(Select2::classname(), [
+        'data' => Especialidade::dropdown(),
+        'options' => ['placeholder' => 'Selecione a Especialidade ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 
@@ -31,7 +40,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'password')->passwordInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success','name' => 'save-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -1,0 +1,13 @@
+suite_namespace: frontend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://localhost/Web-KindredClinic/frontend/web/
+            browser: firefox
+            window_size: 'maximize'
+            port: 8888
+        - Yii2:
+              part: init # allow to use AR methods
+              cleanup: false # don't cleanup the fixtures
+              entryScript: index-test.php

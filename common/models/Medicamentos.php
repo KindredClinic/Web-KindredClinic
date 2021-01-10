@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property float $miligramas
- * @property string $designacao
+ * @property string $descricao
  */
 class Medicamentos extends \yii\db\ActiveRecord
 {
@@ -30,7 +30,7 @@ class Medicamentos extends \yii\db\ActiveRecord
         return [
             [['nome', 'miligramas', 'descricao'], 'required'],
             [['miligramas'], 'number'],
-            [['nome'], 'string', 'max' => 25],
+            [['nome'], 'string', 'max' => 80],
             [['descricao'], 'string', 'max' => 250],
         ];
     }
@@ -44,7 +44,7 @@ class Medicamentos extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'miligramas' => 'Miligramas',
-            'designacao' => 'Designacao',
+            'descricao' => 'Descricao',
         ];
     }
 
@@ -60,6 +60,15 @@ class Medicamentos extends \yii\db\ActiveRecord
         }
 
         return $dropdown;
+    }
+
+    public static function formAddon()
+    {
+        $procurar = Medicamentos::find()
+            ->asArray()
+            ->all();
+
+        return $procurar;
     }
 
     /**

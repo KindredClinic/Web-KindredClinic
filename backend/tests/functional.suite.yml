@@ -2,4 +2,13 @@ suite_namespace: backend\tests\functional
 actor: FunctionalTester
 modules:
     enabled:
-        - Yii2
+        - Yii2:
+              configFile: 'config/test.php'
+              environment: 'test'
+              cleanup: 'true'
+        - Db:
+              dsn: 'mysql:host=localhost;dbname=kindredclinic_test'
+              user: 'root'
+              password: ''
+              cleanup: 'true'
+        - Asserts

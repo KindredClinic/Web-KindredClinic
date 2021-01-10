@@ -13,6 +13,11 @@ namespace backend\tests;
  * @method void lookForwardTo($achieveValue)
  * @method void comment($description)
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
+ * @method amOnPage(string $string)
+ * @method fillField(string $string, string $string1)
+ * @method click(string $string)
+ * @method see(string $string, string $string1)
+ * @method dontSeeLink(string $string)
  *
  * @SuppressWarnings(PHPMD)
  */

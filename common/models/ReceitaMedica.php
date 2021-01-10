@@ -13,7 +13,7 @@ use Yii;
  * @property string $conteudo
  * @property int $id_medico
  * @property int $id_utente
- * @property int $id_medicamento
+ * @property int $id_medicamentos
  *
  * @property  Medicamentos $medicamento
  * @property Medicos $medico
@@ -35,9 +35,9 @@ class ReceitaMedica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'conteudo', 'id_medico', 'id_utente', 'id_medicamento'], 'required'],
+            [['date', 'conteudo', 'id_medico', 'id_utente', 'id_medicamentos'], 'required'],
             [['date'], 'safe'],
-            [['id_medico', 'id_utente', 'id_medicamento'], 'integer'],
+            [['id_medico', 'id_utente', 'id_medicamentos'], 'integer'],
             [['conteudo'], 'string', 'max' => 255],
         ];
     }
@@ -53,7 +53,7 @@ class ReceitaMedica extends \yii\db\ActiveRecord
             'conteudo' => 'Conteudo',
             'id_medico' => 'Medico',
             'id_utente' => 'Utente',
-            'id_medicamento' => 'Id Medicamento',
+            'id_medicamentos' => 'Medicamento',
         ];
     }
 
@@ -74,7 +74,7 @@ class ReceitaMedica extends \yii\db\ActiveRecord
 
     public function getMedicamento()
     {
-        return $this->hasOne(Medicamentos::className(), ['id' => 'id_medicamento']);
+        return $this->hasOne(Medicamentos::className(), ['id' => 'id_medicamentos']);
     }
 
     public function criarReceitaMedica(){
@@ -84,7 +84,7 @@ class ReceitaMedica extends \yii\db\ActiveRecord
         $receita->conteudo = $this->conteudo;
         $receita->id_medico = Yii::$app->user->id;
         $receita->id_utente = $this->id_utente;
-        $receita->id_medicamento = $this->id_medicamento;
+        $receita->id_medicamentos = $this->id_medicamentos;
 
         $receita->save();
     }

@@ -51,7 +51,7 @@ use yii\widgets\ActiveForm;
 
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success','name' => 'save-button']) ?>
         &nbsp;&nbsp;&nbsp;
         <?= Html::a('Voltar para trás', ['index'], ['class' => 'btn btn-success']) ?>
     </div>

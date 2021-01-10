@@ -84,8 +84,8 @@ class Medicos extends \yii\db\ActiveRecord
             'telefone' => 'Telefone',
             'email' => 'Email',
             'num_ordem_medico' => 'Num Ordem Medico',
-            'id_especialidade' => 'Id Especialidade',
-            'id_user' => 'Id User',
+            'id_especialidade' => 'Especialidade',
+            'id_user' => 'User',
         ];
     }
 
@@ -169,6 +169,11 @@ class Medicos extends \yii\db\ActiveRecord
         $model->email = $this->email;
         $model->id_user = $user->getId();
         $model->save(false);
+
+        //rbac
+        $auth = \Yii::$app->authManager;
+        $temp = $auth->getRole('medico');
+        $auth->assign($temp, $user->getId());
 
         return $this->sendEmail($user);
 

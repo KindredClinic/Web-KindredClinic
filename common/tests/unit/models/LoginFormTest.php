@@ -1,6 +1,6 @@
 <?php
 
-namespace common\tests\unit\models;
+namespace unit\unit\models;
 
 use Yii;
 use common\models\LoginForm;
@@ -12,7 +12,7 @@ use common\fixtures\UserFixture;
 class LoginFormTest extends \Codeception\Test\Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var \unit\UnitTester
      */
     protected $tester;
 

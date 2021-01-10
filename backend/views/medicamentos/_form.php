@@ -16,10 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'miligramas')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'designacao')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success','name' => 'save-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
