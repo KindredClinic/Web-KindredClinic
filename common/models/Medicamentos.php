@@ -86,4 +86,37 @@ class Medicamentos extends \yii\db\ActiveRecord
     {
         $this->nome = $nome;
     }
+
+    /**
+     * @return string
+     */
+    public function getMiligramas()
+    {
+        return $this->miligramas;
+    }
+
+    /**
+     * @param string $miligramas
+     */
+    public function setMiligramas($miligramas)
+    {
+        $this->miligramas = $miligramas;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * @param string $descricao
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
 }

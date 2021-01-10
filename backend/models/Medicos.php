@@ -51,7 +51,8 @@ class Medicos extends \yii\db\ActiveRecord
             [['nome', 'sexo', 'nif', 'telefone', 'num_ordem_medico', 'id_especialidade', 'id_user'], 'required'],
             [['sexo'], 'string'],
             [['nif', 'telefone', 'num_ordem_medico', 'id_especialidade', 'id_user'], 'integer'],
-            [['nome', 'email'], 'string', 'max' => 255],
+            [['nome'], 'string', 'max' => 30],
+            [['email'], 'string', 'max' => 255],
             [['id_especialidade'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidade::className(), 'targetAttribute' => ['id_especialidade' => 'id']],
 
             ['username', 'trim'],
@@ -205,5 +206,45 @@ class Medicos extends \yii\db\ActiveRecord
         }
 
         return $dropdown;
+    }
+
+    /**
+     * @param string $nome
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    /**
+     * @param string $sexo
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+    }
+
+    /**
+     * @param string $nif
+     */
+    public function setNif($nif)
+    {
+        $this->nif = $nif;
+    }
+
+    /**
+     * @param string $telefone
+     */
+    public function setTelefone($telefone)
+    {
+        $this->telefone = $telefone;
+    }
+
+    /**
+     * @param string $num_ordem_medico
+     */
+    public function setNumOrderMedico($num_ordem_medico)
+    {
+        $this->num_ordem_medico = $num_ordem_medico;
     }
 }

@@ -88,4 +88,20 @@ class ReceitaMedica extends \yii\db\ActiveRecord
 
         $receita->save();
     }
+
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @param string $conteudo
+     */
+    public function setConteudo($conteudo)
+    {
+        $this->conteudo = $conteudo;
+    }
 }

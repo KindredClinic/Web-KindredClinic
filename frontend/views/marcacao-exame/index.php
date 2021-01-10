@@ -8,17 +8,6 @@ use yii\grid\GridView;
 
 $this->title = 'Marcação Exames';
 ?>
-<div class="utente-index">
-
-    <div id="SideBar" class="sidenav">
-
-        <?= Html::a('Menu', ['/utente/index'])  ?>
-        <?= Html::a('Perfil', ['/utente/view'])  ?>
-        <?= Html::a('Consultas', ['/marcacao-consulta/index'])  ?>
-
-    </div>
-
-</div>
 
 
 <div class="marcacao-exame-index">
