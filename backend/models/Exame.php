@@ -101,4 +101,36 @@ class Exame extends \yii\db\ActiveRecord
 
     }
 
+    /**
+     * @return string
+     */
+    public function getConteudo()
+    {
+        return $this->conteudo;
+    }
+
+    /**
+     * @param string $conteudo
+     */
+    public function setConteudo($conteudo)
+    {
+        $this->conteudo = $conteudo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
 }

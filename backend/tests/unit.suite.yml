@@ -4,8 +4,10 @@ modules:
   enabled:
     - Yii2:
         part: [orm, email, fixtures]
+        cleanup: false
     - Db:
         dsn: 'mysql:host=localhost;dbname=kindredclinic_test'
         user: 'root'
         password: ''
+        cleanup: false
     - Asserts

@@ -26,7 +26,10 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class XmlDescriptor extends Descriptor
 {
-    public function getInputDefinitionDocument(InputDefinition $definition): \DOMDocument
+    /**
+     * @return \DOMDocument
+     */
+    public function getInputDefinitionDocument(InputDefinition $definition)
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($definitionXML = $dom->createElement('definition'));
@@ -44,11 +47,15 @@ class XmlDescriptor extends Descriptor
         return $dom;
     }
 
-    public function getCommandDocument(Command $command): \DOMDocument
+    /**
+     * @return \DOMDocument
+     */
+    public function getCommandDocument(Command $command)
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($commandXML = $dom->createElement('command'));
 
+        $command->getSynopsis();
         $command->mergeApplicationDefinition(false);
 
         $commandXML->setAttribute('id', $command->getName());
@@ -67,13 +74,18 @@ class XmlDescriptor extends Descriptor
         $commandXML->appendChild($helpXML = $dom->createElement('help'));
         $helpXML->appendChild($dom->createTextNode(str_replace("\n", "\n ", $command->getProcessedHelp())));
 
-        $definitionXML = $this->getInputDefinitionDocument($command->getDefinition());
+        $definitionXML = $this->getInputDefinitionDocument($command->getNativeDefinition());
         $this->appendDocument($commandXML, $definitionXML->getElementsByTagName('definition')->item(0));
 
         return $dom;
     }
 
-    public function getApplicationDocument(Application $application, string $namespace = null): \DOMDocument
+    /**
+     * @param string|null $namespace
+     *
+     * @return \DOMDocument
+     */
+    public function getApplicationDocument(Application $application, $namespace = null)
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->appendChild($rootXml = $dom->createElement('symfony'));
@@ -173,7 +185,10 @@ class XmlDescriptor extends Descriptor
         $this->write($dom->saveXML());
     }
 
-    private function getInputArgumentDocument(InputArgument $argument): \DOMDocument
+    /**
+     * @return \DOMDocument
+     */
+    private function getInputArgumentDocument(InputArgument $argument)
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
 
@@ -194,7 +209,10 @@ class XmlDescriptor extends Descriptor
         return $dom;
     }
 
-    private function getInputOptionDocument(InputOption $option): \DOMDocument
+    /**
+     * @return \DOMDocument
+     */
+    private function getInputOptionDocument(InputOption $option)
     {
         $dom = new \DOMDocument('1.0', 'UTF-8');
 

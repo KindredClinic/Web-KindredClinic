@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property float $miligramas
- * @property string $designacao
+ * @property string $descricao
  */
 class Medicamentos extends \yii\db\ActiveRecord
 {
@@ -31,7 +31,7 @@ class Medicamentos extends \yii\db\ActiveRecord
             [['nome', 'miligramas', 'descricao'], 'required'],
             [['miligramas'], 'number'],
             [['nome'], 'string', 'max' => 25],
-            [['descricao'], 'string', 'max' => 250],
+            [['descricao'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,7 +44,7 @@ class Medicamentos extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'miligramas' => 'Miligramas',
-            'designacao' => 'Designacao',
+            'descricao' => 'Descricao',
         ];
     }
 
@@ -77,4 +77,37 @@ class Medicamentos extends \yii\db\ActiveRecord
     {
         $this->nome = $nome;
     }
+
+    /**
+     * @return string
+     */
+    public function getMiligramas()
+    {
+        return $this->miligramas;
+    }
+
+    /**
+     * @param string $miligramas
+     */
+    public function setMiligramas($miligramas)
+    {
+        $this->miligramas = $miligramas;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * @param string $descricao
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
 }

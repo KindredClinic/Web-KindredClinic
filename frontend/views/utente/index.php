@@ -16,13 +16,4 @@ AppAsset::register($this);
 
 <div class="utente-index">
 
-    <div id="SideBar" class="sidenav">
-
-        <?= Html::a('Perfil', ['/utente/view'])  ?>
-        <?= Html::a('Consultas', ['/marcacao-consulta/index'])  ?>
-        <?= Html::a('Exames', ['/marcacao-exame/index'])  ?>
-        <?= Html::a('receita', ['/receita-medica/index'])  ?>
-
-    </div>
-
 </div>

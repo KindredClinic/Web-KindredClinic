@@ -18,7 +18,7 @@ use Yii;
  * @property int $num_sns
  * @property int $id_user
  *
- * @property MarcacaoExame $macacaoExame
+ * @property MarcacaoExame $marcacaoExame
  * @property MarcacaoConsulta $marcacaoConsulta
  * @property ReceitaMedica $receitaMedica
  * @property User $user
@@ -42,7 +42,9 @@ class Utente extends \yii\db\ActiveRecord
             [['nome', 'nif', 'sexo', 'telemovel', 'morada', 'email', 'num_sns', 'id_user'], 'required'],
             [['nif', 'telemovel', 'num_sns', 'id_user'], 'integer'],
             [['sexo'], 'string'],
-            [['nome', 'morada', 'email'], 'string', 'max' => 255]        ];
+            [['email'], 'string', 'max' => 255],
+            [['morada'], 'string', 'max' => 255],
+            [['nome'], 'string', 'max' => 25]];
     }
 
     public function fields()

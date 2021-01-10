@@ -10,18 +10,6 @@ $this->title = 'Utente: '.$model->nome;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="utente-index">
-
-    <div id="SideBar" class="sidenav">
-
-        <?= Html::a('Menu', ['/utente/index'])  ?>
-        <?= Html::a('Consultas', ['/marcacao-consulta/index'])  ?>
-        <?= Html::a('Exames', ['/marcacao-exame/index'])  ?>
-    </div>
-
-</div>
-
-
 <div class="utente-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

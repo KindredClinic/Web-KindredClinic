@@ -40,6 +40,10 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Registar', 'url' => ['/site/signup']];
 
     } else {
+        $menuItems[] = ['label' => 'Perfil', 'url' => ['/utente/view']];
+        $menuItems[] = ['label' => 'Consultas', 'url' => ['/marcacao-consulta/index']];
+        $menuItems[] = ['label' => 'Exames', 'url' => ['/marcacao-exame/index']];
+        $menuItems[] = ['label' => 'Receitas', 'url' => ['/receita-medica/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -48,8 +52,6 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-        $menuItems[] = ['label' => 'Menu', 'url' => ['/utente/index']];
-
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
