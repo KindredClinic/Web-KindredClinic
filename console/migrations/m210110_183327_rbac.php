@@ -115,6 +115,10 @@ class m210110_183327_rbac extends Migration
         $criarMarcacaoExame->description = 'Criar uma marcacao Exame';
         $auth->add($criarMarcacaoExame);
 
+        $alterarMarcacaoExame = $auth->createPermission('alterarMarcacaoExame');
+        $alterarMarcacaoExame->description = 'Alterar um exame';
+        $auth->add($alterarMarcacaoExame);
+
         //<------------Criar Exame -------------------->
 
         $verExame = $auth->createPermission('verExame');
@@ -134,6 +138,10 @@ class m210110_183327_rbac extends Migration
         $criarMarcacaoConsulta = $auth->createPermission('criarMarcacaoConsulta');
         $criarMarcacaoConsulta->description = 'Marcar uma consulta';
         $auth->add($criarMarcacaoConsulta);
+
+        $alterarMarcacaoConsulta = $auth->createPermission('alterarMarcacaoConsulta');
+        $alterarMarcacaoConsulta->description = 'Alterar uma consulta';
+        $auth->add($alterarMarcacaoConsulta);
 
         //<------------ Criar Consulta -------------------->
 
@@ -159,20 +167,27 @@ class m210110_183327_rbac extends Migration
 
         $medico = $auth->createRole('medico');
         $auth->add($medico);
-        $auth->addChild($medico, $verMedico);
         $auth->addChild($medico, $criarMedico);
         $auth->addChild($medico, $updateMedico);
         $auth->addChild($medico, $deleteMedico);
+
         $auth->addChild($medico, $verReceitaMedica);
         $auth->addChild($medico, $criarReceitaMedica);
         $auth->addChild($medico, $deleteReceitaMedica);
+
         $auth->addChild($medico, $verMarcacaoExame);
         $auth->addChild($medico, $criarMarcacaoExame);
+        $auth->addChild($medico, $alterarMarcacaoExame);
+
         $auth->addChild($medico, $verExame);
         $auth->addChild($medico, $criarExame);
+
         $auth->addChild($medico, $verMarcacaoConsulta);
-        $auth->addChild($medico, $criarConsulta);
+        $auth->addChild($medico, $criarMarcacaoConsulta);
+        $auth->addChild($medico, $alterarMarcacaoConsulta);
+
         $auth->addChild($medico, $verConsulta);
+        $auth->addChild($medico, $criarConsulta);
 
         $admin = $auth->createRole('admin');
         $auth->add($admin);
@@ -184,6 +199,10 @@ class m210110_183327_rbac extends Migration
         $auth->addChild($admin, $criarUser);
         $auth->addChild($admin, $updateUser);
         $auth->addChild($admin, $deleteUser);
+        $auth->addChild($admin, $verMedicamentos);
+        $auth->addChild($admin, $criarMedicamento);
+        $auth->addChild($admin, $updateMedicamento);
+        $auth->addChild($admin, $deleteMedicamento);
         $auth->addChild($admin, $utente);
         $auth->addChild($admin, $medico);
 

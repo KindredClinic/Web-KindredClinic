@@ -36,11 +36,11 @@ class CriarMarcacaoExameCest
         $I->amOnPage('/site/login');
         $I->see('Login', 'h1');
 
-        $I->fillField('Username', 'TestTester');
+        $I->fillField('Username', 'RbacMed');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
 
-        $I->see('Logout (TestTester)', 'form button[type=submit]');
+        $I->see('Logout (RbacMed)', 'form button[type=submit]');
 
         $I->click('Exame');
         $I->click('Criar Exame');

@@ -15,7 +15,7 @@ $this->title = 'Marcacao Consultas';
     <p>
         <?= Html::a('Criar Consulta', ['create'], ['class' => 'btn btn-success']) ?>
         &nbsp;&nbsp;
-        <?= Html::a('Ver Calendatio', ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Calendario', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

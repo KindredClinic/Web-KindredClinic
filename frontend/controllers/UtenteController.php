@@ -35,10 +35,9 @@ class UtenteController extends Controller
      */
     public function actionIndex()
     {
-        $id_user = Yii::$app->user->id;
-
+        $id = Utente::dataByUser(Yii::$app->user->id);
         $dataProvider = new ActiveDataProvider([
-            'query' => Utente::find()->where(['id_user' => $id_user]),
+            'query' => Utente::find()->where(['id_user' => $id['id']]),
         ]);
 
         return $this->render('index', [
@@ -54,9 +53,9 @@ class UtenteController extends Controller
      */
     public function actionView()
     {
-        $id = Yii::$app->user->id;
+        $id = Utente::dataByUser(Yii::$app->user->id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id['id']),
         ]);
     }
 

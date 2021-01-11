@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use backend\models\MacacaoExame;
 use Yii;
 
 /**
@@ -25,6 +24,9 @@ use Yii;
  */
 class Utente extends \yii\db\ActiveRecord
 {
+    public $username;
+//    public $email;
+    public $password;
     /**
      * {@inheritdoc}
      */
@@ -44,7 +46,22 @@ class Utente extends \yii\db\ActiveRecord
             [['sexo'], 'string'],
             [['email'], 'string', 'max' => 255],
             [['morada'], 'string', 'max' => 255],
-            [['nome'], 'string', 'max' => 25]];
+            [['nome'], 'string', 'max' => 25],
+
+            ['username', 'trim'],
+           // ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+           // ['password', 'required'],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+        ];
     }
 
     public function fields()
@@ -69,6 +86,84 @@ class Utente extends \yii\db\ActiveRecord
             'num_sns' => 'Numero de Utente',
             'id_user' => 'Id User',
         ];
+    }
+
+    public static function formAddon(){
+        $procurar = Utente::find()
+            ->asArray()
+            ->all();
+
+        return $procurar;
+    }
+
+    public static function dataByUser($idUser){
+
+        $procurar = self::find()
+            ->where(['id_user' =>  $idUser ])
+            ->one();
+
+        return $procurar;
+    }
+
+
+    public static function dropdown(){
+
+        static $dropdown;
+
+        if($dropdown == null){
+            $models = self::find()->all();
+            foreach ($models as $model){
+                $dropdown[$model->id] = $model->nome;
+            }
+        }
+
+        return $dropdown;
+    }
+
+
+    public function criarUtente()
+    {
+            $user = new User();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->status = 9;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->generateEmailVerificationToken();
+            $user->save();
+
+            $utente = new Utente();
+            $utente->nome = $this->nome;
+            $utente->nif = $this->nif;
+            $utente->sexo = $this->sexo;
+            $utente->telemovel = $this->telemovel;
+            $utente->morada = $this->morada;
+            $utente->email = $user->email;
+            $utente->num_sns = $this->num_sns;
+            $utente->id_user = $user->getId();
+            $utente->save(false);
+
+            //rbac
+            $auth = \Yii::$app->authManager;
+            $temp = $auth->getRole('utente');
+            $auth->assign($temp, $user->getId());
+
+            return $this->sendEmail($user);
+
+    }
+
+    protected function sendEmail($user)
+    {
+        return Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Conta Registada em ' . Yii::$app->name)
+            ->send();
     }
 
     /**
@@ -110,15 +205,6 @@ class Utente extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
-
-    public static function formAddon(){
-        $procurar = Utente::find()
-            ->asArray()
-            ->all();
-
-        return $procurar;
-    }
-
 
     /**
      * @return string
@@ -232,18 +318,5 @@ class Utente extends \yii\db\ActiveRecord
         $this->num_sns = $num_sns;
     }
 
-    public static function dropdown(){
-
-        static $dropdown;
-
-        if($dropdown == null){
-            $models = self::find()->all();
-            foreach ($models as $model){
-                $dropdown[$model->id] = $model->nome;
-            }
-        }
-
-        return $dropdown;
-    }
 
 }

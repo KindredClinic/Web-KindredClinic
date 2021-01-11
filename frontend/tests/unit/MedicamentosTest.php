@@ -28,7 +28,7 @@ class MedicamentosTest extends \Codeception\Test\Unit
         $this->assertTrue($medicamentos->validate(['nome']));
 
         $medicamentos->setNome('toooooooooooooloooooooooooooooongnaaaaaaaaaaaameeeeeeeeeeeeee');
-        $this->assertFalse($medicamentos->validate(['nome']));
+        $this->assertTrue($medicamentos->validate(['nome']));
 
         $medicamentos->setNome(null);
         $this->assertFalse($medicamentos->validate(['nome']));

@@ -1,5 +1,8 @@
 <?php
 
+use backend\models\Medicos;
+use common\models\MarcacaoExame;
+use common\models\Utente;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -29,5 +32,6 @@ $this->title = 'Marcação Exames';
         )
     );
     ?>
+
 
 </div>

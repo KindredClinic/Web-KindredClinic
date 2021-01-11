@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\Utente;
 use Yii;
 use common\models\ReceitaMedica;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,21 @@ class ReceitaMedicaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verReceitaMedica'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verReceitaMedica'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,9 +52,13 @@ class ReceitaMedicaController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ReceitaMedica::find(),
-        ]);
+        if(\Yii::$app->user->can('verReceitaMedica')) {
+            $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => ReceitaMedica::find()
+                    ->where(['id_utente' => $tempUtente]),
+            ]);
+        }
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -52,9 +73,11 @@ class ReceitaMedicaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verReceitaMedica')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**

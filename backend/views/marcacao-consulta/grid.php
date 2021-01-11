@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Marcação de Exames';
+$this->title = 'Marcação de Consultas';
 ?>
 <div class="marcacao-consulta-index">
 

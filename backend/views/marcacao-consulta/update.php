@@ -6,9 +6,6 @@ use yii\helpers\Html;
 /* @var $model common\models\MarcacaoConsulta */
 
 $this->title = 'Alteração da Marcação da Consulta: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Marcacao Consultas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="marcacao-consulta-update">
 

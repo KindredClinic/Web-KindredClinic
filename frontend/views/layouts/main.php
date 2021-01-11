@@ -40,10 +40,19 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Registar', 'url' => ['/site/signup']];
 
     } else {
-        $menuItems[] = ['label' => 'Perfil', 'url' => ['/utente/view']];
-        $menuItems[] = ['label' => 'Consultas', 'url' => ['/marcacao-consulta/index']];
-        $menuItems[] = ['label' => 'Exames', 'url' => ['/marcacao-exame/index']];
-        $menuItems[] = ['label' => 'Receitas', 'url' => ['/receita-medica/index']];
+        if(\Yii::$app->user->can('Perfil')){
+            $menuItems[] = ['label' => 'Perfil', 'url' => ['/utente/view']];
+        }
+        if (\Yii::$app->user->can('verMarcacaoConsulta')){
+            $menuItems[] = ['label' => 'Consultas', 'url' => ['/marcacao-consulta/index']];
+        }
+        if (\Yii::$app->user->can('verMarcacaoExame')){
+            $menuItems[] = ['label' => 'Exames', 'url' => ['/marcacao-exame/index']];
+        }
+        if (\Yii::$app->user->can('verReceitaMedica')){
+            $menuItems[] = ['label' => 'Receitas', 'url' => ['/receita-medica/index']];
+        }
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

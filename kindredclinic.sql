@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 07, 2021 at 08:39 PM
+-- Generation Time: Jan 11, 2021 at 12:27 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -41,10 +41,19 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('utente', '2', 1606318091),
-('utente', '3', 1606487175),
-('utente', '5', 1607707351),
-('utente', '6', 1607707422);
+('admin', '37', 1610305313),
+('medico', '11', 1610305313),
+('medico', '19', 1606318089),
+('medico', '20', 1606318089),
+('medico', '22', 1606318089),
+('medico', '24', 1606318089),
+('medico', '36', 1610313985),
+('medico', '8', 1610305313),
+('utente', '2', 1606318089),
+('utente', '3', 1606318089),
+('utente', '35', 1610306989),
+('utente', '5', 1606318089),
+('utente', '6', 1609811431);
 
 -- --------------------------------------------------------
 
@@ -71,10 +80,35 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('consulta', 2, 'Consulta', NULL, NULL, 1606318071, 1606318071),
-('marcacao_consulta', 2, 'Marcar uma consulta', NULL, NULL, 1606318071, 1606318071),
-('receitaMedica', 2, 'Receita Medica', NULL, NULL, 1606318071, 1606318071),
-('utente', 1, NULL, NULL, NULL, 1606318071, 1606318071);
+('admin', 1, NULL, NULL, NULL, 1610305313, 1610305313),
+('alterarMarcacaoConsulta', 2, 'Alterar uma consulta', NULL, NULL, 1606318089, 1610305313),
+('alterarMarcacaoExame', 2, 'Alterar um exame', NULL, NULL, 1610305313, 1610305313),
+('criarConsulta', 2, 'Criar Consulta', NULL, NULL, 1610305313, 1610305313),
+('criarExame', 2, 'Criar Exame', NULL, NULL, 1610305313, 1610305313),
+('criarMarcacaoConsulta', 2, 'Marcar uma consulta', NULL, NULL, 1610305313, 1610305313),
+('criarMarcacaoExame', 2, 'Criar uma marcacao Exame', NULL, NULL, 1610305313, 1610305313),
+('criarMedicamento', 2, 'Criar Medicamento', NULL, NULL, 1610305313, 1610305313),
+('criarMedico', 2, 'Criar Medico', NULL, NULL, 1610305313, 1610305313),
+('criarReceitaMedica', 2, 'Criar Receita Medica', NULL, NULL, 1610305313, 1610305313),
+('criarUser', 2, 'Criar User', NULL, NULL, 1610305313, 1610305313),
+('deleteMedicamento', 2, 'Apagar Medicamento', NULL, NULL, 1610305313, 1610305313),
+('deleteMedico', 2, 'Apagar Medico', NULL, NULL, 1610305313, 1610305313),
+('deleteReceitaMedica', 2, 'Apagar Receita Medica', NULL, NULL, 1610305313, 1610305313),
+('deleteUser', 2, 'Apagar User', NULL, NULL, 1610305313, 1610305313),
+('medico', 1, NULL, NULL, NULL, 1610305313, 1610305313),
+('Perfil', 2, 'Perfil', NULL, NULL, 1610305313, 1610305313),
+('updateMedicamento', 2, 'Atualizar Medicamento', NULL, NULL, 1610305313, 1610305313),
+('updateMedico', 2, 'Atualizar Medico', NULL, NULL, 1610305313, 1610305313),
+('updateUser', 2, 'Atualizar User', NULL, NULL, 1610305313, 1610305313),
+('utente', 1, NULL, NULL, NULL, 1610305313, 1610305313),
+('verConsulta', 2, 'Ver Consulta', NULL, NULL, 1610305313, 1610305313),
+('verExame', 2, 'Ver Exame', NULL, NULL, 1610305313, 1610305313),
+('verMarcacaoConsulta', 2, 'Ver Marcacao Consulta', NULL, NULL, 1610305313, 1610305313),
+('verMarcacaoExame', 2, 'Ver Marcacao Exame', NULL, NULL, 1610305313, 1610305313),
+('verMedicamentos', 2, 'Ver Medicamentos', NULL, NULL, 1610305313, 1610305313),
+('verMedico', 2, 'Ver Medico', NULL, NULL, 1610305313, 1610305313),
+('verReceitaMedica', 2, 'Ver Receita Medica', NULL, NULL, 1610305313, 1610305313),
+('verUser', 2, 'Ver User', NULL, NULL, 1610305313, 1610305313);
 
 -- --------------------------------------------------------
 
@@ -95,9 +129,43 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
-('utente', 'consulta'),
-('utente', 'marcacao_consulta'),
-('utente', 'receitaMedica');
+('medico', 'alterarMarcacaoConsulta'),
+('medico', 'alterarMarcacaoExame'),
+('medico', 'criarConsulta'),
+('medico', 'criarExame'),
+('medico', 'criarMarcacaoConsulta'),
+('utente', 'criarMarcacaoConsulta'),
+('medico', 'criarMarcacaoExame'),
+('admin', 'criarMedicamento'),
+('admin', 'criarMedico'),
+('medico', 'criarMedico'),
+('medico', 'criarReceitaMedica'),
+('admin', 'criarUser'),
+('admin', 'deleteMedicamento'),
+('admin', 'deleteMedico'),
+('medico', 'deleteMedico'),
+('medico', 'deleteReceitaMedica'),
+('admin', 'deleteUser'),
+('admin', 'medico'),
+('utente', 'Perfil'),
+('admin', 'updateMedicamento'),
+('admin', 'updateMedico'),
+('medico', 'updateMedico'),
+('admin', 'updateUser'),
+('admin', 'utente'),
+('medico', 'verConsulta'),
+('utente', 'verConsulta'),
+('medico', 'verExame'),
+('utente', 'verExame'),
+('medico', 'verMarcacaoConsulta'),
+('utente', 'verMarcacaoConsulta'),
+('medico', 'verMarcacaoExame'),
+('utente', 'verMarcacaoExame'),
+('admin', 'verMedicamentos'),
+('admin', 'verMedico'),
+('medico', 'verReceitaMedica'),
+('utente', 'verReceitaMedica'),
+('admin', 'verUser');
 
 -- --------------------------------------------------------
 
@@ -132,14 +200,16 @@ CREATE TABLE IF NOT EXISTS `consulta` (
   KEY `id_marcacao` (`id_marcacao`) USING BTREE,
   KEY `id_medico` (`id_medico`) USING BTREE,
   KEY `id_utente` (`id_utente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `consulta`
 --
 
 INSERT INTO `consulta` (`id`, `conteudo`, `date`, `id_marcacao`, `id_medico`, `id_utente`) VALUES
-(2, '<p>Utente com tosse.</p><p>Possivel covid. Amostra já recolhida para fazer o teste.</p><p><br></p><p>Tomar medicação:</p><ul><li>Valdispert: 2 vezes ao dia;</li><li>Bisolvon: 1 vez depois de cada refeição.</li></ul>', '2021-01-21 14:50:55', 15, 14, 2);
+(2, '<p>Utente com tosse.</p><p>Possivel covid. Amostra já recolhida para fazer o teste.</p><p><br></p><p>Tomar medicação:</p><ul><li>Valdispert: 2 vezes ao dia;</li><li>Bisolvon: 1 vez depois de cada refeição.</li></ul>', '2021-01-21 14:50:55', 15, 14, 2),
+(3, '<p>testes</p><p><br></p><p><br></p><p>teste</p><p>teste</p><p>test<br></p>', '2021-01-27 14:25:42', 18, 39, 6),
+(4, '<p>teste</p><p>teste</p><p>consulta<br></p>', '2020-11-25 21:55:51', 12, 16, 3);
 
 -- --------------------------------------------------------
 
@@ -190,14 +260,16 @@ CREATE TABLE IF NOT EXISTS `exame` (
   KEY `id_medico` (`id_medico`) USING BTREE,
   KEY `id_marcacao` (`id_marcacao`) USING BTREE,
   KEY `id_utente` (`id_utente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `exame`
 --
 
 INSERT INTO `exame` (`id`, `conteudo`, `date`, `id_medico`, `id_marcacao`, `id_utente`) VALUES
-(1, '<p>teste</p><p><br></p><p>teste</p><p><br></p><ol><li>teste</li><li>teste</li></ol>', '2021-01-21 19:50:54', 14, 3, 4);
+(1, '<p>teste</p><p><br></p><p>teste</p><p><br></p><ol><li>teste</li><li>teste</li></ol>', '2021-01-21 19:50:54', 14, 3, 4),
+(2, '<p>teste</p><p>teste</p><p>teste</p><p>ola<br></p>', '2021-02-02 13:50:25', 39, 5, 2),
+(3, '<p>ola</p><p>teste </p><p><br></p><p>exame</p><p><br></p><p>adeus<br></p>', '2020-12-22 22:55:34', 16, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -217,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `macacao_exame` (
   KEY `id_medico` (`id_medico`) USING BTREE,
   KEY `id_especialidade` (`id_especialidade`) USING BTREE,
   KEY `id_utente` (`id_utente`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `macacao_exame`
@@ -226,7 +298,11 @@ CREATE TABLE IF NOT EXISTS `macacao_exame` (
 INSERT INTO `macacao_exame` (`id`, `date`, `id_medico`, `id_utente`, `status`, `id_especialidade`) VALUES
 (1, '2020-12-22 22:55:34', 16, 2, 'Aprovado', 8),
 (2, '2020-12-21 14:50:53', 12, 2, 'Em Espera', 6),
-(3, '2021-01-21 19:50:54', 14, 4, 'Aprovado', 7);
+(3, '2021-01-21 19:50:54', 14, 4, 'Aprovado', 7),
+(4, '2021-01-29 15:50:26', 14, 5, 'Em Espera', 7),
+(5, '2021-02-02 13:50:25', 39, 2, 'Aprovado', 4),
+(6, '2021-02-22 15:45:56', 39, 3, 'Em Espera', 4),
+(7, '2021-02-06 14:45:45', 39, 6, 'Em Espera', 4);
 
 -- --------------------------------------------------------
 
@@ -246,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `marcacao_consulta` (
   KEY `id_especialidade` (`id_especialidade`) USING BTREE,
   KEY `id_utente` (`id_utente`) USING BTREE,
   KEY `id_medico` (`id_medico`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `marcacao_consulta`
@@ -259,7 +335,10 @@ INSERT INTO `marcacao_consulta` (`id`, `date`, `id_medico`, `id_especialidade`, 
 (12, '2020-11-25 21:55:51', 16, 8, 3, 'Aprovado'),
 (13, '2020-12-03 14:45:53', 14, 7, 2, 'Em Espera'),
 (15, '2021-01-21 14:50:55', 14, 7, 2, 'Aprovado'),
-(16, '2021-01-26 18:45:48', 14, 7, 3, 'Em Espera');
+(16, '2021-01-26 18:45:48', 14, 7, 3, 'Em Espera'),
+(17, '2021-01-28 13:55:46', 36, 6, 6, 'Em Espera'),
+(18, '2021-01-27 14:25:42', 39, 4, 6, 'Aprovado'),
+(19, '2021-02-24 15:45:44', 39, 4, 3, 'Em Espera');
 
 -- --------------------------------------------------------
 
@@ -322,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   PRIMARY KEY (`id`),
   KEY `id_categoria` (`id_especialidade`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `medicos`
@@ -353,7 +432,8 @@ INSERT INTO `medicos` (`id`, `nome`, `sexo`, `nif`, `telefone`, `num_ordem_medic
 (33, 'Daniel Barros Correia', 'Masculino', 257630171, 948068512, 129994085, 4, 16),
 (34, 'Leonor Azevedo Barbosa', 'Feminino', 217534694, 924755838, 274140289, 5, 17),
 (35, 'José Silva Martins', 'Masculino', 297251066, 969393024, 371393612, 5, 18),
-(36, 'Joao Castro Goncalves', 'Masculino', 218941455, 969354846, 723133682, 6, 19);
+(36, 'Joao Castro Goncalves', 'Masculino', 218941455, 969354846, 723133682, 6, 19),
+(39, 'RbacMed', 'Feminino', 654987321, 923651427, 654389, 4, 36);
 
 -- --------------------------------------------------------
 
@@ -380,7 +460,8 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m170907_052038_rbac_add_index_on_auth_assignment_user_id', 1603461856),
 ('m180523_151638_rbac_updates_indexes_without_prefix', 1603461856),
 ('m200409_110543_rbac_update_mssql_trigger', 1603461856),
-('m201106_171805_userVerification', 1606318071);
+('m201106_171805_userVerification', 1606318071),
+('m210110_183327_rbac', 1610305313);
 
 -- --------------------------------------------------------
 
@@ -400,7 +481,17 @@ CREATE TABLE IF NOT EXISTS `receita_medica` (
   KEY `id_medico` (`id_medico`) USING BTREE,
   KEY `id_medicamentos` (`id_medicamentos`) USING BTREE,
   KEY `id_utente` (`id_utente`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `receita_medica`
+--
+
+INSERT INTO `receita_medica` (`id`, `date`, `conteudo`, `id_medico`, `id_utente`, `id_medicamentos`) VALUES
+(1, '2021-01-08 23:31:08', '<p>teste~</p><p><br></p><p><br></p><p>teste<br></p>', 22, 4, 7),
+(2, '2021-01-10 23:04:53', '<p>Tomar 2 vez por dia<br></p>', 36, 3, 7),
+(3, '2021-01-10 23:09:13', '<p>ola alex este é o certo</p>', 36, 2, 6),
+(5, '2021-01-10 23:12:40', '<p>Tomar 1 apos a cada refeição</p>', 39, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -424,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -433,8 +524,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
 (2, 'Alex', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$9P/01WEJSEBTw0QVIQLxxegBWvWo17KAoE2YWaaDH85h513RC/azm', NULL, 'alexpereira90038@gmail.com', 10, 1606318089, 1606318130, 'xGg1vt9m0adP8_kPgqfVWQW4L20eyB_R_1606318089'),
 (3, 'teste', 'Zqw2829aOQEJii73dbjkA3dYamvZ7Y1X', '$2y$13$CYuGcfRMkjaBuCYz363IB.317jYUa0NK4XKCGEtnDyovunD7AezYm', NULL, 'teste@teste.com', 10, 1606487174, 1606487174, 'YyBG3TpF011g4WDhs3GLssQ6RinYsKSH_1606487174'),
-(5, 'gsfg', 'hLq2aAS0OBKzC5FSF9Mtnp-rlePDRJfT', '$2y$13$n//iHO62X/QfrHb2Gq538OLBDReSgq9jLhaubycNGRmOTDHIyYcDm', NULL, 'faf@faws.com', 9, 1607707351, 1607707351, 'tHb4XqHRLCo87zGX3aVphPG_ImDHlhpd_1607707351'),
-(6, 'sdef', 'f5PrMuK2qdj0JbX1RF4nD3k35Gwdkm0B', '$2y$13$J7F1V0x3g3TrEzMFI/lIduSMnZLI6oZz2MXG1nGEEtPJRXQPSg0cu', NULL, 'jhgg@jhggf.com', 9, 1607707422, 1607707422, 'CGPlFe85OPlOxvmO1hFZs9tghAqh9C4M_1607707422'),
+(5, 'Macaco', 'hLq2aAS0OBKzC5FSF9Mtnp-rlePDRJfT', '$2y$13$n//iHO62X/QfrHb2Gq538OLBDReSgq9jLhaubycNGRmOTDHIyYcDm', NULL, 'faf@faws.com', 9, 1607707351, 1607707351, 'tHb4XqHRLCo87zGX3aVphPG_ImDHlhpd_1607707351'),
+(6, 'Jose', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$J7F1V0x3g3TrEzMFI/lIduSMnZLI6oZz2MXG1nGEEtPJRXQPSg0cu', NULL, 'jhgg@jhggf.com', 9, 1607707422, 1607707422, 'CGPlFe85OPlOxvmO1hFZs9tghAqh9C4M_1607707422'),
 (8, 'Dr.Afonso', 'oJ_WL-KKTSG18k-KJvKMXPyKPzyLirkf', '$2y$13$lFIOVCTwpQGi4cHiPBarouklRu1NvLzxJXFtbFM88rVNhPMWWmI7.', NULL, 'afonso@afonso.com', 10, 1607708529, 1607708529, 'o4zapCLIX95ByZvcMrHMgSjL8rDsNsuw_1607708529'),
 (9, 'Joao_Albatross', 'PiRPae8WtdbW01Q2fJQAPvZJ20bz0ul6', '$2y$13$hWy.6JEwFPK0BER9XdXf4OcF1iqQkwrCmeVbD8rcvgO6yJzvnxozy', NULL, 'JoaoAlbatross@myfake.com', 10, 1609810783, 1609810783, 'tWaS7i0lKQuvIbtNJSLXgF7K6O7bws7v_1609810783'),
 (10, 'David_Steed', 'BHJmwtn2Og5OjAtIlWGYlW81dQ3gi80-', '$2y$13$tvZwDoB6TTlqbkkmt0Bpyu3fTJyR/6D7yMfRKDULmSgq95VZzEl8y', NULL, 'DavidM_Steed@myfake.com', 10, 1609810863, 1609810863, 'YNEZhcmITe1ALs3PgmGXtAMv5uDIEO5L_1609810863'),
@@ -459,7 +550,17 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (29, 'Kauan_Cunha', 'He8RHuXEjkVAYfb0QNRDqar9mktQ_2ws', '$2y$13$NGPD8SY7AAMORnGQVwXAGOjtvMyTo/GMV0Awzbgbt2c/flIMUVq/6', NULL, 'Kauan_Cunha@myfake.com', 10, 1609811431, 1609811431, 'xmK4WazWcd25ExJXs3jqgbYnqaWRbdz2_1609811431'),
 (30, 'Paulo_Ribeiro', 'He8RHuXEjkVAYfb0QNRDqar9mktQ_2ws', '$2y$13$NGPD8SY7AAMORnGQVwXAGOjtvMyTo/GMV0Awzbgbt2c/flIMUVq/6', NULL, 'Paulo_Ribeiro@myfake.com', 10, 1609811431, 1609811431, 'xmK4WazWcd25ExJXs3jqgbYnqaWRbdz2_1609811431'),
 (31, 'Karen_Dias', 'He8RHuXEjkVAYfb0QNRDqar9mktQ_2ws', '$2y$13$NGPD8SY7AAMORnGQVwXAGOjtvMyTo/GMV0Awzbgbt2c/flIMUVq/6', NULL, 'Karen_Dias@myfake.com', 10, 1609811431, 1609811431, 'xmK4WazWcd25ExJXs3jqgbYnqaWRbdz2_1609811431'),
-(32, 'Renan_Cavalcanti', 'He8RHuXEjkVAYfb0QNRDqar9mktQ_2ws', '$2y$13$NGPD8SY7AAMORnGQVwXAGOjtvMyTo/GMV0Awzbgbt2c/flIMUVq/6', NULL, 'Renan_Cavalcanti@myfake.com', 10, 1609811431, 1609811431, 'xmK4WazWcd25ExJXs3jqgbYnqaWRbdz2_1609811431');
+(32, 'Renan_Cavalcanti', 'He8RHuXEjkVAYfb0QNRDqar9mktQ_2ws', '$2y$13$NGPD8SY7AAMORnGQVwXAGOjtvMyTo/GMV0Awzbgbt2c/flIMUVq/6', NULL, 'Renan_Cavalcanti@myfake.com', 10, 1609811431, 1609811431, 'xmK4WazWcd25ExJXs3jqgbYnqaWRbdz2_1609811431'),
+(33, 'asdasda', 'a8eQsui6T83sqZN5-_k8aYYbUg_paEdZ', '$2y$13$Oyjg4RLAmBYJOMAQWKYUuuIBdL3XmAkpIHsuhbA2UBYi6zLwVCZzy', NULL, 'ssss@gmail.com', 9, 1610214661, 1610214661, 'ERHDLxwJFnIA_gXzMUDFG1hDqBKghgXC_1610214661'),
+(34, 'asd', 'nlI0L9uuYiucI12k2_niik4N7Q1Qebsu', '$2y$13$/Or2wUfs1j.BBAGIXDAu2u..95W0gVaij0wzNheaJ3F58bcuqNbXm', NULL, 'sddddd@gmail.com', 9, 1610222367, 1610324841, 'MQK6d0INArWhYIAPxR2zbhYZgOC_Y5Q4_1610222367'),
+(35, 'RbacTest', 'SBBQM4khtW42-eo3S3OTtnu9exzywIZT', '$2y$13$T/uNzr8rI3T641DUzPNuBOFxN5.uv2CGOsBu0PaFPt79IyMuCknk.', NULL, 'RbacTest@gmail.com', 10, 1610306989, 1610306989, 'o6VjULFv9QC4h1_xcSn3MHF2YOnxTZhj_1610306989'),
+(36, 'RbacMed', '2ZNiEbKntv943rDUu33g24o2GaYcB1ab', '$2y$13$gsIEdKxTL6qAuv13BAFNnuTh1odWqkPgfe1aJtWuq9oOVjGFRjL7.', NULL, 'RbacMed@gmail.com', 10, 1610313985, 1610313985, 'Z2NK9LXLfv6M5tXEn3BiNlp-ynml2yYk_1610313985'),
+(37, 'admin', 's01hgJ_PUVSFKdNA_8wkT-alJ9h6txog', '$2y$13$9P/01WEJSEBTw0QVIQLxxegBWvWo17KAoE2YWaaDH85h513RC/azm', NULL, 'admin@admin.com', 10, 1606318089, 1606318089, 'xGg1vt9m0adP8_kPgqfVWQW4L20eyB_R_1606318089'),
+(38, 'easd', '9T5PwndKEG0xfV9xbLQqHg4jRfGILKL6', '$2y$13$Wpf57azdlGfUaYZWt9bV7.LL0GO.zjTxF.D0ebpX8Sh98vHvR/VIi', NULL, 'easd@gmail.com', 9, 1610327269, 1610327269, 'FYSStvrr0ODU6JKB37snggX-RPRbnq-2_1610327269'),
+(39, 'testbbb', 'GVEBboPJCPGQLwUaHzK0xKw9z0U2jr3J', '$2y$13$ecMSQxCJnda5g4/ZMPJVJeP7ds2Eh224k9B5EzZxtbCdWmXe2VbMi', NULL, 'testbbb@gmail.com', 9, 1610331820, 1610331820, '9OHuYRR3MJLWsq5PxSfEDNg2H6KoTJiY_1610331820'),
+(40, 'tesdgggg', 'BLELjlLMuBeR2GPaLrrbkWARPz-B4Atv', '$2y$13$SdWFA3LZYnVp0LslMhHhauxFdS.wC8jPoY.NUrhDH8fFJX0o9Gg3y', NULL, 'tesdgggg@gmail.com', 9, 1610331977, 1610331977, 'zvm8LTPBxWNhnEk8kpLxx7kvATkxBkLK_1610331977'),
+(41, 'testesssss', 'Sf29HU18Gb-9POwSszq99WnF0f1-2WNh', '$2y$13$.Tx/FIDPXLt1drPm1qRK2emYudrajQIx/hQI3lCsartI8ECG3l8ye', NULL, 'testesssss@gmail.com', 9, 1610332781, 1610332781, 's40clo08qWlktpCaoiy34KSnpDvtTi8s_1610332781'),
+(42, 'testola', 'FMLIa4P1gqOmoGvc7td0pn9pcw7sO1Wx', '$2y$13$hgOsEjOBhZ1HsNjhNQayN.6ROs9GVUGOd7i95YQKltJLFaYmqwTvO', NULL, 'testola@gmail.com', 9, 1610364629, 1610364629, 'k5OLLAv4IBTp3cehJhZH9i8swMai-YH-_1610364629');
 
 -- --------------------------------------------------------
 
@@ -480,7 +581,7 @@ CREATE TABLE IF NOT EXISTS `utente` (
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `utente`
@@ -489,8 +590,9 @@ CREATE TABLE IF NOT EXISTS `utente` (
 INSERT INTO `utente` (`id`, `nome`, `nif`, `sexo`, `telemovel`, `morada`, `email`, `num_sns`, `id_user`) VALUES
 (2, 'Alex', 123456789, 'Masculino', 916073037, 'rua rua', 'alexpereira90038@gmail.com', 123456789, 2),
 (3, 'teste', 987654321, 'Masculino', 923065035, 'rua rua', 'teste@teste.com', 987654321, 3),
-(4, 'jhkgfd', 987654345, 'Masculino', 345465345, 'tgsdgsd', 'faf@faws.com', 987321234, 5),
-(5, 'gjasf', 654321789, 'Masculino', 943215678, 'trt', 'jhgg@jhggf.com', 123456780, 6);
+(4, 'Macaco', 987654345, 'Masculino', 345465345, 'tgsdgsd', 'faf@faws.com', 987321234, 5),
+(5, 'Jose', 654321789, 'Masculino', 943215678, 'trt', 'jhgg@jhggf.com', 123456780, 6),
+(6, 'TestRbac', 321789654, 'Masculino', 945212325, 'rbac rbac', 'RbacTest@gmail.com', 19763248, 35);
 
 --
 -- Constraints for dumped tables

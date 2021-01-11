@@ -129,10 +129,19 @@ class MarcacaoExame extends \yii\db\ActiveRecord
         return $procurar;
     }
 
-    public static function dataByUser($idUtente){
+    public static function dataByUserBack($idUtente){
 
         $procurar = self::find()
             ->where(['id_medico' =>  $idUtente ])
+            ->all();
+
+        return $procurar;
+    }
+
+    public static function dataByUserFront($idUtente){
+
+        $procurar = self::find()
+            ->where(['id_utente' =>  $idUtente ])
             ->all();
 
         return $procurar;

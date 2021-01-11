@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Medicos;
 use Yii;
 use common\models\Consulta;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,26 @@ class ConsultaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarConsulta'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,13 +57,17 @@ class ConsultaController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Consulta::find(),
-        ]);
+        if(\Yii::$app->user->can('verConsulta')) {
+            $tempMed = Medicos::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => Consulta::find()
+                    ->where(['id_medico' => $tempMed['id']]),
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -52,9 +78,11 @@ class ConsultaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verConsulta')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -64,51 +92,20 @@ class ConsultaController extends Controller
      */
     public function actionCreate($id,$data,$id_utente)
     {
-        $model = new Consulta();
+        if(\Yii::$app->user->can('criarConsulta')) {
+            $model = new Consulta();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->criarConsulta($id,$data,$id_utente);
-            return $this->redirect(['index']);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarConsulta($id, $data, $id_utente);
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Updates an existing Consulta model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Consulta model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
 
     /**
      * Finds the Consulta model based on its primary key value.

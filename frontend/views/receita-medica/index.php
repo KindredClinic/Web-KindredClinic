@@ -7,7 +7,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Receitas Medicas';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="receita-medica-index">
 

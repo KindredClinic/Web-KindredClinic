@@ -110,7 +110,8 @@ class UtenteTest extends \Codeception\Test\Unit
 
         $utente->save();
 		
-		$this->tester->seeInDatabase('utente',['nome' => "UnitTest", 'nif' => 123456789, 'telemovel' => 923112312, 'morada' => "rua teste unitario", 'sexo' => "Feminino",
+		$this->tester->seeInDatabase('utente',['nome' => "UnitTest", 'nif' => 123456789, 'telemovel' => 923112312,
+            'morada' => "rua teste unitario", 'sexo' => "Feminino",
             "email" => "unitTest@unitTest.com",'num_sns' => 675785854, 'id_user' => 6]);
 
     }
@@ -142,10 +143,6 @@ class UtenteTest extends \Codeception\Test\Unit
 
         $this->tester->dontSeeInDatabase('utente',['nome' => "TestUnit", 'nif' => 123456789, 'telemovel' => 923112312, 'morada' => "rua teste unitario", 'sexo' => "Feminino",
             "email" => "unitTest@unitTest.com",'num_sns' => 675785854, 'id_user' => 6]);
-    }
-
-
-
     }
 
 }

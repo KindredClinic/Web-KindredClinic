@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\Utente;
 use Yii;
 use common\models\Consulta;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,21 @@ class ConsultaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verConsulta'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,13 +52,17 @@ class ConsultaController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Consulta::find(),
-        ]);
+        if(\Yii::$app->user->can('verConsulta')) {
+            $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => Consulta::find()
+                    ->where(['id_utente' => $tempUtente]),
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -52,9 +73,11 @@ class ConsultaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verConsulta')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**

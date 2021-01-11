@@ -1,6 +1,7 @@
 <?php
 
 use common\models\MarcacaoConsulta;
+use common\models\Utente;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -24,6 +25,7 @@ $this->title = 'Marcação de Consulta';
         &nbsp;&nbsp;
         <?= Html::a('Consultas Passadas', ['consulta/index'], ['class' => 'btn btn-success']) ?>
     </p>
+
 
     <?= yii2fullcalendar\yii2fullcalendar::widget(array(
             'events' => $events,

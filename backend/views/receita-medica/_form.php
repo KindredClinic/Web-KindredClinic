@@ -47,6 +47,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success','name' => 'save-button']) ?>
+        <?= Html::a('Ver Receitas', ['index'], ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

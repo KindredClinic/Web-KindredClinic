@@ -78,11 +78,12 @@ class ReceitaMedica extends \yii\db\ActiveRecord
     }
 
     public function criarReceitaMedica(){
+        $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
         $receita = new ReceitaMedica();
 
         $receita->date = date('Y-m-d H:i:s');
         $receita->conteudo = $this->conteudo;
-        $receita->id_medico = Yii::$app->user->id;
+        $receita->id_medico = $tempMedic['id'];
         $receita->id_utente = $this->id_utente;
         $receita->id_medicamentos = $this->id_medicamentos;
 

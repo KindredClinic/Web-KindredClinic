@@ -36,11 +36,11 @@ class ReceitaMedicaCest
         $I->amOnPage('/site/login');
         $I->see('Login', 'h1');
 
-        $I->fillField('Username', 'TestTester');
+        $I->fillField('Username', 'RbacMed');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
 
-        $I->see('Logout (TestTester)', 'form button[type=submit]');
+        $I->see('Logout (RbacMed)', 'form button[type=submit]');
 
         $I->click('Receita');
         $I->click('Criar Receita Medica');
@@ -48,13 +48,13 @@ class ReceitaMedicaCest
         $opcao = $I->grabTextFrom('select#receitamedica-id_utente option:nth-child(2)');
         $I->selectOption("Utente", $opcao);
 
-        $opcao2 = $I->grabTextFrom('select#receitamedica-id_medicamentos option:nth-child(2)');
+        $opcao2 = $I->grabTextFrom('select#receitamedica-id_medicamentos option:nth-child(4)');
         $I->selectOption("ReceitaMedica[id_medicamentos]", $opcao2);
 
         $I->fillField('Conteudo', 'Teste Teste');
 
         $I->click('save-button');
 
-        $I->see('TestTester2', 'td');
+        $I->see('RbacMed', 'td');
     }
 }

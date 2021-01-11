@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Medicos;
 use Yii;
 use backend\models\Exame;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,26 @@ class ExameController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarExame'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,13 +57,17 @@ class ExameController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Exame::find(),
-        ]);
+        if(\Yii::$app->user->can('verExame')) {
+            $tempMed = Medicos::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => Exame::find()
+                    ->where(['id_medico' => $tempMed['id']]),
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -52,9 +78,11 @@ class ExameController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verExame')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -64,48 +92,16 @@ class ExameController extends Controller
      */
     public function actionCreate($id,$data,$id_utente)
     {
-        $model = new Exame();
+        if(\Yii::$app->user->can('criarExame')) {
+            $model = new Exame();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->criarExame($id,$data,$id_utente);
-            return $this->redirect(['index']);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarExame($id, $data, $id_utente);
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('create', ['model' => $model,]);
         }
-
-        return $this->render('create', ['model' => $model,]);
-    }
-
-    /**
-     * Updates an existing Exame model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Exame model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**

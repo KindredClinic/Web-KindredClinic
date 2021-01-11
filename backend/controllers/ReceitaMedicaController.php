@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Medicos;
 use Yii;
 use common\models\ReceitaMedica;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -26,6 +28,31 @@ class ReceitaMedicaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verReceitaMedica'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verReceitaMedica'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarReceitaMedica'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['deleteReceitaMedica'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -35,13 +62,17 @@ class ReceitaMedicaController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ReceitaMedica::find(),
-        ]);
+        if(\Yii::$app->user->can('verReceitaMedica')) {
+            $tempMed = Medicos::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => ReceitaMedica::find()
+                    ->where(['id_medico' => $tempMed['id']]),
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -52,9 +83,11 @@ class ReceitaMedicaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verReceitaMedica')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -64,37 +97,20 @@ class ReceitaMedicaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ReceitaMedica();
+        if(\Yii::$app->user->can('criarReceitaMedica')) {
+            $model = new ReceitaMedica();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->criarReceitaMedica();
-            return $this->redirect(['index']);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarReceitaMedica();
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Updates an existing ReceitaMedica model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Deletes an existing ReceitaMedica model.
@@ -105,9 +121,11 @@ class ReceitaMedicaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->can('deleteReceitaMedica')) {
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }
     }
 
     /**

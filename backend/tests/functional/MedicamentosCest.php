@@ -29,11 +29,11 @@ class MedicamentosCest
         $I->amOnPage('/site/login');
         $I->see('Login', 'h1');
 
-        $I->fillField('Username', 'UnitTest');
+        $I->fillField('Username', 'admin');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
 
-        $I->see('Logout (UnitTest)', 'form button[type=submit]');
+        $I->see('Logout (admin)', 'form button[type=submit]');
 
         $I->click('Medicamentos');
         $I->click('Create Medicamentos');

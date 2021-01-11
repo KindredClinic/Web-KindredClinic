@@ -8,6 +8,7 @@ use common\models\MarcacaoConsulta;
 use Yii;
 use common\models\MarcacaoExame;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,6 +31,41 @@ class MarcacaoExameController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['alterarMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['grid'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['subcat'],
+                        'roles' => ['criarMarcacaoExame'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -39,28 +75,30 @@ class MarcacaoExameController extends Controller
      */
     public function actionIndex()
     {
-        $tempVariable = Medicos::dataByUser(Yii::$app->user->id);
-        $times = MarcacaoExame::dataByUser($tempVariable);
+        if(\Yii::$app->user->can('verMarcacaoExame')) {
+            $tempVariable = Medicos::dataByUser(Yii::$app->user->id);
+            $times = MarcacaoExame::dataByUserBack($tempVariable['id']);
 
-        $events = [];
-        foreach ($times AS $time){
+            $events = [];
+            foreach ($times as $time) {
 
-            $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
+                $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
 
 
-            $Event = new \yii2fullcalendar\models\Event();
-            $Event->id = $time['id'];
-            $Event->backgroundColor = $this->chooseColor($time['status']);
-            $Event->title = $temp['tipo'];
-            $Event->start = date(($time['date']));
-            $Event->url = 'index.php?r=marcacao-exame/view&id='.$time['id'];
-            $events[] = $Event;
+                $Event = new \yii2fullcalendar\models\Event();
+                $Event->id = $time['id'];
+                $Event->backgroundColor = $this->chooseColor($time['status']);
+                $Event->title = $temp['tipo'];
+                $Event->start = date(($time['date']));
+                $Event->url = 'index.php?r=marcacao-exame/view&id=' . $time['id'];
+                $events[] = $Event;
 
+            }
+
+            return $this->render('index', [
+                'events' => $events,
+            ]);
         }
-
-        return $this->render('index', [
-            'events' => $events,
-        ]);
     }
 
     public function chooseColor($tipo){
@@ -78,14 +116,17 @@ class MarcacaoExameController extends Controller
     }
 
     public function actionGrid(){
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoExame::find()
-                ->where(['id_medico' => Medicos::dataByUser(Yii::$app->user->id)]),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoExame')) {
+            $tempMed = Medicos::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => MarcacaoExame::find()
+                    ->where(['id_medico' => $tempMed['id']]),
+            ]);
 
-        return $this->render('grid', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('grid', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
 
@@ -97,9 +138,11 @@ class MarcacaoExameController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoExame')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -109,16 +152,18 @@ class MarcacaoExameController extends Controller
      */
     public function actionCreate()
     {
-        $model = new MarcacaoExame();
+        if(\Yii::$app->user->can('criarMarcacaoExame')) {
+            $model = new MarcacaoExame();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->criarMarcacaoExame();
-            return $this->redirect(['index', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarMarcacaoExame();
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -130,15 +175,17 @@ class MarcacaoExameController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('alterarMarcacaoExame')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**

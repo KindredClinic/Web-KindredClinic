@@ -1,5 +1,7 @@
 <?php
 
+use backend\models\Medicos;
+use common\models\MarcacaoExame;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -15,7 +17,6 @@ $this->title = 'Marcação de Exames';
     <p>
         <?= Html::a('Ver Calendario', ['index'], ['class' => 'btn btn-success']) ?>
     </p>
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -51,6 +52,4 @@ $this->title = 'Marcação de Exames';
         ],
 
     ]); ?>
-
-
 </div>

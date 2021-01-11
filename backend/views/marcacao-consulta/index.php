@@ -1,6 +1,7 @@
-<?php
+    <?php
 
-use yii\helpers\Html;
+    use backend\models\Medicos;
+    use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */

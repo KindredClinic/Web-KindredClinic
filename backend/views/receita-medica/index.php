@@ -1,5 +1,6 @@
 <?php
 
+use backend\models\Medicos;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -7,7 +8,6 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Receita Medicas';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="receita-medica-index">
 
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Criar Receita Medica', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

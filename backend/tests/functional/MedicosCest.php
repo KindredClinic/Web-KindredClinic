@@ -29,16 +29,16 @@ class MedicosCest
         $I->amOnPage('/site/login');
         $I->see('Login', 'h1');
 
-        $I->fillField('Username', 'UnitTest');
+        $I->fillField('Username', 'admin');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
 
-        $I->see('Logout (UnitTest)', 'form button[type=submit]');
+        $I->see('Logout (admin)', 'form button[type=submit]');
 
         $I->click('Medicos');
         $I->click('Inserir Medico');
 
-        $I->fillField('Nome', 'Medico_Teste');
+        $I->fillField('Nome', 'MedicoTeste');
 
         $opcao = $I->grabTextFrom('select#medicos-sexo option:nth-child(2)');
         $I->selectOption("Sexo", $opcao);
@@ -50,13 +50,13 @@ class MedicosCest
         $opcao = $I->grabTextFrom('select#medicos-id_especialidade option:nth-child(2)');
         $I->selectOption("Especialidade", $opcao);
 
-        $I->fillField('Username', 'Medico_Teste');
+        $I->fillField('Username', 'MedicoTeste');
         $I->fillField('Email', 'MedicoTeste@gmail.com');
         $I->fillField('Password', '123456789');
 
         $I->click('save-button');
 
-        $I->see('Medico_Teste', 'td');
+        $I->see('MedicoTeste', 'td');
         $I->see('286431578', 'td');
     }
 }

@@ -7,6 +7,7 @@ use backend\models\Medicos;
 use Yii;
 use common\models\MarcacaoConsulta;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,6 +31,41 @@ class MarcacaoConsultaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['alterarMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['grid'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['subcat'],
+                        'roles' => ['criarMarcacaoConsulta'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -39,28 +75,30 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionIndex()
     {
-        $tempVariable = Medicos::dataByUser(Yii::$app->user->id);
-        $times = MarcacaoConsulta::dataByUser($tempVariable);
+        if(\Yii::$app->user->can('verMarcacaoConsulta')) {
+            $tempVariable = Medicos::dataByUser(Yii::$app->user->id);
+            $times = MarcacaoConsulta::dataByUserBack($tempVariable['id']);
 
-        $events = [];
-        foreach ($times AS $time){
+            $events = [];
+            foreach ($times as $time) {
 
-            $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
+                $temp = Especialidade::dataByEspecialidade($time['id_especialidade']);
 
 
-            $Event = new Event();
-            $Event->id = $time['id'];
-            $Event->backgroundColor = $this->chooseColor($time['status']);
-            $Event->title = $temp['tipo'];
-            $Event->start = date(($time['date']));
-            $Event->url = 'index.php?r=marcacao-consulta/view&id='.$time['id'];
-            $events[] = $Event;
+                $Event = new Event();
+                $Event->id = $time['id'];
+                $Event->backgroundColor = $this->chooseColor($time['status']);
+                $Event->title = $temp['tipo'];
+                $Event->start = date(($time['date']));
+                $Event->url = 'index.php?r=marcacao-consulta/view&id=' . $time['id'];
+                $events[] = $Event;
 
+            }
+
+            return $this->render('index', [
+                'events' => $events,
+            ]);
         }
-
-        return $this->render('index', [
-            'events' => $events,
-        ]);
     }
 
     public function chooseColor($tipo){
@@ -78,14 +116,17 @@ class MarcacaoConsultaController extends Controller
     }
 
     public function actionGrid(){
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoConsulta::find()
-                ->where(['id_medico' => Medicos::dataByUser(Yii::$app->user->id)]),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoConsulta')) {
+            $tempMed = Medicos::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => MarcacaoConsulta::find()
+                    ->where(['id_medico' => $tempMed['id']]),
+            ]);
 
-        return $this->render('grid', [
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('grid', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -96,9 +137,11 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoConsulta')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
@@ -108,16 +151,18 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new MarcacaoConsulta();
+        if(\Yii::$app->user->can('criarMarcacaoConsulta')) {
+            $model = new MarcacaoConsulta();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->criarMarcacaoConsulta();
-            return $this->redirect(['index', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarMarcacaoConsultaBack();
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -129,15 +174,17 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('alterarMarcacaoConsulta')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -170,25 +217,4 @@ class MarcacaoConsultaController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionSubcat() {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $out = [];
-        if (isset($_POST['depdrop_parents'])) {
-            $parents = $_POST['depdrop_parents'];
-            if ($parents != null) {
-                $especialidade = $parents[0];
-                $out = MarcacaoConsulta::getSubDropDownList($especialidade);
-
-                // the getSubCatList function will query the database based on the
-                // cat_id and return an array like below:
-                // [
-                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-                // ]
-
-                return ['output' => $out, 'selected' => ''];
-            }
-        }
-        return ['output'=>'', 'selected'=>''];
-    }
 }

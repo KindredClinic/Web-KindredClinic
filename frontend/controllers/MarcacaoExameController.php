@@ -4,9 +4,11 @@ namespace frontend\controllers;
 
 use backend\models\Especialidade;
 use common\models\MarcacaoConsulta;
+use common\models\Utente;
 use Yii;
 use common\models\MarcacaoExame;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,6 +31,26 @@ class MarcacaoExameController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['grid'],
+                        'roles' => ['verMarcacaoExame'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -38,7 +60,8 @@ class MarcacaoExameController extends Controller
      */
     public function actionIndex()
     {
-        $times = MarcacaoExame::dataByUser(Yii::$app->user->id);
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+        $times = MarcacaoExame::dataByUserFront($tempUtente);
 
         $events = [];
         foreach ($times AS $time){
@@ -76,14 +99,18 @@ class MarcacaoExameController extends Controller
     }
 
     public function actionGrid(){
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoExame::find()
-                ->where(['id_utente' => Yii::$app->user->id]),
-        ]);
 
-        return $this->render('grid', [
-            'dataProvider' => $dataProvider,
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoExame')) {
+            $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => MarcacaoExame::find()
+                    ->where(['id_utente' => $tempUtente]),
+            ]);
+
+            return $this->render('grid', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
 
@@ -95,9 +122,11 @@ class MarcacaoExameController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoExame')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**

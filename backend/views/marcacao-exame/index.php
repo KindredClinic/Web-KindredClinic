@@ -20,7 +20,6 @@ $this->title = 'Marcação de Exames';
         <?= Html::a('Exames Passados', ['exame/index'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
     <?= yii2fullcalendar\yii2fullcalendar::widget(array(
             'events' => $events,
             'options' => [

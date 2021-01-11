@@ -11,4 +11,3 @@ modules:
         password: ''
         cleanup: false
     - Asserts
-    - \Helper\Unit

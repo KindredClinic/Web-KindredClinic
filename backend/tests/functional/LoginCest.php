@@ -36,10 +36,10 @@ class LoginCest
         $I->amOnPage('/site/login');
         $I->see('Login', 'h1');
 
-        $I->fillField('Username', 'UnitTest');
+        $I->fillField('Username', 'RbacMed');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
 
-        $I->see('Logout (UnitTest)', 'form button[type=submit]');
+        $I->see('Logout (RbacMed)', 'form button[type=submit]');
     }
 }

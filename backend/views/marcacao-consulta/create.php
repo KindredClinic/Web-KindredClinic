@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /* @var $model common\models\MarcacaoConsulta */
 
 $this->title = 'Create Marcacao Consulta';
-$this->params['breadcrumbs'][] = ['label' => 'Marcacao Consultas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="marcacao-consulta-create">
 

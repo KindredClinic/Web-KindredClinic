@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /* @var $model common\models\ReceitaMedica */
 
 $this->title = 'Create Receita Medica';
-$this->params['breadcrumbs'][] = ['label' => 'Receita Medicas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="receita-medica-create">
 
@@ -18,3 +16,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+

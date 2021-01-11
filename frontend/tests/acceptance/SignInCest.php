@@ -17,17 +17,17 @@ class HomeCest
 
         $I->see('Login');
 
-        $I->fillField('Username', 'TestTester');
+        $I->fillField('Username', 'RbacTest');
         $I->fillField('Password', '123456789');
         $I->click('login-button');
         $I->wait(2);
 
-        $I->see('Logout (TestTester)');
+        $I->see('Logout (RbacTest)');
     }
 }
 //para instalar: fazer download de phantomjs por numa directoria no disco C.
 //              Propriedades do Sistema - Varaiveis de ambiente - Variaveis de Sistema - Path - Editar - Novo - por a direção para o executavel
 //              exemplo de direção: C:\PhantomJs\bin\phantomjs
 
-//para começar o servidor: --webdriver=8888 --ssl-protocol=any --ignore-ssl-errors=true
-// ..\vendor\bin\codecept run acceptance HomeCest
+//para começar o servidor: phantomjs --webdriver=8888 --ssl-protocol=any --ignore-ssl-errors=true
+// ..\vendor\bin\codecept run acceptance SignInCest

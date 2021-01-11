@@ -37,15 +37,33 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        $menuItems[] = ['label' => 'Medicos', 'url' => ['/medicos/index']],
-        $menuItems[] = ['label' => 'Medicamentos', 'url' => ['/medicamentos/index']],
-        $menuItems[] = ['label' => 'Receita', 'url' => ['/receita-medica/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Exame', 'url' => ['/marcacao-exame/index']];
-        $menuItems[] = ['label' => 'Consulta', 'url' => ['/marcacao-consulta/index']];
+        $user = \Yii::$app->user->identity;
+
+        if(!$user['username'] != 'admin') {
+            if (\Yii::$app->user->can('verMarcacaoExame')) {
+                $menuItems[] = ['label' => 'Exame', 'url' => ['/marcacao-exame/index']];
+            }
+            if (\Yii::$app->user->can('verReceitaMedica')) {
+                $menuItems[] = ['label' => 'Receita', 'url' => ['/receita-medica/index']];
+            }
+            if (\Yii::$app->user->can('verConsulta')) {
+                $menuItems[] = ['label' => 'Consulta', 'url' => ['/marcacao-consulta/index']];
+            }
+        }
+        if(\Yii::$app->user->can('verMedico')) {
+            $menuItems[] = ['label' => 'Medicos', 'url' => ['/medicos/index']];
+        }
+        if (\Yii::$app->user->can('verMedicamentos')) {
+            $menuItems[] = ['label' => 'Medicamentos', 'url' => ['/medicamentos/index']];
+        }
+        if(\Yii::$app->user->can('verUser')) {
+            $menuItems[] = ['label' => 'User', 'url' => ['/user/index']];
+            $menuItems[] = ['label' => 'Utente', 'url' => ['/utente/index']];
+        }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

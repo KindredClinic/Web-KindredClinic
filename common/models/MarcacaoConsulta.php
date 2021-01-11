@@ -103,7 +103,7 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
         return $this->hasOne(Especialidade::className(), ['id' => 'id_especialidade']);
     }
 
-    public function criarMarcacaoConsulta(){
+    public function criarMarcacaoConsultaBack(){
 
         $tempMedic = Medicos::dataByUser(Yii::$app->user->id);
         $tempEspec = Especialidade::dataByEspecialidade($tempMedic);
@@ -114,7 +114,23 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
         $model->id_medico = $tempMedic['id'];
         $model->id_utente = $this->id_utente;
 
-        var_dump($model);
+        var_dump($this->id_utente);
+
+
+        $model->save();
+    }
+
+    public function criarMarcacaoConsultaFront(){
+
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+
+        $model = new MarcacaoConsulta();
+        $model->date = $this->date;
+        $model->id_especialidade = $this->id_especialidade;
+        $model->id_medico = $this->id_medico;
+        $model->id_utente = $tempUtente['id'];
+
+        var_dump($this->id_utente);
 
 
         $model->save();
@@ -132,10 +148,19 @@ class MarcacaoConsulta extends \yii\db\ActiveRecord
         return $procurar;
     }
 
-    public static function dataByUser($idUtente){
+    public static function dataByUserBack($idUtente){
 
         $procurar = self::find()
             ->where(['id_medico' =>  $idUtente ])
+            ->all();
+
+        return $procurar;
+    }
+
+    public static function dataByUserFront($idUtente){
+
+        $procurar = self::find()
+            ->where(['id_utente' =>  $idUtente ])
             ->all();
 
         return $procurar;

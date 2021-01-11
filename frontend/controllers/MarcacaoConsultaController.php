@@ -3,9 +3,11 @@
 namespace frontend\controllers;
 
 use backend\models\Especialidade;
+use common\models\Utente;
 use Yii;
 use common\models\MarcacaoConsulta;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,6 +36,36 @@ class MarcacaoConsultaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['criarMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['grid'],
+                        'roles' => ['verMarcacaoConsulta'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['subcat'],
+                        'roles' => ['criarMarcacaoConsulta'],
+                    ],
+                ],
+            ]
         ];
     }
 
@@ -43,7 +75,8 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionIndex()
     {
-        $times = MarcacaoConsulta::dataByUser(Yii::$app->user->id);
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+        $times = MarcacaoConsulta::dataByUserFront($tempUtente);
 
         $events = [];
         foreach ($times AS $time){
@@ -82,10 +115,14 @@ class MarcacaoConsultaController extends Controller
     }
 
     public function actionGrid(){
-        $dataProvider = new ActiveDataProvider([
-            'query' => MarcacaoConsulta::find()
-            ->where(['id_utente' => Yii::$app->user->id]),
-        ]);
+        if(\Yii::$app->user->can('criarMarcacaoConsulta')) {
+            $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => MarcacaoConsulta::find()
+                    ->where(['id_utente' => $tempUtente]),
+            ]);
+
+        }
 
         return $this->render('grid', [
             'dataProvider' => $dataProvider,
@@ -101,9 +138,13 @@ class MarcacaoConsultaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(\Yii::$app->user->can('verMarcacaoConsulta')) {
+
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+
+        }
     }
 
     /**
@@ -115,48 +156,18 @@ class MarcacaoConsultaController extends Controller
     {
         $model = new MarcacaoConsulta();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->criarMarcacaoConsulta();
-            return $this->redirect(['index', 'id' => $model->id]);
+        if(\Yii::$app->user->can('criarMarcacaoConsulta')) {
+
+            if ($model->load(Yii::$app->request->post())) {
+                $model->criarMarcacaoConsultaFront();
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
+
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Updates an existing MarcacaoConsulta model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing MarcacaoConsulta model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**
@@ -178,6 +189,7 @@ class MarcacaoConsultaController extends Controller
 
 // THE CONTROLLER
     public function actionSubcat() {
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
