@@ -18,7 +18,7 @@ $this->title = 'Marcação Exames';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Ver Consultas', ['grid'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ver Exames', ['grid'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
