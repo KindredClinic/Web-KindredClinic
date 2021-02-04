@@ -11,7 +11,8 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [ 'api' => [
+    'modules' => [
+        'api' => [
         'class' => 'backend\api\Module',
         ],
     ],
@@ -54,6 +55,7 @@ return [
                         'api/users',
                         'api/consultas',
                         'api/exames',
+                        'api/marcacaoconsulta',
                         'api/receitasmedica'
                     ],
                     'pluralize' => false,
