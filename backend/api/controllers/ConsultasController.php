@@ -1,11 +1,11 @@
 <?php
 
-
 namespace backend\api\controllers;
 
 
 use common\models\Consulta;
 use common\models\MarcacaoConsulta;
+use common\models\Utente;
 use yii\rest\ActiveController;
 use Yii;
 use yii\filters\auth\CompositeAuth;
@@ -60,11 +60,11 @@ class ConsultasController extends ActiveController
 // Método que devolve as consultas do utente após a autenticação
     public function actionIndex(){
 
-        $user = Yii::$app->user->identity;
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
 
         $consultas = Consulta::find()
-            ->where(['id_utente' => $user->getId()])
-            ->asArray()
+            ->where(['id_utente' => $tempUtente['id']])
+          //  ->asArray()
             ->all();
 
         return $consultas;

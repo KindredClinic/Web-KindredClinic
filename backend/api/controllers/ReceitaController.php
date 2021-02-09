@@ -4,6 +4,8 @@
 namespace backend\api\controllers;
 
 
+use common\models\ReceitaMedica;
+use common\models\Utente;
 use yii\rest\ActiveController;
 use Yii;
 use yii\filters\auth\CompositeAuth;
@@ -38,6 +40,17 @@ class ReceitaController extends ActiveController
             return $user;
         }
         return null;
+    }
+
+    public function actionIndex(){
+
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+
+        $receitaMedica = ReceitaMedica::find()
+            ->where(['id_utente' => $tempUtente['id']])
+            ->all();
+
+        return $receitaMedica;
     }
 
     public function  actionTotal(){

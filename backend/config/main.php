@@ -54,15 +54,16 @@ return [
                     'controller' => [
                         'api/users',
                         'api/consultas',
-                        'api/exames',
-                        'api/marcacaoconsulta',
-                        'api/receitasmedica'
+                        'api/exame',
+                        'api/marcacaoconsultas',
+                        'api/marcacaoexames',
+                        'api/receita'
                     ],
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST signup' => 'signup',
                         'GET total' => 'total',
-                        'GET {id}/marcacaoconsulta' => 'marcacaoconsulta',
+                     //   'GET {id}/marcacaoconsultas' => 'marcacaoconsultas',
                     ],
                 ],
             ],

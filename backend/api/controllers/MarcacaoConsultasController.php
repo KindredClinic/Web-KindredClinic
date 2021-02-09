@@ -1,16 +1,19 @@
 <?php
 
-
 namespace backend\api\controllers;
 
 
+use common\models\MarcacaoConsulta;
+use common\models\Utente;
+use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
-class MarcacaoConsultasController extends ActiveController
+class MarcacaoconsultasController extends ActiveController
 {
-    public $modelClass = 'common\models\MarcacaoConsulta';
+    public $modelClass = 'fronend\models\MarcacaoConsulta';
 
     public function behaviors()
     {
@@ -22,6 +25,7 @@ class MarcacaoConsultasController extends ActiveController
                     'class' => HttpBasicAuth::className(),
                     'auth' =>  [$this, 'auth'],
                 ],
+                QueryParamAuth::className(),
             ],
         ];
         return $behaviors;
@@ -35,5 +39,33 @@ class MarcacaoConsultasController extends ActiveController
             return $user;
         }
         return null;
+    }
+
+    public function  actionTotal(){
+        $marcacaoconsulta = new $this->modelClass;
+        $recs = $marcacaoconsulta::find()->all();
+        return ['total' => count($recs)];
+    }
+
+    public function actions()
+    {
+        $actions = parent::actions();
+
+        unset($actions['index']);
+
+        return $actions;
+    }
+
+    // Método que devolve a Marcacao da Consulta
+    public function actionIndex(){
+
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+
+        $marcacaoConsulta = MarcacaoConsulta::find()
+            ->where(['id_utente' => $tempUtente['id']])
+         //   ->asArray()
+            ->all();
+
+        return $marcacaoConsulta;
     }
 }

@@ -4,7 +4,7 @@
 namespace backend\api\controllers;
 
 use backend\models\Exame;
-use common\models\MarcacaoExame;
+use common\models\Utente;
 use yii\rest\ActiveController;
 use Yii;
 use yii\filters\auth\CompositeAuth;
@@ -59,11 +59,11 @@ class ExameController extends ActiveController
     // Método que devolve as Receita do utente após a autenticação
     public function actionIndex(){
 
-        $user = Yii::$app->user->identity;
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
 
         $receitas = Exame::find()
-            ->where(['id_utente' => $user->getId()])
-            ->asArray()
+            ->where(['id_utente' => $tempUtente['id']])
+          //  ->asArray()
             ->all();
 
         return $receitas;
