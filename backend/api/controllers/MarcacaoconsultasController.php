@@ -68,4 +68,15 @@ class MarcacaoconsultasController extends ActiveController
 
         return $marcacaoConsulta;
     }
+
+    // Método que devolve os quartos reservados da reserva
+    public function actionMarcacaoconsulta($id){
+
+        $reserva = MarcacaoConsulta::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $reserva;
+    }
+
 }

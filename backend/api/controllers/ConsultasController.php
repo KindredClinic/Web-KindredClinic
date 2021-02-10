@@ -71,16 +71,13 @@ class ConsultasController extends ActiveController
     }
 
     // Método que devolve a Marcacao da Consulta
-    public function actionMarcacaoConsulta($id){
+    public function actionConsulta($id){
 
-        $consulta = Consulta::find()->where(['id' => $id])->one();
+        $consulta = Consulta::find()
+            ->where(['id' => $id])
+            ->one();
 
-        $marcacaoConsulta = MarcacaoConsulta::find()
-            ->where(['id_consulta' => $consulta->id])
-            ->asArray()
-            ->all();
-
-        return $marcacaoConsulta;
+        return $consulta;
     }
 
 }

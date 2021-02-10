@@ -42,17 +42,6 @@ class ReceitaController extends ActiveController
         return null;
     }
 
-    public function actionIndex(){
-
-        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
-
-        $receitaMedica = ReceitaMedica::find()
-            ->where(['id_utente' => $tempUtente['id']])
-            ->all();
-
-        return $receitaMedica;
-    }
-
     public function  actionTotal(){
         $receitamodel = new $this->modelClass;
         $recs = $receitamodel::find()->all();
@@ -67,4 +56,27 @@ class ReceitaController extends ActiveController
 
         return $actions;
     }
+
+    public function actionIndex(){
+
+        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
+
+        $receitaMedica = ReceitaMedica::find()
+            ->where(['id_utente' => $tempUtente['id']])
+            ->all();
+
+        return $receitaMedica;
+    }
+
+
+    // Método que devolve a Marcacao da Consulta
+    public function actionReceita($id){
+
+        $receita = ReceitaMedica::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $receita;
+    }
+
 }

@@ -1,9 +1,11 @@
 <?php
 
-
 namespace backend\api\controllers;
 
-use backend\models\Exame;
+
+use backend\models\Medicos;
+use common\models\Consulta;
+use common\models\MarcacaoConsulta;
 use common\models\Utente;
 use yii\rest\ActiveController;
 use Yii;
@@ -11,9 +13,9 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 
-class ExameController extends ActiveController
+class MedicosController extends ActiveController
 {
-    public $modelClass = 'backend\models\Exame';
+    public $modelClass = 'backend\models\Medicos';
 
     public function behaviors()
     {
@@ -42,8 +44,8 @@ class ExameController extends ActiveController
     }
 
     public function  actionTotal(){
-        $examemodel = new $this->modelClass;
-        $recs = $examemodel::find()->all();
+        $medicosmodel = new $this->modelClass;
+        $recs = $medicosmodel::find()->all();
         return ['total' => count($recs)];
     }
 
@@ -56,28 +58,23 @@ class ExameController extends ActiveController
         return $actions;
     }
 
-    // Método que devolve as Receita do utente após a autenticação
+// Método que devolve todos os medicos
     public function actionIndex(){
 
-        $tempUtente = Utente::dataByUser(Yii::$app->user->id);
-
-        $exames = Exame::find()
-            ->where(['id_utente' => $tempUtente['id']])
-          //  ->asArray()
+        $medicos = Medicos::find()
             ->all();
 
-        return $exames;
+        return $medicos;
     }
 
-    // Método que devolve um Exame
-    public function actionExame($id){
+    // Método que devolve um Medico
+    public function actionMedico($id){
 
-        $exame = Exame::find()
+        $medico = Medicos::find()
             ->where(['id' => $id])
-            ->one();
+            ->all();
 
-        return $exame;
+        return $medico;
     }
-
 
 }

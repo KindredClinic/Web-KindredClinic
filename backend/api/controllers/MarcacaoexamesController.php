@@ -69,4 +69,15 @@ class MarcacaoexamesController extends ActiveController
         return $marcacaoexame;
     }
 
+    // Método que devolve uma unica marcação exame
+    public function actionMarcacaoexame($id){
+
+        $reserva = MarcacaoExame::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $reserva;
+    }
+
+
 }

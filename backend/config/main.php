@@ -57,13 +57,19 @@ return [
                         'api/exame',
                         'api/marcacaoconsultas',
                         'api/marcacaoexames',
-                        'api/receita'
+                        'api/receita',
+                        'api/medicos'
                     ],
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST signup' => 'signup',
                         'GET total' => 'total',
-                     //   'GET {id}/marcacaoconsultas' => 'marcacaoconsultas',
+                        'GET {id}/marcacaoexame' => 'marcacaoexame',
+                        'GET {id}/marcacaoconsulta' => 'marcacaoconsulta',
+                        'GET {id}/medico' => 'medico',
+                        'GET {id}/consulta' => 'consulta',
+                        'GET {id}/exame' => 'exame',
+                        'GET {id}/receita' => 'receita',
                     ],
                 ],
             ],
