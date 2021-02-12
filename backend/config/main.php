@@ -23,6 +23,9 @@ return [
             ],
             'csrfParam' => '_csrf-backend',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -58,7 +61,8 @@ return [
                         'api/marcacaoconsultas',
                         'api/marcacaoexames',
                         'api/receita',
-                        'api/medicos'
+                        'api/medicos',
+                        'apr/utentes'
                     ],
                     'pluralize' => false,
                     'extraPatterns' => [

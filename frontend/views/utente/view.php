@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Utente;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -27,6 +28,5 @@ $this->title = 'Utente: '.$model->nome;
             'num_sns',
         ],
     ]) ?>
-
 
 </div>

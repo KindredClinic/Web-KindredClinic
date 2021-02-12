@@ -5,6 +5,7 @@ use common\models\Utente;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\rbac\DbManager;
 
 /**
  * Signup form
@@ -86,7 +87,7 @@ class SignupForm extends Model
             $utente->save(false);
 
             //rbac
-            $auth = \Yii::$app->authManager;
+            $auth = new DbManager();
             $temp = $auth->getRole('utente');
             $auth->assign($temp, $user->getId());
 

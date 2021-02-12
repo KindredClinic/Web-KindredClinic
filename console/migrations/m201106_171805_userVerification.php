@@ -207,12 +207,6 @@ class m201106_171805_userVerification extends Migration
         $auth->addChild($admin, $utente);
         $auth->addChild($admin, $medico);
 
-        // <---------------------------- Atribuição de Roles ---------------------------->
-
-        $auth->assign($admin, 40);
-        $auth->assign($medico, 26);
-        $auth->assign($utente, 25);
-
     }
 
     public function down()

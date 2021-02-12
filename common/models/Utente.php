@@ -66,7 +66,7 @@ class Utente extends \yii\db\ActiveRecord
 
     public function fields()
     {
-        return ['Numero de Utente'=>'Num Sns'];
+      // return ['Numero de Utente'=>'Num Sns'];
     }
 
 
