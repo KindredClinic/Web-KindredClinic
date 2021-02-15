@@ -67,6 +67,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST signup' => 'signup',
+                        'POST adicionarconulta' => 'adicionarconulta',
                         'GET total' => 'total',
                         'GET {id}/marcacaoexame' => 'marcacaoexame',
                         'GET {id}/marcacaoconsulta' => 'marcacaoconsulta',

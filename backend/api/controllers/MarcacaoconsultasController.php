@@ -3,6 +3,7 @@
 namespace backend\api\controllers;
 
 
+use backend\models\Medicos;
 use common\models\MarcacaoConsulta;
 use common\models\Utente;
 use Yii;
@@ -77,6 +78,40 @@ class MarcacaoconsultasController extends ActiveController
             ->one();
 
         return $reserva;
+    }
+
+    public function actionAdicionarconulta(){
+
+        $model = new MarcacaoConsulta();
+
+        //$model->criarMarcacaoConsultaFront();
+        $params = Yii::$app->request->post();
+
+        $model->id = $params['id'];
+        $model->date = $params['date'];
+        $model->id_especialidade = $params['id_especialidade'];
+        $model->id_medico = $params['id_medico'];
+        $model->id_utente = $params['id_utente'];
+        $model->status = $params['status'];
+
+        $model->save();
+/*
+        if($model->criarMarcacaoConsultaFront()){
+            $response['isSuccess'] = 201;
+            $response['message'] = "Marcacao registada com sucesso!";
+            $response['user'] =\common\models\User::findByUsername($model->username);
+            return $response;
+        } else {
+            $model->getErrors();
+            $response['hasErrors'] = $model->hasErrors();
+            $response['errors'] = $model->getErrors();
+            return $response;
+        }
+*/
+
+        $response['isSuccess'] = 201;
+        $response['message'] = "Marcacao registada com sucesso!";
+        return $response;
     }
 
 }
